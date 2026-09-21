@@ -1,2698 +1,3365 @@
-// ─── Events ───────────────────────────────────────────────────────────────────
-export interface MockEvent {
+﻿// =============================================================================
+// EventCraft - Mock Data
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Types
+// -----------------------------------------------------------------------------
+
+export interface Company {
   id: string;
   name: string;
-  date: string;
-  endDate: string;
-  time: string;
-  venue: string;
-  venueId: string;
-  status: 'draft' | 'published' | 'live' | 'completed' | 'cancelled';
-  category: string;
-  budget: number;
-  revenue: number;
-  attendance: number;
-  maxCapacity: number;
-  ticketsSold: number;
-  tags: string[];
+  logo: string;
+  description: string;
+  website: string;
+  email: string;
+  phone: string;
+  address: string;
+  founded: string;
+  employees: number;
+  plan: "starter" | "professional" | "enterprise";
 }
 
-export const MOCK_EVENTS: MockEvent[] = [
-  {
-    id: 'evt-001',
-    name: 'AI & Machine Learning Summit 2026',
-    date: '2026-03-15',
-    endDate: '2026-03-17',
-    time: '09:00 AM – 6:00 PM',
-    venue: 'Grand Horizon Convention Center',
-    venueId: 'ven-001',
-    status: 'live',
-    category: 'Technology',
-    budget: 12000000,
-    revenue: 18950000,
-    attendance: 545,
-    maxCapacity: 800,
-    ticketsSold: 545,
-    tags: ['AI', 'Machine Learning', 'Keynote'],
-  },
-  {
-    id: 'evt-002',
-    name: 'CloudNative Conference',
-    date: '2026-04-22',
-    endDate: '2026-04-22',
-    time: '10:00 AM – 5:00 PM',
-    venue: 'Skyline Auditorium',
-    venueId: 'ven-002',
-    status: 'published',
-    category: 'Technology',
-    budget: 5500000,
-    revenue: 3200000,
-    attendance: 0,
-    maxCapacity: 300,
-    ticketsSold: 120,
-    tags: ['Cloud', 'DevOps', 'Containers'],
-  },
-  {
-    id: 'evt-003',
-    name: 'UX Design Workshop',
-    date: '2026-02-28',
-    endDate: '2026-02-28',
-    time: '2:00 PM – 6:00 PM',
-    venue: 'Design Hub Studio',
-    venueId: 'ven-003',
-    status: 'completed',
-    category: 'Design',
-    budget: 1800000,
-    revenue: 6650000,
-    attendance: 75,
-    maxCapacity: 100,
-    ticketsSold: 75,
-    tags: ['UX', 'Design', 'Workshop'],
-  },
-  {
-    id: 'evt-004',
-    name: 'Blockchain & Web3 Expo',
-    date: '2026-05-10',
-    endDate: '2026-05-11',
-    time: '11:00 AM – 7:00 PM',
-    venue: 'Metaverse Pavilion',
-    venueId: 'ven-004',
-    status: 'published',
-    category: 'Technology',
-    budget: 8000000,
-    revenue: 5000000,
-    attendance: 0,
-    maxCapacity: 550,
-    ticketsSold: 260,
-    tags: ['Blockchain', 'Web3', 'NFT'],
-  },
-  {
-    id: 'evt-005',
-    name: 'Startup Pitch Night',
-    date: '2026-03-01',
-    endDate: '2026-03-01',
-    time: '6:00 PM – 10:00 PM',
-    venue: 'Innovation Center',
-    venueId: 'ven-005',
-    status: 'cancelled',
-    category: 'Business',
-    budget: 2500000,
-    revenue: 0,
-    attendance: 0,
-    maxCapacity: 200,
-    ticketsSold: 0,
-    tags: ['Startup', 'Pitch', 'Networking'],
-  },
-  {
-    id: 'evt-006',
-    name: 'Data Science Bootcamp',
-    date: '2026-06-15',
-    endDate: '2026-06-16',
-    time: '09:00 AM – 5:00 PM',
-    venue: 'Tech Campus B',
-    venueId: 'ven-001',
-    status: 'draft',
-    category: 'Education',
-    budget: 3200000,
-    revenue: 0,
-    attendance: 0,
-    maxCapacity: 50,
-    ticketsSold: 0,
-    tags: ['Data Science', 'Python', 'Bootcamp'],
-  },
-  {
-    id: 'evt-007',
-    name: 'Digital Marketing Masterclass',
-    date: '2026-07-20',
-    endDate: '2026-07-20',
-    time: '1:00 PM – 5:00 PM',
-    venue: 'Skyline Auditorium',
-    venueId: 'ven-002',
-    status: 'published',
-    category: 'Marketing',
-    budget: 2000000,
-    revenue: 1500000,
-    attendance: 0,
-    maxCapacity: 150,
-    ticketsSold: 85,
-    tags: ['Marketing', 'SEO', 'Social Media'],
-  },
-  {
-    id: 'evt-008',
-    name: 'Creative Writing Retreat',
-    date: '2026-08-05',
-    endDate: '2026-08-07',
-    time: '10:00 AM – 4:00 PM',
-    venue: 'Lakeside Lodge',
-    venueId: 'ven-006',
-    status: 'draft',
-    category: 'Arts',
-    budget: 4500000,
-    revenue: 0,
-    attendance: 0,
-    maxCapacity: 30,
-    ticketsSold: 0,
-    tags: ['Writing', 'Creative', 'Retreat'],
-  },
-];
+export interface Event {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  status: "draft" | "published" | "on-sale" | "sold-out" | "cancelled" | "completed";
+  category: string;
+  startDate: string;
+  endDate: string;
+  timezone: string;
+  venueId: string;
+  capacity: number;
+  attendees: number;
+  budget: number;
+  revenue: number;
+  expenses: number;
+  ticketsSold: number;
+  checkIns: number;
+  rating: number;
+  image: string;
+  tags: string[];
+  featured: boolean;
+}
 
-// ─── Venues ───────────────────────────────────────────────────────────────────
-export interface MockVenue {
+export interface Venue {
   id: string;
   name: string;
   address: string;
   city: string;
+  state: string;
+  zip: string;
+  country: string;
   capacity: number;
   costPerDay: number;
-  rating: number;
-  totalReviews: number;
+  contactName: string;
+  contactEmail: string;
+  contactPhone: string;
   amenities: string[];
-  availability: Record<string, 'available' | 'booked' | 'partial'>;
-  imageUrl?: string;
+  rating: number;
+  image: string;
+  available: boolean;
 }
 
-export const MOCK_VENUES: MockVenue[] = [
-  {
-    id: 'ven-001',
-    name: 'Grand Horizon Convention Center',
-    address: '1200 Convention Way',
-    city: 'San Francisco, CA',
-    capacity: 2500,
-    costPerDay: 15000000,
-    rating: 4.8,
-    totalReviews: 342,
-    amenities: ['WiFi', 'AV Equipment', 'Catering', 'Parking', 'Stage', 'Green Room'],
-    availability: {
-      '2026-09-01': 'available',
-      '2026-09-02': 'booked',
-      '2026-09-03': 'available',
-      '2026-09-04': 'available',
-      '2026-09-05': 'booked',
-      '2026-09-06': 'partial',
-      '2026-09-07': 'available',
-      '2026-09-08': 'available',
-      '2026-09-09': 'booked',
-      '2026-09-10': 'available',
-      '2026-09-11': 'available',
-      '2026-09-12': 'partial',
-      '2026-09-13': 'available',
-      '2026-09-14': 'booked',
-      '2026-09-15': 'available',
-      '2026-09-16': 'available',
-      '2026-09-17': 'booked',
-      '2026-09-18': 'available',
-      '2026-09-19': 'available',
-      '2026-09-20': 'available',
-      '2026-09-21': 'available',
-      '2026-09-22': 'booked',
-      '2026-09-23': 'available',
-      '2026-09-24': 'available',
-      '2026-09-25': 'partial',
-      '2026-09-26': 'available',
-      '2026-09-27': 'available',
-      '2026-09-28': 'booked',
-      '2026-09-29': 'available',
-      '2026-09-30': 'available',
-    },
-  },
-  {
-    id: 'ven-002',
-    name: 'Skyline Auditorium',
-    address: '450 Skyline Blvd',
-    city: 'New York, NY',
-    capacity: 800,
-    costPerDay: 8000000,
-    rating: 4.5,
-    totalReviews: 189,
-    amenities: ['WiFi', 'AV Equipment', 'Parking', 'Accessibility'],
-    availability: {
-      '2026-09-01': 'available',
-      '2026-09-02': 'available',
-      '2026-09-03': 'booked',
-      '2026-09-04': 'available',
-      '2026-09-05': 'available',
-      '2026-09-06': 'available',
-      '2026-09-07': 'partial',
-      '2026-09-08': 'available',
-      '2026-09-09': 'available',
-      '2026-09-10': 'booked',
-      '2026-09-11': 'available',
-      '2026-09-12': 'available',
-      '2026-09-13': 'booked',
-      '2026-09-14': 'available',
-      '2026-09-15': 'available',
-      '2026-09-16': 'partial',
-      '2026-09-17': 'available',
-      '2026-09-18': 'booked',
-      '2026-09-19': 'available',
-      '2026-09-20': 'available',
-      '2026-09-21': 'available',
-      '2026-09-22': 'available',
-      '2026-09-23': 'booked',
-      '2026-09-24': 'available',
-      '2026-09-25': 'available',
-      '2026-09-26': 'available',
-      '2026-09-27': 'partial',
-      '2026-09-28': 'available',
-      '2026-09-29': 'booked',
-      '2026-09-30': 'available',
-    },
-  },
-  {
-    id: 'ven-003',
-    name: 'Design Hub Studio',
-    address: '88 Creative Lane',
-    city: 'Austin, TX',
-    capacity: 120,
-    costPerDay: 3000000,
-    rating: 4.9,
-    totalReviews: 97,
-    amenities: ['WiFi', 'AV Equipment', 'Whiteboard', 'Coffee Bar', 'Natural Light'],
-    availability: {
-      '2026-09-01': 'available',
-      '2026-09-02': 'available',
-      '2026-09-03': 'available',
-      '2026-09-04': 'booked',
-      '2026-09-05': 'available',
-      '2026-09-06': 'available',
-      '2026-09-07': 'available',
-      '2026-09-08': 'booked',
-      '2026-09-09': 'available',
-      '2026-09-10': 'available',
-      '2026-09-11': 'booked',
-      '2026-09-12': 'available',
-      '2026-09-13': 'available',
-      '2026-09-14': 'available',
-      '2026-09-15': 'available',
-      '2026-09-16': 'booked',
-      '2026-09-17': 'available',
-      '2026-09-18': 'available',
-      '2026-09-19': 'available',
-      '2026-09-20': 'booked',
-      '2026-09-21': 'available',
-      '2026-09-22': 'available',
-      '2026-09-23': 'available',
-      '2026-09-24': 'booked',
-      '2026-09-25': 'available',
-      '2026-09-26': 'available',
-      '2026-09-27': 'available',
-      '2026-09-28': 'available',
-      '2026-09-29': 'booked',
-      '2026-09-30': 'available',
-    },
-  },
-  {
-    id: 'ven-004',
-    name: 'Metaverse Pavilion',
-    address: '1 Innovation Drive',
-    city: 'Miami, FL',
-    capacity: 1200,
-    costPerDay: 10000000,
-    rating: 4.3,
-    totalReviews: 156,
-    amenities: ['WiFi', 'AV Equipment', 'Catering', 'Parking', 'Outdoor Space', 'VR Stations'],
-    availability: {
-      '2026-09-01': 'booked',
-      '2026-09-02': 'available',
-      '2026-09-03': 'available',
-      '2026-09-04': 'booked',
-      '2026-09-05': 'available',
-      '2026-09-06': 'available',
-      '2026-09-07': 'booked',
-      '2026-09-08': 'available',
-      '2026-09-09': 'partial',
-      '2026-09-10': 'available',
-      '2026-09-11': 'booked',
-      '2026-09-12': 'available',
-      '2026-09-13': 'available',
-      '2026-09-14': 'booked',
-      '2026-09-15': 'available',
-      '2026-09-16': 'available',
-      '2026-09-17': 'available',
-      '2026-09-18': 'booked',
-      '2026-09-19': 'available',
-      '2026-09-20': 'booked',
-      '2026-09-21': 'available',
-      '2026-09-22': 'available',
-      '2026-09-23': 'available',
-      '2026-09-24': 'booked',
-      '2026-09-25': 'available',
-      '2026-09-26': 'available',
-      '2026-09-27': 'booked',
-      '2026-09-28': 'available',
-      '2026-09-29': 'available',
-      '2026-09-30': 'available',
-    },
-  },
-  {
-    id: 'ven-005',
-    name: 'Innovation Center',
-    address: '77 Startup Way',
-    city: 'San Francisco, CA',
-    capacity: 250,
-    costPerDay: 5000000,
-    rating: 4.6,
-    totalReviews: 213,
-    amenities: ['WiFi', 'AV Equipment', 'Co-working Space', 'Coffee Bar', 'Meeting Rooms'],
-    availability: {
-      '2026-09-01': 'available',
-      '2026-09-02': 'booked',
-      '2026-09-03': 'booked',
-      '2026-09-04': 'available',
-      '2026-09-05': 'available',
-      '2026-09-06': 'booked',
-      '2026-09-07': 'available',
-      '2026-09-08': 'available',
-      '2026-09-09': 'available',
-      '2026-09-10': 'booked',
-      '2026-09-11': 'available',
-      '2026-09-12': 'available',
-      '2026-09-13': 'booked',
-      '2026-09-14': 'available',
-      '2026-09-15': 'available',
-      '2026-09-16': 'available',
-      '2026-09-17': 'booked',
-      '2026-09-18': 'available',
-      '2026-09-19': 'booked',
-      '2026-09-20': 'available',
-      '2026-09-21': 'available',
-      '2026-09-22': 'available',
-      '2026-09-23': 'booked',
-      '2026-09-24': 'available',
-      '2026-09-25': 'booked',
-      '2026-09-26': 'available',
-      '2026-09-27': 'available',
-      '2026-09-28': 'available',
-      '2026-09-29': 'booked',
-      '2026-09-30': 'available',
-    },
-  },
-  {
-    id: 'ven-006',
-    name: 'Lakeside Lodge',
-    address: '200 Lakeview Trail',
-    city: 'Lake Tahoe, NV',
-    capacity: 40,
-    costPerDay: 6000000,
-    rating: 4.9,
-    totalReviews: 64,
-    amenities: ['WiFi', 'Catering', 'Outdoor Space', 'Fireplace', 'Kitchen', 'Parking'],
-    availability: {
-      '2026-09-01': 'available',
-      '2026-09-02': 'available',
-      '2026-09-03': 'available',
-      '2026-09-04': 'available',
-      '2026-09-05': 'booked',
-      '2026-09-06': 'booked',
-      '2026-09-07': 'available',
-      '2026-09-08': 'available',
-      '2026-09-09': 'available',
-      '2026-09-10': 'available',
-      '2026-09-11': 'available',
-      '2026-09-12': 'available',
-      '2026-09-13': 'booked',
-      '2026-09-14': 'booked',
-      '2026-09-15': 'available',
-      '2026-09-16': 'available',
-      '2026-09-17': 'available',
-      '2026-09-18': 'available',
-      '2026-09-19': 'available',
-      '2026-09-20': 'available',
-      '2026-09-21': 'booked',
-      '2026-09-22': 'booked',
-      '2026-09-23': 'available',
-      '2026-09-24': 'available',
-      '2026-09-25': 'available',
-      '2026-09-26': 'available',
-      '2026-09-27': 'available',
-      '2026-09-28': 'booked',
-      '2026-09-29': 'available',
-      '2026-09-30': 'available',
-    },
-  },
-];
-
-// ─── Sessions ─────────────────────────────────────────────────────────────────
-export type TrackColor = 'rose' | 'violet' | 'teal' | 'amber' | 'sky' | 'emerald';
-
-export interface MockSession {
+export interface Session {
   id: string;
+  eventId: string;
   title: string;
   description: string;
-  speaker: string;
-  speakerId: string;
-  eventId: string;
-  eventName: string;
   track: string;
-  trackColor: TrackColor;
-  room: string;
+  speakerId: string;
   startTime: string;
   endTime: string;
-  date: string;
-  attendeeCount: number;
-  maxAttendees: number;
-  status: 'draft' | 'scheduled' | 'live' | 'completed' | 'cancelled';
+  room: string;
+  capacity: number;
+  attendees: number;
+  level: "beginner" | "intermediate" | "advanced";
+  tags: string[];
+  status: "scheduled" | "live" | "completed" | "cancelled";
 }
 
-export const MOCK_SESSIONS: MockSession[] = [
-  {
-    id: 'ses-001',
-    title: 'Keynote: The Future of AI in Everyday Life',
-    description: 'An inspiring look at how artificial intelligence is transforming daily experiences.',
-    speaker: 'Dr. Sarah Chen',
-    speakerId: 'spk-001',
-    eventId: 'evt-001',
-    eventName: 'AI & ML Summit 2026',
-    track: 'Keynote',
-    trackColor: 'rose',
-    room: 'Main Hall A',
-    startTime: '09:00',
-    endTime: '10:00',
-    date: '2026-03-15',
-    attendeeCount: 520,
-    maxAttendees: 800,
-    status: 'completed',
-  },
-  {
-    id: 'ses-002',
-    title: 'Building Scalable ML Pipelines',
-    description: 'Deep dive into production-grade machine learning infrastructure.',
-    speaker: 'James Rodriguez',
-    speakerId: 'spk-002',
-    eventId: 'evt-001',
-    eventName: 'AI & ML Summit 2026',
-    track: 'Engineering',
-    trackColor: 'violet',
-    room: 'Room B2',
-    startTime: '10:30',
-    endTime: '11:30',
-    date: '2026-03-15',
-    attendeeCount: 185,
-    maxAttendees: 200,
-    status: 'completed',
-  },
-  {
-    id: 'ses-003',
-    title: 'Ethics in Artificial Intelligence',
-    description: 'Exploring the moral implications of AI deployment in society.',
-    speaker: 'Prof. Amira Osei',
-    speakerId: 'spk-003',
-    eventId: 'evt-001',
-    eventName: 'AI & ML Summit 2026',
-    track: 'Ethics',
-    trackColor: 'teal',
-    room: 'Room C1',
-    startTime: '10:30',
-    endTime: '12:00',
-    date: '2026-03-15',
-    attendeeCount: 130,
-    maxAttendees: 150,
-    status: 'completed',
-  },
-  {
-    id: 'ses-004',
-    title: 'Hands-on: Fine-tuning LLMs',
-    description: 'Workshop on customizing large language models for domain-specific tasks.',
-    speaker: 'James Rodriguez',
-    speakerId: 'spk-002',
-    eventId: 'evt-001',
-    eventName: 'AI & ML Summit 2026',
-    track: 'Workshop',
-    trackColor: 'amber',
-    room: 'Lab 1',
-    startTime: '14:00',
-    endTime: '16:00',
-    date: '2026-03-15',
-    attendeeCount: 48,
-    maxAttendees: 50,
-    status: 'completed',
-  },
-  {
-    id: 'ses-005',
-    title: 'Kubernetes at Scale',
-    description: 'Managing container orchestration at enterprise scale.',
-    speaker: 'Mike Chang',
-    speakerId: 'spk-004',
-    eventId: 'evt-002',
-    eventName: 'CloudNative Conference',
-    track: 'Infrastructure',
-    trackColor: 'sky',
-    room: 'Auditorium',
-    startTime: '10:00',
-    endTime: '11:00',
-    date: '2026-04-22',
-    attendeeCount: 0,
-    maxAttendees: 300,
-    status: 'scheduled',
-  },
-  {
-    id: 'ses-006',
-    title: 'GitOps in Practice',
-    description: 'Implementing GitOps workflows for continuous deployment.',
-    speaker: 'Lisa Park',
-    speakerId: 'spk-005',
-    eventId: 'evt-002',
-    eventName: 'CloudNative Conference',
-    track: 'DevOps',
-    trackColor: 'emerald',
-    room: 'Room 2',
-    startTime: '11:30',
-    endTime: '12:30',
-    date: '2026-04-22',
-    attendeeCount: 0,
-    maxAttendees: 120,
-    status: 'scheduled',
-  },
-  {
-    id: 'ses-007',
-    title: 'Design Systems That Scale',
-    description: 'Building and maintaining design systems across large organizations.',
-    speaker: 'Emily Nakamura',
-    speakerId: 'spk-006',
-    eventId: 'evt-003',
-    eventName: 'UX Design Workshop',
-    track: 'Design',
-    trackColor: 'rose',
-    room: 'Studio A',
-    startTime: '14:00',
-    endTime: '15:30',
-    date: '2026-02-28',
-    attendeeCount: 72,
-    maxAttendees: 75,
-    status: 'completed',
-  },
-  {
-    id: 'ses-008',
-    title: 'Zero Knowledge Proofs Explained',
-    description: 'Understanding ZK-proofs and their applications in blockchain.',
-    speaker: 'Dr. Sarah Chen',
-    speakerId: 'spk-001',
-    eventId: 'evt-004',
-    eventName: 'Blockchain & Web3 Expo',
-    track: 'Blockchain',
-    trackColor: 'violet',
-    room: 'Stage 1',
-    startTime: '11:00',
-    endTime: '12:30',
-    date: '2026-05-10',
-    attendeeCount: 0,
-    maxAttendees: 400,
-    status: 'scheduled',
-  },
-  {
-    id: 'ses-009',
-    title: 'Intro to Data Pipelines with Python',
-    description: 'Building robust ETL pipelines using pandas and Apache Airflow.',
-    speaker: 'Lisa Park',
-    speakerId: 'spk-005',
-    eventId: 'evt-006',
-    eventName: 'Data Science Bootcamp',
-    track: 'Data',
-    trackColor: 'teal',
-    room: 'Classroom 1',
-    startTime: '09:00',
-    endTime: '12:00',
-    date: '2026-06-15',
-    attendeeCount: 0,
-    maxAttendees: 50,
-    status: 'draft',
-  },
-  {
-    id: 'ses-010',
-    title: 'SEO Strategies for 2026',
-    description: 'Emerging SEO techniques and algorithm updates to watch.',
-    speaker: 'Emily Nakamura',
-    speakerId: 'spk-006',
-    eventId: 'evt-007',
-    eventName: 'Digital Marketing Masterclass',
-    track: 'Marketing',
-    trackColor: 'amber',
-    room: 'Main Room',
-    startTime: '13:00',
-    endTime: '14:30',
-    date: '2026-07-20',
-    attendeeCount: 0,
-    maxAttendees: 150,
-    status: 'scheduled',
-  },
-];
-
-// ─── Speakers ─────────────────────────────────────────────────────────────────
-export interface MockSpeaker {
+export interface Speaker {
   id: string;
   name: string;
   email: string;
+  phone: string;
+  bio: string;
+  avatar: string;
   title: string;
   company: string;
-  bio: string;
-  avatarColor: string;
-  initials: string;
-  sessionsCount: number;
+  website: string;
+  linkedin: string;
+  twitter: string;
+  sessions: string[];
   rating: number;
-  totalReviews: number;
   fee: number;
-  topics: string[];
-  socialLinks?: { platform: string; url: string }[];
+  expertise: string[];
+  featured: boolean;
 }
 
-export const MOCK_SPEAKERS: MockSpeaker[] = [
-  {
-    id: 'spk-001',
-    name: 'Dr. Sarah Chen',
-    email: 'sarah.chen@example.com',
-    title: 'Chief AI Scientist',
-    company: 'NeuralForge Labs',
-    bio: 'Leading researcher in artificial intelligence with over 15 years of experience in machine learning and neural networks. Published 50+ papers in top-tier conferences.',
-    avatarColor: '#e11d48',
-    initials: 'SC',
-    sessionsCount: 3,
-    rating: 4.9,
-    totalReviews: 287,
-    fee: 1500000,
-    topics: ['Artificial Intelligence', 'Machine Learning', 'Neural Networks', 'Ethics in AI'],
-  },
-  {
-    id: 'spk-002',
-    name: 'James Rodriguez',
-    email: 'james.r@example.com',
-    title: 'Principal ML Engineer',
-    company: 'CloudScale Inc.',
-    bio: 'Expert in building production ML systems that serve millions of predictions per second. Former tech lead at Google Brain and Meta AI.',
-    avatarColor: '#7c3aed',
-    initials: 'JR',
-    sessionsCount: 4,
-    rating: 4.7,
-    totalReviews: 198,
-    fee: 1200000,
-    topics: ['Machine Learning', 'MLOps', 'Distributed Systems', 'Python'],
-  },
-  {
-    id: 'spk-003',
-    name: 'Prof. Amira Osei',
-    email: 'amira.o@example.com',
-    title: 'Professor of AI Ethics',
-    company: 'Stanford University',
-    bio: 'Award-winning professor specializing in the intersection of technology and ethics. Author of "Responsible AI: A Practical Guide."',
-    avatarColor: '#0891b2',
-    initials: 'AO',
-    sessionsCount: 2,
-    rating: 4.8,
-    totalReviews: 156,
-    fee: 800000,
-    topics: ['AI Ethics', 'Technology Policy', 'Responsible AI', 'Social Impact'],
-  },
-  {
-    id: 'spk-004',
-    name: 'Mike Chang',
-    email: 'mike.c@example.com',
-    title: 'Cloud Architect',
-    company: 'Kubernetes Core',
-    bio: 'Infrastructure expert with deep knowledge of Kubernetes, service meshes, and cloud-native architecture. CNCF Ambassador.',
-    avatarColor: '#d97706',
-    initials: 'MC',
-    sessionsCount: 5,
-    rating: 4.6,
-    totalReviews: 234,
-    fee: 900000,
-    topics: ['Kubernetes', 'Cloud Architecture', 'DevOps', 'Infrastructure'],
-  },
-  {
-    id: 'spk-005',
-    name: 'Lisa Park',
-    email: 'lisa.p@example.com',
-    title: 'Senior Data Engineer',
-    company: 'DataStream Co.',
-    bio: 'Passionate about data engineering and open-source tools. Core contributor to Apache Airflow and dbt.',
-    avatarColor: '#059669',
-    initials: 'LP',
-    sessionsCount: 3,
-    rating: 4.5,
-    totalReviews: 142,
-    fee: 700000,
-    topics: ['Data Engineering', 'Python', 'Apache Airflow', 'ETL'],
-  },
-  {
-    id: 'spk-006',
-    name: 'Emily Nakamura',
-    email: 'emily.n@example.com',
-    title: 'Head of Design',
-    company: 'PixelPerfect Agency',
-    bio: 'Design leader with experience building design systems used by thousands of designers worldwide. Speaker at Config, Figma Community leader.',
-    avatarColor: '#db2777',
-    initials: 'EN',
-    sessionsCount: 2,
-    rating: 4.9,
-    totalReviews: 312,
-    fee: 1000000,
-    topics: ['Design Systems', 'UX Research', 'Figma', 'Accessibility'],
-  },
-  {
-    id: 'spk-007',
-    name: 'Dr. Raj Patel',
-    email: 'raj.p@example.com',
-    title: 'Blockchain Researcher',
-    company: 'CryptoLedger Foundation',
-    bio: 'Pioneer in zero-knowledge proofs and decentralized applications. PhD from MIT in cryptography.',
-    avatarColor: '#4f46e5',
-    initials: 'RP',
-    sessionsCount: 2,
-    rating: 4.7,
-    totalReviews: 98,
-    fee: 1100000,
-    topics: ['Blockchain', 'Cryptography', 'Zero-Knowledge Proofs', 'Web3'],
-  },
-  {
-    id: 'spk-008',
-    name: 'Olivia Martinez',
-    email: 'olivia.m@example.com',
-    title: 'Marketing Director',
-    company: 'GrowthHack Digital',
-    bio: 'Digital marketing strategist who has helped 200+ startups scale their online presence. Google & Meta certified.',
-    avatarColor: '#ea580c',
-    initials: 'OM',
-    sessionsCount: 3,
-    rating: 4.4,
-    totalReviews: 176,
-    fee: 600000,
-    topics: ['Digital Marketing', 'SEO', 'Social Media', 'Content Strategy'],
-  },
-];
-
-// ─── Attendees ────────────────────────────────────────────────────────────────
-export type TicketType = 'General' | 'VIP' | 'Student' | 'Speaker' | 'Sponsor';
-
-export interface MockAttendee {
+export interface Attendee {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
-  ticketType: TicketType;
-  checkedIn: boolean;
-  checkInTime?: string;
-  sessionsRegistered: string[];
-  dietaryRestrictions: string;
-  registrationDate: string;
-  eventId: string;
-  eventName: string;
   company: string;
-}
-
-export const MOCK_ATTENDEES: MockAttendee[] = [
-  {
-    id: 'att-001',
-    firstName: 'Alice',
-    lastName: 'Johnson',
-    email: 'alice.johnson@gmail.com',
-    phone: '+1 (415) 555-0101',
-    ticketType: 'VIP',
-    checkedIn: true,
-    checkInTime: '2026-03-15T08:42:00',
-    sessionsRegistered: ['ses-001', 'ses-002', 'ses-004'],
-    dietaryRestrictions: 'Vegetarian',
-    registrationDate: '2026-01-10',
-    eventId: 'evt-001',
-    eventName: 'AI & ML Summit 2026',
-    company: 'TechCorp',
-  },
-  {
-    id: 'att-002',
-    firstName: 'Bob',
-    lastName: 'Williams',
-    email: 'bob.williams@outlook.com',
-    phone: '+1 (212) 555-0202',
-    ticketType: 'General',
-    checkedIn: true,
-    checkInTime: '2026-03-15T08:55:00',
-    sessionsRegistered: ['ses-001', 'ses-003'],
-    dietaryRestrictions: 'None',
-    registrationDate: '2026-01-22',
-    eventId: 'evt-001',
-    eventName: 'AI & ML Summit 2026',
-    company: 'DataFlow Inc.',
-  },
-  {
-    id: 'att-003',
-    firstName: 'Carla',
-    lastName: 'Diaz',
-    email: 'carla.diaz@company.com',
-    phone: '+1 (512) 555-0303',
-    ticketType: 'Student',
-    checkedIn: true,
-    checkInTime: '2026-03-15T09:10:00',
-    sessionsRegistered: ['ses-001', 'ses-002', 'ses-003', 'ses-004'],
-    dietaryRestrictions: 'Gluten-free',
-    registrationDate: '2026-02-05',
-    eventId: 'evt-001',
-    eventName: 'AI & ML Summit 2026',
-    company: 'UT Austin',
-  },
-  {
-    id: 'att-004',
-    firstName: 'David',
-    lastName: 'Kim',
-    email: 'david.kim@startup.io',
-    phone: '+1 (310) 555-0404',
-    ticketType: 'General',
-    checkedIn: false,
-    sessionsRegistered: ['ses-001', 'ses-002'],
-    dietaryRestrictions: 'Vegan',
-    registrationDate: '2026-02-14',
-    eventId: 'evt-001',
-    eventName: 'AI & ML Summit 2026',
-    company: 'Neural Startup',
-  },
-  {
-    id: 'att-005',
-    firstName: 'Elena',
-    lastName: 'Petrova',
-    email: 'elena.p@corp.com',
-    phone: '+1 (650) 555-0505',
-    ticketType: 'VIP',
-    checkedIn: true,
-    checkInTime: '2026-03-15T08:30:00',
-    sessionsRegistered: ['ses-001', 'ses-002', 'ses-003', 'ses-004'],
-    dietaryRestrictions: 'None',
-    registrationDate: '2026-01-05',
-    eventId: 'evt-001',
-    eventName: 'AI & ML Summit 2026',
-    company: 'MegaSoft',
-  },
-  {
-    id: 'att-006',
-    firstName: 'Frank',
-    lastName: 'O\'Brien',
-    email: 'frank.obrien@uni.edu',
-    phone: '+1 (773) 555-0606',
-    ticketType: 'Student',
-    checkedIn: false,
-    sessionsRegistered: ['ses-001'],
-    dietaryRestrictions: 'Nut allergy',
-    registrationDate: '2026-02-28',
-    eventId: 'evt-001',
-    eventName: 'AI & ML Summit 2026',
-    company: 'University of Chicago',
-  },
-  {
-    id: 'att-007',
-    firstName: 'Grace',
-    lastName: 'Tanaka',
-    email: 'grace.t@design.co',
-    phone: '+1 (512) 555-0707',
-    ticketType: 'Speaker',
-    checkedIn: true,
-    checkInTime: '2026-02-28T13:15:00',
-    sessionsRegistered: ['ses-007'],
-    dietaryRestrictions: 'Pescatarian',
-    registrationDate: '2026-01-15',
-    eventId: 'evt-003',
-    eventName: 'UX Design Workshop',
-    company: 'PixelPerfect Agency',
-  },
-  {
-    id: 'att-008',
-    firstName: 'Henry',
-    lastName: 'Larson',
-    email: 'henry.l@cloud.dev',
-    phone: '+1 (206) 555-0808',
-    ticketType: 'General',
-    checkedIn: false,
-    sessionsRegistered: ['ses-005', 'ses-006'],
-    dietaryRestrictions: 'None',
-    registrationDate: '2026-03-01',
-    eventId: 'evt-002',
-    eventName: 'CloudNative Conference',
-    company: 'CloudScale Inc.',
-  },
-  {
-    id: 'att-009',
-    firstName: 'Isabelle',
-    lastName: 'Moreau',
-    email: 'isabelle.m@blockchain.org',
-    phone: '+1 (305) 555-0909',
-    ticketType: 'Sponsor',
-    checkedIn: false,
-    sessionsRegistered: ['ses-008'],
-    dietaryRestrictions: 'Halal',
-    registrationDate: '2026-02-20',
-    eventId: 'evt-004',
-    eventName: 'Blockchain & Web3 Expo',
-    company: 'CryptoLedger',
-  },
-  {
-    id: 'att-010',
-    firstName: 'Jake',
-    lastName: 'Thompson',
-    email: 'jake.t@market.io',
-    phone: '+1 (415) 555-1010',
-    ticketType: 'General',
-    checkedIn: false,
-    sessionsRegistered: ['ses-010'],
-    dietaryRestrictions: 'None',
-    registrationDate: '2026-04-10',
-    eventId: 'evt-007',
-    eventName: 'Digital Marketing Masterclass',
-    company: 'GrowthHack Digital',
-  },
-  {
-    id: 'att-011',
-    firstName: 'Karen',
-    lastName: 'Lee',
-    email: 'karen.lee@data.com',
-    phone: '+1 (628) 555-1111',
-    ticketType: 'VIP',
-    checkedIn: true,
-    checkInTime: '2026-03-15T08:20:00',
-    sessionsRegistered: ['ses-001', 'ses-002', 'ses-003'],
-    dietaryRestrictions: 'Dairy-free',
-    registrationDate: '2026-01-02',
-    eventId: 'evt-001',
-    eventName: 'AI & ML Summit 2026',
-    company: 'DataStream Co.',
-  },
-  {
-    id: 'att-012',
-    firstName: 'Leo',
-    lastName: 'Fernandez',
-    email: 'leo.f@innovate.co',
-    phone: '+1 (408) 555-1212',
-    ticketType: 'General',
-    checkedIn: false,
-    sessionsRegistered: [],
-    dietaryRestrictions: 'None',
-    registrationDate: '2026-03-18',
-    eventId: 'evt-002',
-    eventName: 'CloudNative Conference',
-    company: 'Innovate Co.',
-  },
-];
-
-// ─── Dashboard & Analytics ──────────────────────────────────────────────────
-
-export const MOCK_DASHBOARD_METRICS = {
-  totalEvents: MOCK_EVENTS.length,
-  totalAttendees: MOCK_EVENTS.reduce((sum, e) => sum + e.attendance, 0),
-  revenue: MOCK_EVENTS.reduce((sum, e) => sum + e.revenue, 0),
-  conversionRate: 4.2,
-  totalEventsChange: 12.5,
-  totalAttendeesChange: 18.3,
-  revenueChange: 24.7,
-  conversionRateChange: 0.8,
-};
-
-export const MOCK_REVENUE_BY_MONTH = [
-  { month: 'Jan', revenue: 5200000, attendees: 1200, events: 4 },
-  { month: 'Feb', revenue: 5800000, attendees: 1380, events: 5 },
-  { month: 'Mar', revenue: 7500000, attendees: 1820, events: 6 },
-  { month: 'Apr', revenue: 8200000, attendees: 2100, events: 5 },
-  { month: 'May', revenue: 6800000, attendees: 1640, events: 4 },
-  { month: 'Jun', revenue: 9200000, attendees: 2480, events: 7 },
-  { month: 'Jul', revenue: 10500000, attendees: 2840, events: 6 },
-  { month: 'Aug', revenue: 9800000, attendees: 2620, events: 5 },
-  { month: 'Sep', revenue: 11200000, attendees: 3040, events: 8 },
-];
-
-export const MOCK_TICKET_SALES_BY_TYPE = [
-  { type: 'VIP', sold: 3200, revenue: 32000000, percentage: 17.4 },
-  { type: 'Regular', sold: 8900, revenue: 44500000, percentage: 48.3 },
-  { type: 'Early Bird', sold: 4100, revenue: 12300000, percentage: 22.3 },
-  { type: 'Group', sold: 2220, revenue: 0, percentage: 12.0 },
-];
-
-export const MOCK_ATTENDEE_DEMOGRAPHICS = {
-  byAge: [
-    { range: '18-24', count: 3200, percentage: 17.4 },
-    { range: '25-34', count: 6100, percentage: 33.1 },
-    { range: '35-44', count: 4800, percentage: 26.1 },
-    { range: '45-54', count: 2600, percentage: 14.1 },
-    { range: '55+', count: 1720, percentage: 9.3 },
-  ],
-  byGender: [
-    { label: 'Male', value: 9200, color: '#e11d48' },
-    { label: 'Female', value: 7800, color: '#f43f5e' },
-    { label: 'Non-binary', value: 820, color: '#fda4af' },
-    { label: 'Undisclosed', value: 600, color: '#fecdd3' },
-  ],
-  byLocation: [
-    { city: 'San Francisco', count: 4200, percentage: 22.8 },
-    { city: 'New York', count: 3600, percentage: 19.5 },
-    { city: 'Los Angeles', count: 2800, percentage: 15.2 },
-    { city: 'Austin', count: 2100, percentage: 11.4 },
-    { city: 'Chicago', count: 1800, percentage: 9.8 },
-    { city: 'Seattle', count: 1500, percentage: 8.1 },
-    { city: 'Other', count: 2420, percentage: 13.1 },
-  ],
-  bySource: [
-    { label: 'Organic Search', value: 5800, color: '#e11d48' },
-    { label: 'Social Media', value: 4200, color: '#f43f5e' },
-    { label: 'Email Campaign', value: 3600, color: '#fb7185' },
-    { label: 'Direct', value: 2800, color: '#fda4af' },
-    { label: 'Referral', value: 2020, color: '#fecdd3' },
-  ],
-};
-
-export const MOCK_MARKETING_CHANNELS = [
-  { channel: 'Email Marketing', sent: 45000, opened: 22500, clicked: 6750, conversions: 1350, revenue: 13500000, roi: 8.2 },
-  { channel: 'Social Media Ads', sent: 120000, opened: 48000, clicked: 9600, conversions: 1440, revenue: 14400000, roi: 5.4 },
-  { channel: 'Google Ads', sent: 85000, opened: 34000, clicked: 8500, conversions: 1275, revenue: 12750000, roi: 4.8 },
-  { channel: 'Influencer Partnerships', sent: 30000, opened: 18000, clicked: 5400, conversions: 810, revenue: 8100000, roi: 12.1 },
-  { channel: 'Content Marketing', sent: 25000, opened: 15000, clicked: 4500, conversions: 675, revenue: 6750000, roi: 15.6 },
-];
-
-export const MOCK_ACTIVITY = [
-  { id: '1', user: 'System', action: 'New ticket purchase: AI & ML Summit (VIP × 2)', type: 'ticket', time: '5 min ago' },
-  { id: '2', user: 'Khalid Khan', action: 'Published CloudNative Conference event page', type: 'event', time: '22 min ago' },
-  { id: '3', user: 'System', action: 'UX Design Workshop reached 75% capacity', type: 'alert', time: '1 hr ago' },
-  { id: '4', user: 'Sarah Chen', action: 'Created new event: Data Science Bootcamp', type: 'event', time: '2 hr ago' },
-  { id: '5', user: 'System', action: 'Payment processed: AI & ML Summit ($189,500)', type: 'payment', time: '3 hr ago' },
-  { id: '6', user: 'Emily Nakamura', action: 'Launched email campaign for Blockchain Expo', type: 'marketing', time: '4 hr ago' },
-  { id: '7', user: 'System', action: '12 new registrations for CloudNative Conference', type: 'ticket', time: '5 hr ago' },
-  { id: '8', user: 'Marcus Johnson', action: 'Refunded ticket #att-006 (Startup Pitch Night)', type: 'refund', time: '6 hr ago' },
-  { id: '9', user: 'System', action: 'Monthly analytics report generated', type: 'system', time: '1 day ago' },
-  { id: '10', user: 'Lisa Park', action: 'Published Digital Marketing Masterclass event', type: 'event', time: '1 day ago' },
-];
-
-export const MOCK_UPCOMING_EVENTS = [
-  { id: 'evt-002', name: 'CloudNative Conference', date: '2026-04-22', venue: 'Skyline Auditorium', ticketsSold: 120, maxCapacity: 300 },
-  { id: 'evt-004', name: 'Blockchain & Web3 Expo', date: '2026-05-10', venue: 'Metaverse Pavilion', ticketsSold: 260, maxCapacity: 550 },
-  { id: 'evt-007', name: 'Digital Marketing Masterclass', date: '2026-07-20', venue: 'Skyline Auditorium', ticketsSold: 85, maxCapacity: 150 },
-  { id: 'evt-008', name: 'Creative Writing Retreat', date: '2026-08-05', venue: 'Lakeside Lodge', ticketsSold: 0, maxCapacity: 30 },
-];
-
-export const MOCK_REVENUE_BY_EVENT = [
-  { event: 'AI & ML Summit', revenue: 18950000, percentage: 39.3 },
-  { event: 'UX Design Workshop', revenue: 6650000, percentage: 13.8 },
-  { event: 'CloudNative Conf', revenue: 3200000, percentage: 6.6 },
-  { event: 'Blockchain Expo', revenue: 5000000, percentage: 10.4 },
-  { event: 'Marketing Masterclass', revenue: 1500000, percentage: 3.1 },
-  { event: 'Other', revenue: 12850000, percentage: 26.7 },
-];
-
-export const MOCK_TICKET_SALES_TREND = [
-  { week: 'Week 1', vip: 120, regular: 340, earlyBird: 180 },
-  { week: 'Week 2', vip: 145, regular: 420, earlyBird: 210 },
-  { week: 'Week 3', vip: 180, regular: 510, earlyBird: 260 },
-  { week: 'Week 4', vip: 160, regular: 480, earlyBird: 230 },
-  { week: 'Week 5', vip: 210, regular: 580, earlyBird: 290 },
-  { week: 'Week 6', vip: 195, regular: 620, earlyBird: 310 },
-  { week: 'Week 7', vip: 240, regular: 710, earlyBird: 350 },
-  { week: 'Week 8', vip: 280, regular: 780, earlyBird: 380 },
-  { week: 'Week 9', vip: 310, regular: 840, earlyBird: 410 },
-  { week: 'Week 10', vip: 290, regular: 860, earlyBird: 420 },
-  { week: 'Week 11', vip: 340, regular: 920, earlyBird: 450 },
-  { week: 'Week 12', vip: 360, regular: 980, earlyBird: 480 },
-];
-
-export const MOCK_SATISFACTION = [
-  { month: 'Jan', score: 4.3, responses: 240 },
-  { month: 'Feb', score: 4.4, responses: 280 },
-  { month: 'Mar', score: 4.5, responses: 360 },
-  { month: 'Apr', score: 4.3, responses: 420 },
-  { month: 'May', score: 4.6, responses: 320 },
-  { month: 'Jun', score: 4.5, responses: 490 },
-  { month: 'Jul', score: 4.7, responses: 560 },
-  { month: 'Aug', score: 4.6, responses: 520 },
-  { month: 'Sep', score: 4.7, responses: 610 },
-];
-
-export const MOCK_CONVERSION_FUNNEL = [
-  { stage: 'Page Views', count: 124000, percentage: 100 },
-  { stage: 'Event Browsed', count: 68000, percentage: 54.8 },
-  { stage: 'Ticket Selected', count: 28000, percentage: 22.6 },
-  { stage: 'Checkout Started', count: 12000, percentage: 9.7 },
-  { stage: 'Payment Completed', count: 8200, percentage: 6.6 },
-  { stage: 'Registration Confirmed', count: 7600, percentage: 6.1 },
-];
-
-export const MOCK_EVENT_PERFORMANCE = [
-  { event: 'AI & ML Summit', revenue: 18950000, attendees: 545, satisfaction: 4.7, roi: 6.8 },
-  { event: 'UX Design Workshop', revenue: 6650000, attendees: 75, satisfaction: 4.9, roi: 9.4 },
-  { event: 'CloudNative Conference', revenue: 3200000, attendees: 0, satisfaction: 0, roi: 5.2 },
-  { event: 'Blockchain & Web3 Expo', revenue: 5000000, attendees: 0, satisfaction: 0, roi: 4.6 },
-  { event: 'Digital Marketing Masterclass', revenue: 1500000, attendees: 0, satisfaction: 0, roi: 3.6 },
-  { event: 'Startup Pitch Night', revenue: 0, attendees: 0, satisfaction: 0, roi: 0 },
-];
-
-// ─── Budget ───────────────────────────────────────────────────────────────────
-// All monetary values are in CENTS (÷ 100 when displayed via formatCurrency).
-
-export interface BudgetLineItem {
-  id: string;
-  category: string;
-  description: string;
-  allocated: number;   // cents
-  spent: number;       // cents
-  status: 'under' | 'on-track' | 'over';
-}
-
-export interface BudgetEvent {
-  id: string;
-  eventName: string;
-  date: string;
-  totalBudget: number;  // cents
-  totalSpent: number;   // cents
-  status: 'draft' | 'active' | 'review' | 'closed';
-  lineItems: BudgetLineItem[];
-  forecast: number;     // cents
-}
-
-export const MOCK_BUDGET: BudgetEvent[] = [
-  {
-    id: 'b1',
-    eventName: 'Annual Tech Conference 2026',
-    date: '2026-10-15',
-    totalBudget: 12500000,
-    totalSpent: 9875000,
-    status: 'active',
-    forecast: 12200000,
-    lineItems: [
-      { id: 'l1', category: 'Venue', description: 'Convention center rental', allocated: 4000000, spent: 3850000, status: 'on-track' },
-      { id: 'l2', category: 'Catering', description: 'Meals & refreshments', allocated: 2500000, spent: 2210000, status: 'on-track' },
-      { id: 'l3', category: 'Marketing', description: 'Digital campaigns & ads', allocated: 1800000, spent: 2120000, status: 'over' },
-      { id: 'l4', category: 'AV & Tech', description: 'Sound, lighting, streaming', allocated: 2000000, spent: 1430000, status: 'under' },
-      { id: 'l5', category: 'Staff', description: 'Event crew & coordinators', allocated: 1200000, spent: 1080000, status: 'on-track' },
-      { id: 'l6', category: 'Decor', description: 'Stage design & branding', allocated: 1000000, spent: 1185000, status: 'over' },
-    ],
-  },
-  {
-    id: 'b2',
-    eventName: 'Charity Gala Night',
-    date: '2026-11-20',
-    totalBudget: 8500000,
-    totalSpent: 3240000,
-    status: 'active',
-    forecast: 7800000,
-    lineItems: [
-      { id: 'l7', category: 'Venue', description: 'Grand ballroom', allocated: 3000000, spent: 1200000, status: 'under' },
-      { id: 'l8', category: 'Catering', description: 'Formal dinner service', allocated: 2200000, spent: 840000, status: 'under' },
-      { id: 'l9', category: 'Entertainment', description: 'Live band & DJ', allocated: 1500000, spent: 600000, status: 'under' },
-      { id: 'l10', category: 'Marketing', description: 'Invitations & PR', allocated: 1000000, spent: 420000, status: 'under' },
-      { id: 'l11', category: 'Auction', description: 'Auction items & display', allocated: 800000, spent: 180000, status: 'under' },
-    ],
-  },
-  {
-    id: 'b3',
-    eventName: 'Product Launch – Nova',
-    date: '2026-09-05',
-    totalBudget: 6500000,
-    totalSpent: 6720000,
-    status: 'review',
-    forecast: 6720000,
-    lineItems: [
-      { id: 'l12', category: 'Venue', description: 'Showroom space', allocated: 1800000, spent: 1800000, status: 'on-track' },
-      { id: 'l13', category: 'AV & Tech', description: 'Demo stations & screens', allocated: 1500000, spent: 1680000, status: 'over' },
-      { id: 'l14', category: 'Catering', description: 'Cocktail reception', allocated: 1200000, spent: 1140000, status: 'on-track' },
-      { id: 'l15', category: 'Marketing', description: 'Press kits & swag', allocated: 1000000, spent: 1100000, status: 'over' },
-      { id: 'l16', category: 'Logistics', description: 'Transport & shipping', allocated: 1000000, spent: 1000000, status: 'on-track' },
-    ],
-  },
-  {
-    id: 'b4',
-    eventName: 'Summer Music Festival',
-    date: '2026-07-20',
-    totalBudget: 20000000,
-    totalSpent: 20000000,
-    status: 'closed',
-    forecast: 20000000,
-    lineItems: [
-      { id: 'l17', category: 'Talent', description: 'Artist fees & travel', allocated: 9000000, spent: 8850000, status: 'under' },
-      { id: 'l18', category: 'Venue', description: 'Outdoor amphitheater', allocated: 4500000, spent: 4500000, status: 'on-track' },
-      { id: 'l19', category: 'Security', description: 'Guards & barriers', allocated: 2500000, spent: 2620000, status: 'over' },
-      { id: 'l20', category: 'Catering', description: 'Food trucks & bars', allocated: 2000000, spent: 1980000, status: 'on-track' },
-      { id: 'l21', category: 'Marketing', description: 'Posters, social, radio', allocated: 2000000, spent: 2050000, status: 'on-track' },
-    ],
-  },
-];
-
-// ─── Revenue ──────────────────────────────────────────────────────────────────
-// All monetary values are in CENTS (÷ 100 when displayed via formatCurrency).
-
-export interface RevenueItem {
-  month: string;
-  ticketSales: number;
-  sponsorships: number;
-  merchandise: number;
-  foodBeverage: number;
-  other: number;
-}
-
-export interface RevenueReport {
-  totalRevenue: number;     // cents
-  totalExpenses: number;    // cents
-  netProfit: number;        // cents
-  eventsCompleted: number;
-  avgTicketPrice: number;   // cents
-  totalAttendees: number;
-  monthlyData: RevenueItem[];
-  topEvents: { name: string; revenue: number; profit: number }[];
-  revenueBySource: { source: string; value: number }[];
-}
-
-export const MOCK_REVENUE: RevenueReport = {
-  totalRevenue: 68450000,
-  totalExpenses: 42760000,
-  netProfit: 25690000,
-  eventsCompleted: 12,
-  avgTicketPrice: 12700,
-  totalAttendees: 4820,
-  monthlyData: [
-    { month: 'Jan', ticketSales: 3200000, sponsorships: 1800000, merchandise: 420000, foodBeverage: 610000, other: 280000 },
-    { month: 'Feb', ticketSales: 2800000, sponsorships: 1500000, merchandise: 380000, foodBeverage: 550000, other: 220000 },
-    { month: 'Mar', ticketSales: 4100000, sponsorships: 2200000, merchandise: 560000, foodBeverage: 780000, other: 310000 },
-    { month: 'Apr', ticketSales: 3500000, sponsorships: 1900000, merchandise: 490000, foodBeverage: 690000, other: 260000 },
-    { month: 'May', ticketSales: 5200000, sponsorships: 2800000, merchandise: 720000, foodBeverage: 940000, other: 410000 },
-    { month: 'Jun', ticketSales: 4800000, sponsorships: 2500000, merchandise: 680000, foodBeverage: 880000, other: 370000 },
-    { month: 'Jul', ticketSales: 6200000, sponsorships: 3200000, merchandise: 850000, foodBeverage: 1120000, other: 500000 },
-    { month: 'Aug', ticketSales: 5800000, sponsorships: 3000000, merchandise: 790000, foodBeverage: 1050000, other: 440000 },
-    { month: 'Sep', ticketSales: 4500000, sponsorships: 2400000, merchandise: 620000, foodBeverage: 820000, other: 350000 },
-    { month: 'Oct', ticketSales: 5500000, sponsorships: 2900000, merchandise: 760000, foodBeverage: 1000000, other: 420000 },
-    { month: 'Nov', ticketSales: 4200000, sponsorships: 2100000, merchandise: 580000, foodBeverage: 760000, other: 330000 },
-    { month: 'Dec', ticketSales: 3800000, sponsorships: 2000000, merchandise: 540000, foodBeverage: 700000, other: 300000 },
-  ],
-  topEvents: [
-    { name: 'Summer Music Festival', revenue: 18600000, profit: 8200000 },
-    { name: 'Annual Tech Conference', revenue: 15400000, profit: 6700000 },
-    { name: 'Charity Gala Night', revenue: 11200000, profit: 4800000 },
-    { name: 'Product Launch – Nova', revenue: 8900000, profit: 2180000 },
-    { name: 'Winter Networking Mixer', revenue: 6800000, profit: 3200000 },
-  ],
-  revenueBySource: [
-    { source: 'Ticket Sales', value: 29800000 },
-    { source: 'Sponsorships', value: 18300000 },
-    { source: 'Food & Beverage', value: 8900000 },
-    { source: 'Merchandise', value: 6150000 },
-    { source: 'Other', value: 5300000 },
-  ],
-};
-
-// ─── Staff ────────────────────────────────────────────────────────────────────
-
-export interface StaffMember {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  department: string;
-  status: 'active' | 'inactive' | 'on-leave';
-  assignedEvents: string[];
-  permissions: string[];
-  joinDate: string;
-}
-
-export const MOCK_STAFF: StaffMember[] = [
-  {
-    id: 's1',
-    name: 'Sarah Mitchell',
-    email: 'sarah.m@eventcraft.io',
-    role: 'Event Director',
-    department: 'Management',
-    status: 'active',
-    assignedEvents: ['Annual Tech Conference 2026', 'Charity Gala Night'],
-    permissions: ['manage_events', 'manage_budget', 'manage_staff', 'view_reports'],
-    joinDate: '2022-03-15',
-  },
-  {
-    id: 's2',
-    name: 'James Cooper',
-    email: 'james.c@eventcraft.io',
-    role: 'Marketing Lead',
-    department: 'Marketing',
-    status: 'active',
-    assignedEvents: ['Annual Tech Conference 2026', 'Product Launch – Nova'],
-    permissions: ['manage_marketing', 'view_reports', 'manage_content'],
-    joinDate: '2023-01-10',
-  },
-  {
-    id: 's3',
-    name: 'Emily Chen',
-    email: 'emily.c@eventcraft.io',
-    role: 'Budget Analyst',
-    department: 'Finance',
-    status: 'active',
-    assignedEvents: ['Annual Tech Conference 2026', 'Charity Gala Night', 'Product Launch – Nova'],
-    permissions: ['manage_budget', 'view_reports', 'view_financials'],
-    joinDate: '2023-06-22',
-  },
-  {
-    id: 's4',
-    name: 'Marcus Johnson',
-    email: 'marcus.j@eventcraft.io',
-    role: 'Venue Coordinator',
-    department: 'Operations',
-    status: 'active',
-    assignedEvents: ['Annual Tech Conference 2026'],
-    permissions: ['manage_venues', 'view_events', 'manage_vendors'],
-    joinDate: '2023-09-01',
-  },
-  {
-    id: 's5',
-    name: 'Olivia Torres',
-    email: 'olivia.t@eventcraft.io',
-    role: 'Sponsorship Manager',
-    department: 'Business Development',
-    status: 'on-leave',
-    assignedEvents: ['Charity Gala Night', 'Summer Music Festival'],
-    permissions: ['manage_sponsors', 'view_reports', 'manage_contracts'],
-    joinDate: '2022-11-18',
-  },
-  {
-    id: 's6',
-    name: 'David Kim',
-    email: 'david.k@eventcraft.io',
-    role: 'Tech Lead',
-    department: 'Technology',
-    status: 'active',
-    assignedEvents: ['Annual Tech Conference 2026', 'Product Launch – Nova'],
-    permissions: ['manage_tech', 'manage_av', 'view_reports'],
-    joinDate: '2023-04-05',
-  },
-  {
-    id: 's7',
-    name: 'Rachel Adams',
-    email: 'rachel.a@eventcraft.io',
-    role: 'Catering Coordinator',
-    department: 'Operations',
-    status: 'active',
-    assignedEvents: ['Annual Tech Conference 2026', 'Charity Gala Night'],
-    permissions: ['manage_catering', 'view_events', 'manage_vendors'],
-    joinDate: '2023-08-12',
-  },
-  {
-    id: 's8',
-    name: 'Alex Rivera',
-    email: 'alex.r@eventcraft.io',
-    role: 'Social Media Specialist',
-    department: 'Marketing',
-    status: 'inactive',
-    assignedEvents: [],
-    permissions: ['manage_content', 'view_reports'],
-    joinDate: '2024-01-20',
-  },
-  {
-    id: 's9',
-    name: 'Nina Patel',
-    email: 'nina.p@eventcraft.io',
-    role: 'Security Coordinator',
-    department: 'Operations',
-    status: 'active',
-    assignedEvents: ['Summer Music Festival', 'Annual Tech Conference 2026'],
-    permissions: ['manage_security', 'view_events', 'manage_emergency'],
-    joinDate: '2023-05-30',
-  },
-  {
-    id: 's10',
-    name: 'Carlos Mendez',
-    email: 'carlos.m@eventcraft.io',
-    role: 'Graphic Designer',
-    department: 'Marketing',
-    status: 'active',
-    assignedEvents: ['Annual Tech Conference 2026', 'Product Launch – Nova', 'Charity Gala Night'],
-    permissions: ['manage_design', 'view_events', 'manage_content'],
-    joinDate: '2024-02-14',
-  },
-  {
-    id: 's11',
-    name: 'Laura Bennett',
-    email: 'laura.b@eventcraft.io',
-    role: 'Registration Manager',
-    department: 'Operations',
-    status: 'active',
-    assignedEvents: ['Annual Tech Conference 2026'],
-    permissions: ['manage_registrations', 'view_reports', 'view_events'],
-    joinDate: '2023-10-08',
-  },
-  {
-    id: 's12',
-    name: 'Tom Harrison',
-    email: 'tom.h@eventcraft.io',
-    role: 'AV Technician',
-    department: 'Technology',
-    status: 'active',
-    assignedEvents: ['Annual Tech Conference 2026', 'Summer Music Festival'],
-    permissions: ['manage_av', 'view_events'],
-    joinDate: '2024-03-01',
-  },
-];
-
-// ─── Check-In Stats ──────────────────────────────────────────────────────────
-export interface MockCheckinStat {
-  hour: string;
-  count: number;
-}
-
-export interface MockRecentCheckin {
-  id: string;
-  name: string;
-  type: 'qr' | 'manual' | 'walk-in';
-  time: string;
+  jobTitle: string;
   ticketType: string;
+  ticketPrice: number;
+  checkInStatus: "checked-in" | "no-show" | "cancelled" | "pending";
+  checkedInAt: string | null;
+  dietary: string;
+  sessionsRegistered: string[];
+  registeredAt: string;
+  avatar: string;
+  notes: string;
+  amountPaid: number;
 }
 
-export const MOCK_CHECKINS = {
-  totalRegistered: 545,
-  checkedIn: 387,
-  walkIns: 23,
-  qrScans: 412,
-  byHour: [
-    { hour: '8 AM', count: 18 },
-    { hour: '9 AM', count: 89 },
-    { hour: '10 AM', count: 142 },
-    { hour: '11 AM', count: 78 },
-    { hour: '12 PM', count: 24 },
-    { hour: '1 PM', count: 21 },
-    { hour: '2 PM', count: 12 },
-    { hour: '3 PM', count: 3 },
-  ] as MockCheckinStat[],
-  recentCheckins: [
-    { id: 'c1', name: 'Sarah Chen', type: 'qr' as const, time: '2026-03-15T11:42:00', ticketType: 'VIP' },
-    { id: 'c2', name: 'Marcus Johnson', type: 'manual' as const, time: '2026-03-15T11:41:00', ticketType: 'General' },
-    { id: 'c3', name: 'Aisha Patel', type: 'walk-in' as const, time: '2026-03-15T11:40:00', ticketType: 'General' },
-    { id: 'c4', name: 'Tomoko Saito', type: 'qr' as const, time: '2026-03-15T11:39:00', ticketType: 'Speaker' },
-    { id: 'c5', name: 'Liam O\'Brien', type: 'qr' as const, time: '2026-03-15T11:38:00', ticketType: 'VIP' },
-    { id: 'c6', name: 'Elena Vasquez', type: 'manual' as const, time: '2026-03-15T11:37:00', ticketType: 'General' },
-    { id: 'c7', name: 'David Kim', type: 'qr' as const, time: '2026-03-15T11:36:00', ticketType: 'VIP' },
-    { id: 'c8', name: 'Fatima Al-Hassan', type: 'walk-in' as const, time: '2026-03-15T11:35:00', ticketType: 'General' },
-  ] as MockRecentCheckin[],
-};
-
-// ─── Live Event Data ─────────────────────────────────────────────────────────
-export interface MockLiveSession {
+export interface TicketType {
   id: string;
-  title: string;
-  speaker: string;
-  attendance: number;
+  eventId: string;
+  name: string;
+  description: string;
+  price: number;
   capacity: number;
-  status: 'live' | 'upcoming';
-  scheduledFor?: string;
-  engagement: number;
+  sold: number;
+  revenue: number;
+  saleStart: string;
+  saleEnd: string;
+  status: "active" | "inactive" | "sold-out";
+  perks: string[];
 }
 
-export interface MockEngagementPoint {
-  time: string;
-  score: number;
-}
-
-export interface MockQaItem {
-  id: string;
-  attendee: string;
-  question: string;
-  votes: number;
-  status: 'pending' | 'answered';
-}
-
-export interface MockPollOption {
-  label: string;
-  votes: number;
-  percentage: number;
-}
-
-export interface MockPoll {
-  id: string;
-  question: string;
-  options: MockPollOption[];
-  totalVotes: number;
-  status: 'active' | 'closed';
-}
-
-export const MOCK_LIVE = {
-  event: 'AI & Machine Learning Summit 2026',
-  status: 'live' as const,
-  startedAt: '2026-03-15T09:00:00',
-  currentSession: 'Keynote: The Future of AI in Everyday Life',
-  totalAttendees: 387,
-  onlineViewers: 156,
-  sessions: [
-    {
-      id: 's1',
-      title: 'Keynote: The Future of AI in Everyday Life',
-      speaker: 'Dr. Sarah Chen',
-      attendance: 387,
-      capacity: 800,
-      status: 'live' as const,
-      engagement: 87,
-    },
-    {
-      id: 's2',
-      title: 'Building Scalable ML Pipelines',
-      speaker: 'James Rodriguez',
-      attendance: 0,
-      capacity: 200,
-      status: 'upcoming' as const,
-      scheduledFor: '2026-03-15T11:00:00',
-      engagement: 0,
-    },
-    {
-      id: 's3',
-      title: 'Ethics in Artificial Intelligence',
-      speaker: 'Prof. Amira Osei',
-      attendance: 0,
-      capacity: 150,
-      status: 'upcoming' as const,
-      scheduledFor: '2026-03-15T13:00:00',
-      engagement: 0,
-    },
-    {
-      id: 's4',
-      title: 'Hands-on: Fine-tuning LLMs',
-      speaker: 'James Rodriguez',
-      attendance: 0,
-      capacity: 50,
-      status: 'upcoming' as const,
-      scheduledFor: '2026-03-15T14:30:00',
-      engagement: 0,
-    },
-  ] as MockLiveSession[],
-  engagementScore: 87,
-  engagementTrend: [
-    { time: '9:00', score: 72 },
-    { time: '9:15', score: 78 },
-    { time: '9:30', score: 81 },
-    { time: '9:45', score: 85 },
-    { time: '10:00', score: 83 },
-    { time: '10:15', score: 87 },
-  ] as MockEngagementPoint[],
-  qaQueue: [
-    { id: 'q1', attendee: 'Rachel Wu', question: 'How do you see LLMs changing the developer experience in 2027?', votes: 142, status: 'pending' as const },
-    { id: 'q2', attendee: 'Ben Fischer', question: 'What\'s your take on open-source vs proprietary foundation models?', votes: 98, status: 'pending' as const },
-    { id: 'q3', attendee: 'Sofia Andersson', question: 'Can you share more about the latency benchmarks you mentioned?', votes: 76, status: 'answered' as const },
-    { id: 'q4', attendee: 'Wei Zhang', question: 'Will the framework be open-sourced?', votes: 61, status: 'answered' as const },
-  ] as MockQaItem[],
-  polls: [
-    {
-      id: 'p1',
-      question: 'Which topic interests you most?',
-      options: [
-        { label: 'AI / ML', votes: 142, percentage: 41 },
-        { label: 'Web Dev', votes: 89, percentage: 26 },
-        { label: 'DevOps', votes: 68, percentage: 20 },
-        { label: 'Design', votes: 46, percentage: 13 },
-      ],
-      totalVotes: 345,
-      status: 'active' as const,
-    },
-  ] as MockPoll[],
-};
-
-// ─── Feedback / Survey Data ──────────────────────────────────────────────────
-export interface MockSessionRating {
-  id: string;
-  title: string;
-  speaker: string;
-  rating: number;
-  responses: number;
-}
-
-export interface MockSpeakerRating {
+export interface Sponsor {
   id: string;
   name: string;
-  role: string;
-  rating: number;
-  responses: number;
+  logo: string;
+  tier: "platinum" | "gold" | "silver" | "bronze" | "community";
+  amount: number;
+  contactName: string;
+  contactEmail: string;
+  contactPhone: string;
+  website: string;
+  benefits: string[];
+  status: "confirmed" | "pending" | "cancelled";
+  since: string;
 }
-
-export interface MockSentimentTopic {
-  topic: string;
-  sentiment: 'positive' | 'neutral' | 'negative';
-  mentions: number;
-}
-
-export interface MockRatingRow {
-  stars: number;
-  count: number;
-  percentage: number;
-}
-
-export const MOCK_FEEDBACK = {
-  eventId: 'evt-001',
-  eventName: 'AI & Machine Learning Summit 2026',
-  overallRating: 4.6,
-  totalResponses: 374,
-  responseRate: 68.6,
-  npsScore: 72,
-  npsBreakdown: { promoters: 64, passives: 24, detractors: 12 },
-  sessionRatings: [
-    { id: 's1', title: 'Keynote: The Future of AI in Everyday Life', speaker: 'Dr. Sarah Chen', rating: 4.8, responses: 352 },
-    { id: 's2', title: 'Building Scalable ML Pipelines', speaker: 'James Rodriguez', rating: 4.4, responses: 176 },
-    { id: 's3', title: 'Ethics in Artificial Intelligence', speaker: 'Prof. Amira Osei', rating: 4.7, responses: 118 },
-    { id: 's4', title: 'Hands-on: Fine-tuning LLMs', speaker: 'James Rodriguez', rating: 4.9, responses: 46 },
-  ] as MockSessionRating[],
-  speakerRatings: [
-    { id: 'sp1', name: 'Dr. Sarah Chen', role: 'Chief AI Scientist, NeuralForge Labs', rating: 4.8, responses: 352 },
-    { id: 'sp2', name: 'James Rodriguez', role: 'Principal ML Engineer, CloudScale Inc.', rating: 4.4, responses: 176 },
-    { id: 'sp3', name: 'Prof. Amira Osei', role: 'Professor of AI Ethics, Stanford University', rating: 4.7, responses: 118 },
-    { id: 'sp4', name: 'Emily Nakamura', role: 'Head of Design, PixelPerfect Agency', rating: 4.9, responses: 46 },
-  ] as MockSpeakerRating[],
-  venueRating: {
-    overall: 4.2,
-    cleanliness: 4.5,
-    signage: 3.8,
-    foodQuality: 3.9,
-    wifi: 3.2,
-    comfort: 4.3,
-  },
-  sentiment: { positive: 72, neutral: 21, negative: 7 },
-  sentimentTopics: [
-    { topic: 'Content Quality', sentiment: 'positive' as const, mentions: 186 },
-    { topic: 'Networking', sentiment: 'positive' as const, mentions: 134 },
-    { topic: 'Food & Drinks', sentiment: 'neutral' as const, mentions: 84 },
-    { topic: 'Wi-Fi Issues', sentiment: 'negative' as const, mentions: 71 },
-    { topic: 'Venue Layout', sentiment: 'neutral' as const, mentions: 60 },
-    { topic: 'Session Length', sentiment: 'positive' as const, mentions: 54 },
-  ] as MockSentimentTopic[],
-  ratingDistribution: [
-    { stars: 5, count: 178, percentage: 47 },
-    { stars: 4, count: 120, percentage: 32 },
-    { stars: 3, count: 45, percentage: 12 },
-    { stars: 2, count: 22, percentage: 6 },
-    { stars: 1, count: 9, percentage: 3 },
-  ] as MockRatingRow[],
-};
-
-// ─── Vendors ────────────────────────────────────────────────────────────────
-export type VendorServiceType =
-  | "Photography"
-  | "Videography"
-  | "Florals"
-  | "Entertainment"
-  | "Lighting"
-  | "AV Production"
-  | "Transportation"
-  | "Decor"
-  | "Security"
-  | "Printing";
-
-export type VendorStatus = "Active" | "Pending" | "Inactive" | "On Hold";
 
 export interface Vendor {
   id: string;
   name: string;
-  serviceType: VendorServiceType;
-  contactPerson: string;
-  email: string;
-  phone: string;
-  website: string;
-  costPerEvent: number;
-  rating: number;
-  status: VendorStatus;
-  contractStart: string;
-  contractEnd: string;
-  assignedEvents: string[];
-  location: string;
+  service: string;
+  category: string;
+  contactName: string;
+  contactEmail: string;
+  contactPhone: string;
+  cost: number;
+  status: "pending" | "confirmed" | "in-progress" | "completed" | "cancelled";
+  startDate: string;
+  endDate: string;
   notes: string;
+  rating: number;
+  contractUrl: string;
 }
-
-export const MOCK_VENDORS: Vendor[] = [
-  {
-    id: "VND-001",
-    name: "Lux Lens Studios",
-    serviceType: "Photography",
-    contactPerson: "Emma Richardson",
-    email: "emma@luxlens.com",
-    phone: "(555) 201-4400",
-    website: "https://luxlens.com",
-    costPerEvent: 3500,
-    rating: 4.9,
-    status: "Active",
-    contractStart: "2026-01-01",
-    contractEnd: "2026-12-31",
-    assignedEvents: ["Tech Summit 2026", "Gala Night"],
-    location: "New York, NY",
-    notes: "Preferred photographer for VIP events",
-  },
-  {
-    id: "VND-002",
-    name: "BeatSync Entertainment",
-    serviceType: "Entertainment",
-    contactPerson: "Marcus Lee",
-    email: "marcus@beatsync.com",
-    phone: "(555) 302-7800",
-    website: "https://beatsync.com",
-    costPerEvent: 5000,
-    rating: 4.7,
-    status: "Active",
-    contractStart: "2026-03-01",
-    contractEnd: "2026-11-30",
-    assignedEvents: ["Gala Night", "Summer Festival"],
-    location: "Los Angeles, CA",
-    notes: "Full band and DJ available",
-  },
-  {
-    id: "VND-003",
-    name: "Bloom & Petal Florals",
-    serviceType: "Florals",
-    contactPerson: "Sofia Nguyen",
-    email: "sofia@bloomandpetal.com",
-    phone: "(555) 403-5500",
-    website: "https://bloomandpetal.com",
-    costPerEvent: 2800,
-    rating: 4.8,
-    status: "Active",
-    contractStart: "2026-02-15",
-    contractEnd: "2026-12-15",
-    assignedEvents: ["Tech Summit 2026", "Wedding Showcase"],
-    location: "Chicago, IL",
-    notes: "Sustainable and locally sourced flowers",
-  },
-  {
-    id: "VND-004",
-    name: "BrightStage AV",
-    serviceType: "AV Production",
-    contactPerson: "James Hartley",
-    email: "james@brightstage.com",
-    phone: "(555) 504-9100",
-    website: "https://brightstage.com",
-    costPerEvent: 8500,
-    rating: 4.6,
-    status: "Active",
-    contractStart: "2026-01-01",
-    contractEnd: "2027-06-30",
-    assignedEvents: ["Tech Summit 2026"],
-    location: "San Francisco, CA",
-    notes: "Full-scale LED walls and projection mapping",
-  },
-  {
-    id: "VND-005",
-    name: "FlashFrame Media",
-    serviceType: "Videography",
-    contactPerson: "Priya Kapoor",
-    email: "priya@flashframe.com",
-    phone: "(555) 605-3200",
-    website: "https://flashframe.com",
-    costPerEvent: 4200,
-    rating: 4.5,
-    status: "Pending",
-    contractStart: "2026-06-01",
-    contractEnd: "2026-12-31",
-    assignedEvents: [],
-    location: "Austin, TX",
-    notes: "Cinematic event highlight reels",
-  },
-  {
-    id: "VND-006",
-    name: "LuxeRide Transportation",
-    serviceType: "Transportation",
-    contactPerson: "Carlos Mendez",
-    email: "carlos@luxeride.com",
-    phone: "(555) 706-8800",
-    website: "https://luxeride.com",
-    costPerEvent: 1800,
-    rating: 4.3,
-    status: "Active",
-    contractStart: "2026-04-01",
-    contractEnd: "2026-10-31",
-    assignedEvents: ["Gala Night"],
-    location: "Miami, FL",
-    notes: "Fleet includes luxury sedans and sprinter vans",
-  },
-  {
-    id: "VND-007",
-    name: "Glow Works Lighting",
-    serviceType: "Lighting",
-    contactPerson: "Aisha Johnson",
-    email: "aisha@glowworks.com",
-    phone: "(555) 807-2100",
-    website: "https://glowworks.com",
-    costPerEvent: 3200,
-    rating: 4.7,
-    status: "On Hold",
-    contractStart: "2026-02-01",
-    contractEnd: "2026-08-31",
-    assignedEvents: [],
-    location: "Denver, CO",
-    notes: "Specializing in ambient and dramatic lighting",
-  },
-  {
-    id: "VND-008",
-    name: "EventGuard Security",
-    serviceType: "Security",
-    contactPerson: "Tom Bradley",
-    email: "tom@eventguard.com",
-    phone: "(555) 908-6400",
-    website: "https://eventguard.com",
-    costPerEvent: 2500,
-    rating: 4.4,
-    status: "Active",
-    contractStart: "2026-01-01",
-    contractEnd: "2027-12-31",
-    assignedEvents: ["Tech Summit 2026", "Gala Night", "Summer Festival"],
-    location: "Dallas, TX",
-    notes: "Licensed and bonded, crowd management specialists",
-  },
-  {
-    id: "VND-009",
-    name: "Inkwell Print Co.",
-    serviceType: "Printing",
-    contactPerson: "Rachel Kim",
-    email: "rachel@inkwell.com",
-    phone: "(555) 109-7700",
-    website: "https://inkwell.com",
-    costPerEvent: 800,
-    rating: 4.2,
-    status: "Inactive",
-    contractStart: "2025-06-01",
-    contractEnd: "2025-12-31",
-    assignedEvents: [],
-    location: "Portland, OR",
-    notes: "Premium paper and eco-friendly inks",
-  },
-  {
-    id: "VND-010",
-    name: "Drape & Dazzle Decor",
-    serviceType: "Decor",
-    contactPerson: "Nadia Petrova",
-    email: "nadia@drapedazzle.com",
-    phone: "(555) 210-3300",
-    website: "https://drapedazzle.com",
-    costPerEvent: 4500,
-    rating: 4.8,
-    status: "Active",
-    contractStart: "2026-03-01",
-    contractEnd: "2026-12-31",
-    assignedEvents: ["Gala Night", "Wedding Showcase"],
-    location: "Las Vegas, NV",
-    notes: "Luxury draping and custom installations",
-  },
-];
-
-// ─── Catering ───────────────────────────────────────────────────────────────
-export type DietaryOption =
-  | "Vegetarian"
-  | "Vegan"
-  | "Gluten-Free"
-  | "Halal"
-  | "Kosher"
-  | "Dairy-Free"
-  | "Nut-Free";
-
-export type CateringStatus =
-  | "Confirmed"
-  | "Pending"
-  | "Tasting Scheduled"
-  | "Cancelled";
 
 export interface CateringMenu {
   id: string;
-  menuName: string;
-  vendor: string;
-  cuisine: string;
-  pricePerHead: number;
-  headcount: number;
-  totalCost: number;
-  dietaryOptions: DietaryOption[];
-  event: string;
-  eventDate: string;
-  status: CateringStatus;
-  courses: string[];
-  notes: string;
-}
-
-export const MOCK_CATERING: CateringMenu[] = [
-  {
-    id: "CAT-001",
-    menuName: "Grand Gala Dinner",
-    vendor: "Bistro Luxe Catering",
-    cuisine: "French-Italian Fusion",
-    pricePerHead: 125,
-    headcount: 350,
-    totalCost: 43750,
-    dietaryOptions: ["Vegetarian", "Vegan", "Gluten-Free", "Nut-Free"],
-    event: "Gala Night",
-    eventDate: "2026-09-20",
-    status: "Confirmed",
-    courses: ["Amuse-bouche", "Caesar Salad", "Pan-Seared Salmon", "Wagyu Beef", "Crème Brûlée"],
-    notes: "Wine pairing included for first two courses",
-  },
-  {
-    id: "CAT-002",
-    menuName: "Innovator's Buffet",
-    vendor: "Green Plate Kitchen",
-    cuisine: "Modern American",
-    pricePerHead: 85,
-    headcount: 500,
-    totalCost: 42500,
-    dietaryOptions: ["Vegetarian", "Vegan", "Halal", "Dairy-Free"],
-    event: "Tech Summit 2026",
-    eventDate: "2026-10-15",
-    status: "Pending",
-    courses: ["Soup Bar", "Salad Station", "Grilled Proteins", "Pasta Station", "Dessert Bar"],
-    notes: "Coffee and juice bar throughout the day",
-  },
-  {
-    id: "CAT-003",
-    menuName: "Sunset Cocktail Reception",
-    vendor: "Fork & Flame",
-    cuisine: "Mediterranean",
-    pricePerHead: 65,
-    headcount: 200,
-    totalCost: 13000,
-    dietaryOptions: ["Vegetarian", "Vegan", "Gluten-Free", "Kosher"],
-    event: "Summer Festival",
-    eventDate: "2026-07-04",
-    status: "Tasting Scheduled",
-    courses: ["Mezze Platters", "Grilled Skewers", "Seafood Display", "Pastry Assortment"],
-    notes: "Tasting scheduled for June 1st",
-  },
-  {
-    id: "CAT-004",
-    menuName: "Bridal Brunch",
-    vendor: "Sweet Harmony Café",
-    cuisine: "Brunch & Patisserie",
-    pricePerHead: 55,
-    headcount: 80,
-    totalCost: 4400,
-    dietaryOptions: ["Vegetarian", "Gluten-Free", "Nut-Free"],
-    event: "Wedding Showcase",
-    eventDate: "2026-11-10",
-    status: "Confirmed",
-    courses: ["Fresh Pastries", "Eggs Benedict", "Avocado Toast", "Fruit Parfait", "Mimosa Bar"],
-    notes: "Champagne toast for bridal party",
-  },
-  {
-    id: "CAT-005",
-    menuName: "VIP Executive Lunch",
-    vendor: "Bistro Luxe Catering",
-    cuisine: "Continental",
-    pricePerHead: 95,
-    headcount: 50,
-    totalCost: 4750,
-    dietaryOptions: ["Vegetarian", "Vegan", "Gluten-Free", "Halal", "Dairy-Free"],
-    event: "Tech Summit 2026",
-    eventDate: "2026-10-16",
-    status: "Confirmed",
-    courses: ["Garden Salad", "Grilled Chicken or Salmon", "Roasted Vegetables", "Tiramisu"],
-    notes: "Private dining room setup",
-  },
-  {
-    id: "CAT-006",
-    menuName: "Late Night Snack Bar",
-    vendor: "Street Bites Co.",
-    cuisine: "Fusion Street Food",
-    pricePerHead: 35,
-    headcount: 400,
-    totalCost: 14000,
-    dietaryOptions: ["Vegetarian", "Vegan", "Gluten-Free"],
-    event: "Gala Night",
-    eventDate: "2026-09-20",
-    status: "Pending",
-    courses: ["Slider Station", "Taco Bar", "Dumpling Station", "Dessert Shooters"],
-    notes: "Available from 10 PM to midnight",
-  },
-];
-
-// ─── Accommodation ──────────────────────────────────────────────────────────
-export type AccommodationStatus =
-  | "Active"
-  | "Booking Open"
-  | "Almost Full"
-  | "Sold Out"
-  | "Expired";
-
-export interface RoomType {
+  vendorId: string;
+  name: string;
+  description: string;
   type: string;
-  total: number;
-  booked: number;
-  rate: number;
+  pricePerPerson: number;
+  minGuests: number;
+  maxGuests: number;
+  items: string[];
+  dietary: string[];
+  eventId: string;
+  scheduledDate: string;
+  servings: number;
+  status: "planned" | "confirmed" | "delivered";
 }
 
-export interface HotelBlock {
+export interface Accommodation {
   id: string;
-  propertyName: string;
-  hotelGroup: string;
-  starRating: number;
+  hotelName: string;
   address: string;
   city: string;
-  roomTypes: RoomType[];
-  totalRooms: number;
-  totalBooked: number;
-  blockRate: number;
-  cutoffDate: string;
-  event: string;
-  status: AccommodationStatus;
-  contactPerson: string;
+  starRating: number;
+  roomBlocks: RoomBlock[];
+  contactName: string;
   contactEmail: string;
   contactPhone: string;
-  notes: string;
+  checkInDate: string;
+  checkOutDate: string;
+  negotiatedRate: number;
+  totalCost: number;
+  status: "reserved" | "confirmed" | "cancelled";
 }
 
-export const MOCK_ACCOMMODATION: HotelBlock[] = [
-  {
-    id: "ACC-001",
-    propertyName: "The Grand Meridian",
-    hotelGroup: "Marriott Bonvoy",
-    starRating: 5,
-    address: "1200 Convention Center Blvd",
-    city: "New York, NY",
-    roomTypes: [
-      { type: "Standard King", total: 60, booked: 48, rate: 289 },
-      { type: "Deluxe Double", total: 30, booked: 25, rate: 349 },
-      { type: "Suite", total: 10, booked: 7, rate: 599 },
-    ],
-    totalRooms: 100,
-    totalBooked: 80,
-    blockRate: 289,
-    cutoffDate: "2026-09-01",
-    event: "Tech Summit 2026",
-    status: "Almost Full",
-    contactPerson: "Linda Chen",
-    contactEmail: "groups@grandmeridian.com",
-    contactPhone: "(212) 555-0100",
-    notes: "Complimentary breakfast included. Shuttle to venue.",
-  },
-  {
-    id: "ACC-002",
-    propertyName: "Seaside Resort & Spa",
-    hotelGroup: "Hilton Hotels",
-    starRating: 4,
-    address: "800 Ocean Drive",
-    city: "Miami, FL",
-    roomTypes: [
-      { type: "Ocean View King", total: 45, booked: 30, rate: 219 },
-      { type: "Poolside Double", total: 25, booked: 18, rate: 189 },
-      { type: "Penthouse Suite", total: 5, booked: 3, rate: 499 },
-    ],
-    totalRooms: 75,
-    totalBooked: 51,
-    blockRate: 189,
-    cutoffDate: "2026-08-15",
-    event: "Summer Festival",
-    status: "Booking Open",
-    contactPerson: "David Morales",
-    contactEmail: "reservations@seasideresort.com",
-    contactPhone: "(305) 555-0200",
-    notes: "Beach access, spa discounts for guests.",
-  },
-  {
-    id: "ACC-003",
-    propertyName: "The Wynn Convention Hotel",
-    hotelGroup: "IHG Hotels",
-    starRating: 5,
-    address: "3500 Las Vegas Blvd",
-    city: "Las Vegas, NV",
-    roomTypes: [
-      { type: "Standard Room", total: 80, booked: 80, rate: 249 },
-      { type: "Executive King", total: 40, booked: 40, rate: 329 },
-      { type: "Presidential Suite", total: 4, booked: 4, rate: 899 },
-    ],
-    totalRooms: 124,
-    totalBooked: 124,
-    blockRate: 249,
-    cutoffDate: "2026-06-30",
-    event: "Gala Night",
-    status: "Sold Out",
-    contactPerson: "Angela Torres",
-    contactEmail: "groups@wynnconvention.com",
-    contactPhone: "(702) 555-0300",
-    notes: "No availability. Waitlist available.",
-  },
-  {
-    id: "ACC-004",
-    propertyName: "Downtown Boutique Inn",
-    hotelGroup: "Independent",
-    starRating: 3,
-    address: "425 Market Street",
-    city: "San Francisco, CA",
-    roomTypes: [
-      { type: "Cozy Queen", total: 20, booked: 12, rate: 179 },
-      { type: "City View King", total: 15, booked: 8, rate: 229 },
-    ],
-    totalRooms: 35,
-    totalBooked: 20,
-    blockRate: 179,
-    cutoffDate: "2026-10-01",
-    event: "Tech Summit 2026",
-    status: "Booking Open",
-    contactPerson: "Kevin Park",
-    contactEmail: "events@downtownboutique.com",
-    contactPhone: "(415) 555-0400",
-    notes: "Walking distance to venue. Complimentary Wi-Fi.",
-  },
-  {
-    id: "ACC-005",
-    propertyName: "Riverside Grand Hotel",
-    hotelGroup: "Hyatt Hotels",
-    starRating: 4,
-    address: "500 River Walk",
-    city: "Chicago, IL",
-    roomTypes: [
-      { type: "Standard King", total: 40, booked: 22, rate: 199 },
-      { type: "River View Suite", total: 10, booked: 4, rate: 399 },
-    ],
-    totalRooms: 50,
-    totalBooked: 26,
-    blockRate: 199,
-    cutoffDate: "2026-10-15",
-    event: "Wedding Showcase",
-    status: "Active",
-    contactPerson: "Maria Santos",
-    contactEmail: "groups@riversidegrand.com",
-    contactPhone: "(312) 555-0500",
-    notes: "Discounted parking for block guests.",
-  },
-];
-
-// ─── Floor Plans ────────────────────────────────────────────────────────────
-export type LayoutType = "Theater" | "Classroom" | "Banquet" | "U-Shape" | "Cocktail" | "Boardroom";
-export type SetupStatus = "Not Started" | "In Progress" | "Ready" | "Needs Revision";
-
-export interface FloorPlanZone {
-  name: string;
-  capacity: number;
-  purpose: string;
+export interface RoomBlock {
+  roomType: string;
+  count: number;
+  ratePerNight: number;
 }
 
-export interface FloorPlan {
-  id: string;
-  venue: string;
-  eventName: string;
-  layoutType: LayoutType;
-  capacity: number;
-  zones: FloorPlanZone[];
-  setupStatus: SetupStatus;
-  setupDate: string;
-  notes: string;
-  sqft: number;
-  assignedTeam: string;
-}
-
-export const MOCK_FLOOR_PLANS: FloorPlan[] = [
-  {
-    id: "FP-001",
-    venue: "Metro Convention Center — Hall A",
-    eventName: "Tech Summit 2026",
-    layoutType: "Theater",
-    capacity: 1200,
-    zones: [
-      { name: "Main Stage", capacity: 0, purpose: "Keynotes and panels" },
-      { name: "Seating Section A", capacity: 400, purpose: "General seating" },
-      { name: "Seating Section B", capacity: 400, purpose: "General seating" },
-      { name: "VIP Lounge", capacity: 50, purpose: "VIP guests and speakers" },
-      { name: "Expo Hall", capacity: 350, purpose: "Sponsor booths and demos" },
-    ],
-    setupStatus: "In Progress",
-    setupDate: "2026-10-14",
-    notes: "Stage requires 40ft LED wall. AV team arrives at 6 AM.",
-    sqft: 25000,
-    assignedTeam: "Alpha Setup Crew",
-  },
-  {
-    id: "FP-002",
-    venue: "Grand Ballroom — Marriott",
-    eventName: "Gala Night",
-    layoutType: "Banquet",
-    capacity: 400,
-    zones: [
-      { name: "Dance Floor", capacity: 0, purpose: "Center stage dancing" },
-      { name: "Dining Tables", capacity: 320, purpose: "Seated dinner (40 tables × 8)" },
-      { name: "DJ Booth", capacity: 0, purpose: "Music and lighting control" },
-      { name: "Bar Area", capacity: 0, purpose: "Cocktail service" },
-      { name: "Photo Booth", capacity: 0, purpose: "Guest photos" },
-    ],
-    setupStatus: "Ready",
-    setupDate: "2026-09-19",
-    notes: "Floral centerpieces delivered day-of. Uplighting on pillars.",
-    sqft: 12000,
-    assignedTeam: "Beta Decor Team",
-  },
-  {
-    id: "FP-003",
-    venue: "Beachfront Pavilion",
-    eventName: "Summer Festival",
-    layoutType: "Cocktail",
-    capacity: 600,
-    zones: [
-      { name: "Main Stage", capacity: 0, purpose: "Live performances" },
-      { name: "Food Court", capacity: 150, purpose: "Food vendor area" },
-      { name: "Lounge Zone", capacity: 100, purpose: "Casual seating and networking" },
-      { name: "Activity Area", capacity: 200, purpose: "Games and activities" },
-      { name: "Kids Zone", capacity: 100, purpose: "Children's activities" },
-    ],
-    setupStatus: "Not Started",
-    setupDate: "2026-07-03",
-    notes: "Outdoor event — rain contingency plan in place.",
-    sqft: 35000,
-    assignedTeam: "Gamma Outdoor Crew",
-  },
-  {
-    id: "FP-004",
-    venue: "Riverside Conference Room 3",
-    eventName: "Wedding Showcase",
-    layoutType: "Classroom",
-    capacity: 120,
-    zones: [
-      { name: "Presentation Area", capacity: 0, purpose: "Vendor presentations" },
-      { name: "Seating Rows", capacity: 80, purpose: "Audience seating" },
-      { name: "Display Booths", capacity: 40, purpose: "Vendor showcase tables" },
-      { name: "Refreshment Station", capacity: 0, purpose: "Coffee and snacks" },
-    ],
-    setupStatus: "Needs Revision",
-    setupDate: "2026-11-09",
-    notes: "Fire marshal requires updated exit signage. Need 2 more display tables.",
-    sqft: 5000,
-    assignedTeam: "Alpha Setup Crew",
-  },
-  {
-    id: "FP-005",
-    venue: "Metro Convention Center — Hall B",
-    eventName: "Tech Summit 2026",
-    layoutType: "Classroom",
-    capacity: 300,
-    zones: [
-      { name: "Workshop Zone A", capacity: 75, purpose: "Breakout workshop sessions" },
-      { name: "Workshop Zone B", capacity: 75, purpose: "Breakout workshop sessions" },
-      { name: "Hackathon Area", capacity: 100, purpose: "Team coding challenge" },
-      { name: "Charging Lounge", capacity: 50, purpose: "Device charging and refreshments" },
-    ],
-    setupStatus: "Not Started",
-    setupDate: "2026-10-14",
-    notes: "Wi-Fi bandwidth needs to support 300 concurrent devices.",
-    sqft: 15000,
-    assignedTeam: "Alpha Setup Crew",
-  },
-];
-
-// ─── Merchandise ────────────────────────────────────────────────────────────
-export type MerchCategory =
-  | "Apparel"
-  | "Accessories"
-  | "Tech"
-  | "Drinkware"
-  | "Stationery"
-  | "Bags";
-
-export type MerchStatus = "In Stock" | "Low Stock" | "Pre-Order" | "Out of Stock";
-
-export interface MerchItem {
+export interface Campaign {
   id: string;
   name: string;
-  category: MerchCategory;
+  description: string;
+  channel: "email" | "sms" | "social" | "paid" | "direct";
+  status: "draft" | "scheduled" | "sending" | "sent" | "paused" | "completed";
+  sent: number;
+  delivered: number;
+  opened: number;
+  clicked: number;
+  conversions: number;
+  revenue: number;
+  cost: number;
+  startDate: string;
+  endDate: string;
+  targetAudience: string;
+  content: string;
+}
+
+export interface Promotion {
+  id: string;
+  code: string;
+  name: string;
+  description: string;
+  discountType: "percentage" | "fixed" | "bogo";
+  discountValue: number;
+  minPurchase: number;
+  maxUses: number;
+  usedCount: number;
+  startDate: string;
+  endDate: string;
+  status: "active" | "inactive" | "expired";
+  applicableTickets: string[];
+}
+
+export interface Merchandise {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
   price: number;
   stock: number;
   sold: number;
   revenue: number;
-  event: string;
-  status: MerchStatus;
+  image: string;
+  sizes: string[];
+  colors: string[];
   sku: string;
+  eventId: string;
+}
+
+export interface FloorPlan {
+  id: string;
+  name: string;
+  venueId: string;
+  level: string;
+  image: string;
+  zones: FloorZone[];
+  width: number;
+  height: number;
+}
+
+export interface FloorZone {
+  id: string;
+  name: string;
+  type: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  capacity: number;
+  currentOccupancy: number;
+}
+
+export interface CheckIn {
+  id: string;
+  attendeeId: string;
+  eventId: string;
+  timestamp: string;
+  method: "qr" | "manual" | "nfc" | "self";
+  stationId: string;
+  status: "success" | "failed" | "duplicate";
+  checkedInBy: string;
   notes: string;
 }
 
-export const MOCK_MERCHANDISE: MerchItem[] = [
-  {
-    id: "MER-001",
-    name: "Tech Summit 2026 — Premium Hoodie",
-    category: "Apparel",
-    price: 59.99,
-    stock: 120,
-    sold: 230,
-    revenue: 13797.70,
-    event: "Tech Summit 2026",
-    status: "Low Stock",
-    sku: "TS26-HOODIE-001",
-    notes: "Unisex, available in S/M/L/XL/XXL. Best seller.",
-  },
-  {
-    id: "MER-002",
-    name: "Tech Summit 2026 — Enamel Pin Set",
-    category: "Accessories",
-    price: 12.99,
-    stock: 500,
-    sold: 180,
-    revenue: 2338.20,
-    event: "Tech Summit 2026",
-    status: "In Stock",
-    sku: "TS26-PIN-001",
-    notes: "Set of 3 pins: circuit board, robot, and cloud motifs.",
-  },
-  {
-    id: "MER-003",
-    name: "Gala Night — Velvet Tote Bag",
-    category: "Bags",
-    price: 34.99,
-    stock: 80,
-    sold: 110,
-    revenue: 3848.90,
-    event: "Gala Night",
-    status: "Out of Stock",
-    sku: "GN26-TOTE-001",
-    notes: "Gold foil logo. Sold out at last event — reorder placed.",
-  },
-  {
-    id: "MER-004",
-    name: "EventCraft Stainless Tumbler",
-    category: "Drinkware",
-    price: 24.99,
-    stock: 300,
-    sold: 95,
-    revenue: 2374.05,
-    event: "All Events",
-    status: "In Stock",
-    sku: "EC-TUMB-001",
-    notes: "20oz double-wall vacuum insulated. Keeps drinks hot 8hrs.",
-  },
-  {
-    id: "MER-005",
-    name: "Summer Festival — Graphic Tee",
-    category: "Apparel",
-    price: 29.99,
-    stock: 40,
-    sold: 160,
-    revenue: 4798.40,
-    event: "Summer Festival",
-    status: "Low Stock",
-    sku: "SF26-TEE-001",
-    notes: "Limited edition summer design. 100% organic cotton.",
-  },
-  {
-    id: "MER-006",
-    name: "Tech Summit — Power Bank 10000mAh",
-    category: "Tech",
-    price: 39.99,
-    stock: 200,
-    sold: 145,
-    revenue: 5798.55,
-    event: "Tech Summit 2026",
-    status: "In Stock",
-    sku: "TS26-PWR-001",
-    notes: "Dual USB-C, laser-engraved EventCraft logo.",
-  },
-  {
-    id: "MER-007",
-    name: "EventCraft Moleskine Notebook",
-    category: "Stationery",
-    price: 18.99,
-    stock: 250,
-    sold: 88,
-    revenue: 1671.12,
-    event: "All Events",
-    status: "In Stock",
-    sku: "EC-NOTE-001",
-    notes: "Hardcover, 240 lined pages, ribbon bookmark.",
-  },
-  {
-    id: "MER-008",
-    name: "Gala Night — Crystal Whiskey Glass Set",
-    category: "Drinkware",
-    price: 49.99,
-    stock: 60,
-    sold: 45,
-    revenue: 2249.55,
-    event: "Gala Night",
-    status: "In Stock",
-    sku: "GN26-GLASS-001",
-    notes: "Set of 2 engraved glasses in velvet gift box.",
-  },
-  {
-    id: "MER-009",
-    name: "Tech Summit — Wireless Charging Pad",
-    category: "Tech",
-    price: 29.99,
-    stock: 0,
-    sold: 200,
-    revenue: 5998.00,
-    event: "Tech Summit 2026",
-    status: "Out of Stock",
-    sku: "TS26-CHRG-001",
-    notes: "Qi-certified, 10W fast charge. Pre-order for next batch.",
-  },
-  {
-    id: "MER-010",
-    name: "Wedding Showcase — Silk Scarf",
-    category: "Accessories",
-    price: 44.99,
-    stock: 75,
-    sold: 20,
-    revenue: 899.80,
-    event: "Wedding Showcase",
-    status: "Pre-Order",
-    sku: "WS26-SCARF-001",
-    notes: "Hand-printed floral design. Made in Italy.",
-  },
-];
+export interface Feedback {
+  id: string;
+  eventId: string;
+  attendeeId: string;
+  overallRating: number;
+  contentRating: number;
+  venueRating: number;
+  speakerRating: number;
+  cateringRating: number;
+  organizationRating: number;
+  wouldRecommend: boolean;
+  comments: string;
+  improvementSuggestions: string;
+  submittedAt: string;
+}
 
-// ─── API Keys ───────────────────────────────────────────────────────────────
+export interface BudgetItem {
+  id: string;
+  eventId: string;
+  category: string;
+  description: string;
+  budgetedAmount: number;
+  actualAmount: number;
+  variance: number;
+  status: "planned" | "approved" | "spent" | "over-budget";
+  vendor: string;
+  dueDate: string;
+  paidDate: string | null;
+  notes: string;
+}
+
+export interface RevenueRecord {
+  month: string;
+  tickets: number;
+  sponsors: number;
+  merchandise: number;
+  concessions: number;
+  other: number;
+  total: number;
+  expenses: number;
+  profit: number;
+}
+
+export interface Activity {
+  id: string;
+  type: string;
+  title: string;
+  description: string;
+  timestamp: string;
+  user: string;
+  avatar: string;
+  eventId: string;
+  metadata: Record<string, string>;
+}
+
+export interface NotificationItem {
+  id: string;
+  title: string;
+  message: string;
+  type: "info" | "success" | "warning" | "error";
+  read: boolean;
+  timestamp: string;
+  action?: { label: string; href: string };
+}
+
+export interface Staff {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  role: string;
+  department: string;
+  avatar: string;
+  shiftStart: string;
+  shiftEnd: string;
+  assignedArea: string;
+  status: "on-duty" | "off-duty" | "break" | "unavailable";
+  permissions: string[];
+}
 
 export interface ApiKey {
   id: string;
   name: string;
-  service: string;
+  key: string;
   prefix: string;
-  created: string;
-  lastUsed: string;
-  requests: number;
-  status: 'active' | 'inactive';
-  scopes: string[];
-  description: string;
+  permissions: string[];
+  createdAt: string;
+  lastUsedAt: string | null;
+  expiresAt: string | null;
+  status: "active" | "revoked" | "expired";
+  requestsToday: number;
+  rateLimit: number;
 }
+
+// -----------------------------------------------------------------------------
+// MOCK_COMPANY
+// -----------------------------------------------------------------------------
+
+export const MOCK_COMPANY: Company = {
+  id: "comp_01HQJK2M3N4P5R6S7T8V9W0X",
+  name: "EventCraft Studios",
+  logo: "/images/company-logo.png",
+  description: "Premier event management company specializing in tech conferences, product launches, and corporate experiences across North America.",
+  website: "https://eventcraft.io",
+  email: "hello@eventcraft.io",
+  phone: "+1 (415) 555-0123",
+  address: "742 Innovation Drive, Suite 400, San Francisco, CA 94105",
+  founded: "2019-03-15",
+  employees: 47,
+  plan: "enterprise",
+};
+
+// -----------------------------------------------------------------------------
+// MOCK_EVENTS (10)
+// -----------------------------------------------------------------------------
+
+export const MOCK_EVENTS: Event[] = [
+  {
+    id: "evt_001",
+    name: "TechVision Summit 2026",
+    slug: "techvision-summit-2026",
+    description: "The premier AI and cloud computing conference bringing together 3,000+ developers, engineers, and tech leaders for three days of workshops, keynotes, and networking.",
+    status: "on-sale",
+    category: "Conference",
+    startDate: "2026-03-15T09:00:00Z",
+    endDate: "2026-03-17T18:00:00Z",
+    timezone: "America/Los_Angeles",
+    venueId: "ven_001",
+    capacity: 3000,
+    attendees: 2347,
+    budget: 850000,
+    revenue: 1245000,
+    expenses: 620000,
+    ticketsSold: 2100,
+    checkIns: 0,
+    rating: 4.8,
+    image: "/images/events/techvision.jpg",
+    tags: ["AI", "Cloud", "Machine Learning", "DevOps"],
+    featured: true,
+  },
+  {
+    id: "evt_002",
+    name: "DesignCraft Workshop Series",
+    slug: "designcraft-workshop-series",
+    description: "A hands-on workshop series focused on UI/UX design principles, design systems, and prototyping with industry experts.",
+    status: "published",
+    category: "Workshop",
+    startDate: "2026-04-10T10:00:00Z",
+    endDate: "2026-04-10T17:00:00Z",
+    timezone: "America/New_York",
+    venueId: "ven_002",
+    capacity: 150,
+    attendees: 128,
+    budget: 45000,
+    revenue: 62000,
+    expenses: 38000,
+    ticketsSold: 128,
+    checkIns: 0,
+    rating: 4.6,
+    image: "/images/events/designcraft.jpg",
+    tags: ["Design", "UX", "Workshop", "Figma"],
+    featured: false,
+  },
+  {
+    id: "evt_003",
+    name: "StartupPitch Live",
+    slug: "startuppitch-live",
+    description: "Where emerging startups pitch their ideas to top-tier VCs and angel investors.  in prizes and funding opportunities.",
+    status: "on-sale",
+    category: "Competition",
+    startDate: "2026-05-22T13:00:00Z",
+    endDate: "2026-05-23T21:00:00Z",
+    timezone: "America/Chicago",
+    venueId: "ven_003",
+    capacity: 800,
+    attendees: 623,
+    budget: 320000,
+    revenue: 480000,
+    expenses: 210000,
+    ticketsSold: 580,
+    checkIns: 0,
+    rating: 4.9,
+    image: "/images/events/startuppitch.jpg",
+    tags: ["Startup", "Investing", "Pitch", "VC"],
+    featured: true,
+  },
+  {
+    id: "evt_004",
+    name: "CommunityMakers Festival",
+    slug: "communitymakers-festival",
+    description: "A two-day community festival celebrating open source, maker culture, and grassroots technology projects.",
+    status: "on-sale",
+    category: "Festival",
+    startDate: "2026-06-07T09:00:00Z",
+    endDate: "2026-06-08T18:00:00Z",
+    timezone: "America/Denver",
+    venueId: "ven_004",
+    capacity: 1500,
+    attendees: 987,
+    budget: 180000,
+    revenue: 290000,
+    expenses: 145000,
+    ticketsSold: 900,
+    checkIns: 0,
+    rating: 4.5,
+    image: "/images/events/communitymakers.jpg",
+    tags: ["Open Source", "Maker", "Community", "DIY"],
+    featured: false,
+  },
+  {
+    id: "evt_005",
+    name: "FinTech Forward Conference",
+    slug: "fintech-forward-conference",
+    description: "Exploring the future of financial technology, blockchain, DeFi, and digital banking innovation.",
+    status: "sold-out",
+    category: "Conference",
+    startDate: "2026-02-20T09:00:00Z",
+    endDate: "2026-02-21T17:00:00Z",
+    timezone: "America/New_York",
+    venueId: "ven_005",
+    capacity: 1200,
+    attendees: 1200,
+    budget: 520000,
+    revenue: 780000,
+    expenses: 410000,
+    ticketsSold: 1200,
+    checkIns: 1156,
+    rating: 4.7,
+    image: "/images/events/fintech.jpg",
+    tags: ["FinTech", "Blockchain", "DeFi", "Banking"],
+    featured: true,
+  },
+  {
+    id: "evt_006",
+    name: "GreenTech Innovation Summit",
+    slug: "greentech-innovation-summit",
+    description: "Dedicated to sustainable technology, clean energy solutions, and green innovation for a better planet.",
+    status: "draft",
+    category: "Conference",
+    startDate: "2026-09-14T09:00:00Z",
+    endDate: "2026-09-15T17:00:00Z",
+    timezone: "Europe/London",
+    venueId: "ven_006",
+    capacity: 600,
+    attendees: 0,
+    budget: 280000,
+    revenue: 0,
+    expenses: 45000,
+    ticketsSold: 0,
+    checkIns: 0,
+    rating: 0,
+    image: "/images/events/greentech.jpg",
+    tags: ["GreenTech", "Sustainability", "Clean Energy", "Innovation"],
+    featured: false,
+  },
+  {
+    id: "evt_007",
+    name: "HealthTech Connect",
+    slug: "healthtech-connect",
+    description: "Bridging healthcare and technology with talks on telemedicine, health AI, wearable tech, and digital health records.",
+    status: "completed",
+    category: "Conference",
+    startDate: "2025-11-08T09:00:00Z",
+    endDate: "2025-11-09T17:00:00Z",
+    timezone: "America/Los_Angeles",
+    venueId: "ven_001",
+    capacity: 800,
+    attendees: 764,
+    budget: 350000,
+    revenue: 510000,
+    expenses: 295000,
+    ticketsSold: 764,
+    checkIns: 742,
+    rating: 4.4,
+    image: "/images/events/healthtech.jpg",
+    tags: ["HealthTech", "Telemedicine", "Wearables", "AI"],
+    featured: false,
+  },
+  {
+    id: "evt_008",
+    name: "WomenInTech Gala 2026",
+    slug: "womenintech-gala-2026",
+    description: "An evening of inspiration, recognition, and networking celebrating women leaders in technology.",
+    status: "on-sale",
+    category: "Gala",
+    startDate: "2026-03-08T18:00:00Z",
+    endDate: "2026-03-08T23:00:00Z",
+    timezone: "America/New_York",
+    venueId: "ven_002",
+    capacity: 400,
+    attendees: 312,
+    budget: 195000,
+    revenue: 310000,
+    expenses: 160000,
+    ticketsSold: 300,
+    checkIns: 0,
+    rating: 4.9,
+    image: "/images/events/womenintech.jpg",
+    tags: ["WomenInTech", "Networking", "Diversity", "Gala"],
+    featured: true,
+  },
+  {
+    id: "evt_009",
+    name: "DevOps Days Portland",
+    slug: "devops-days-portland",
+    description: "Community-organized conference on DevOps practices, infrastructure automation, and site reliability engineering.",
+    status: "cancelled",
+    category: "Conference",
+    startDate: "2026-07-11T09:00:00Z",
+    endDate: "2026-07-12T17:00:00Z",
+    timezone: "America/Los_Angeles",
+    venueId: "ven_004",
+    capacity: 500,
+    attendees: 0,
+    budget: 120000,
+    revenue: 15000,
+    expenses: 62000,
+    ticketsSold: 45,
+    checkIns: 0,
+    rating: 0,
+    image: "/images/events/devops.jpg",
+    tags: ["DevOps", "SRE", "Infrastructure", "Automation"],
+    featured: false,
+  },
+  {
+    id: "evt_010",
+    name: "CreativeCode Jam",
+    slug: "creativecode-jam",
+    description: "A 48-hour hackathon combining art and technology. Build generative art, interactive installations, and creative software.",
+    status: "completed",
+    category: "Hackathon",
+    startDate: "2025-12-05T18:00:00Z",
+    endDate: "2025-12-07T18:00:00Z",
+    timezone: "America/Chicago",
+    venueId: "ven_003",
+    capacity: 200,
+    attendees: 186,
+    budget: 85000,
+    revenue: 95000,
+    expenses: 72000,
+    ticketsSold: 186,
+    checkIns: 180,
+    rating: 4.3,
+    image: "/images/events/creativecode.jpg",
+    tags: ["Hackathon", "Creative Coding", "Art", "Generative"],
+    featured: false,
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_VENUES (6)
+// -----------------------------------------------------------------------------
+
+export const MOCK_VENUES: Venue[] = [
+  {
+    id: "ven_001",
+    name: "Moscone Center West",
+    address: "800 Howard Street",
+    city: "San Francisco",
+    state: "CA",
+    zip: "94103",
+    country: "US",
+    capacity: 3000,
+    costPerDay: 45000,
+    contactName: "Maria Chen",
+    contactEmail: "bookings@moscone.com",
+    contactPhone: "+1 (415) 555-0200",
+    amenities: [
+      "High-Speed WiFi",
+      "AV Equipment",
+      "Stage & Lighting",
+      "Catering Kitchen",
+      "Green Room",
+      "Exhibit Hall",
+      "Parking Garage",
+      "Public Transit Access",
+      "Wheelchair Accessible",
+      "Coat Check",
+    ],
+    rating: 4.7,
+    image: "/images/venues/moscone.jpg",
+    available: true,
+  },
+  {
+    id: "ven_002",
+    name: "The Metropolitan Pavilion",
+    address: "125 West 18th Street",
+    city: "New York",
+    state: "NY",
+    zip: "10011",
+    country: "US",
+    capacity: 500,
+    costPerDay: 28000,
+    contactName: "James O'Brien",
+    contactEmail: "events@metpavilion.com",
+    contactPhone: "+1 (212) 555-0300",
+    amenities: [
+      "High-Speed WiFi",
+      "Built-in AV",
+      "Natural Light",
+      "Climate Control",
+      "Freight Elevator",
+      "Street-Level Access",
+      "Green Room",
+      "ADA Compliant",
+    ],
+    rating: 4.5,
+    image: "/images/venues/metpavilion.jpg",
+    available: true,
+  },
+  {
+    id: "ven_003",
+    name: "Austin Convention Center",
+    address: "500 East Cesar Chavez Street",
+    city: "Austin",
+    state: "TX",
+    zip: "78701",
+    country: "US",
+    capacity: 1500,
+    costPerDay: 32000,
+    contactName: "Sarah Williams",
+    contactEmail: "booking@austincc.com",
+    contactPhone: "+1 (512) 555-0400",
+    amenities: [
+      "High-Speed WiFi",
+      "Full AV Suite",
+      "Outdoor Terrace",
+      "Multiple Halls",
+      "Catering Services",
+      "On-site Parking",
+      "Hotel Connected",
+      "Box Office",
+      "Loading Dock",
+      "Security Team",
+    ],
+    rating: 4.6,
+    image: "/images/venues/austincc.jpg",
+    available: true,
+  },
+  {
+    id: "ven_004",
+    name: "Denver Convention Center",
+    address: "700 14th Street",
+    city: "Denver",
+    state: "CO",
+    zip: "80202",
+    country: "US",
+    capacity: 2000,
+    costPerDay: 30000,
+    contactName: "Tom Bradley",
+    contactEmail: "events@denvercc.com",
+    contactPhone: "+1 (303) 555-0500",
+    amenities: [
+      "High-Speed WiFi",
+      "AV Equipment",
+      "Mountain Views",
+      "Rooftop Deck",
+      "Catering Kitchen",
+      "Parking Garage",
+      "Light Rail Access",
+      "Meeting Rooms",
+      "Green Room",
+      "Press Room",
+    ],
+    rating: 4.4,
+    image: "/images/venues/denvercc.jpg",
+    available: true,
+  },
+  {
+    id: "ven_005",
+    name: "Javits Center",
+    address: "429 11th Avenue",
+    city: "New York",
+    state: "NY",
+    zip: "10001",
+    country: "US",
+    capacity: 5000,
+    costPerDay: 65000,
+    contactName: "Lisa Park",
+    contactEmail: "reservations@javitscenter.com",
+    contactPhone: "+1 (212) 555-0600",
+    amenities: [
+      "High-Speed WiFi",
+      "Massive Exhibit Hall",
+      "Full AV Production",
+      "Green Roof",
+      "Catering Facilities",
+      "Multi-Level Parking",
+      "NYC Ferry Access",
+      "Press Center",
+      "VIP Lounge",
+      "Security Screening",
+      "Medical Station",
+      "Business Center",
+    ],
+    rating: 4.8,
+    image: "/images/venues/javits.jpg",
+    available: false,
+  },
+  {
+    id: "ven_006",
+    name: "ExCeL London",
+    address: "Royal Victoria Dock, 1 Western Gateway",
+    city: "London",
+    state: "England",
+    zip: "E16 1XL",
+    country: "UK",
+    capacity: 4000,
+    costPerDay: 55000,
+    contactName: "David Mitchell",
+    contactEmail: "events@excel.london",
+    contactPhone: "+44 20 555 0700",
+    amenities: [
+      "High-Speed WiFi",
+      "International AV",
+      "Dockside Location",
+      "Elizabeth Line Access",
+      "Air Freight Access",
+      "Catering Village",
+      "Hotel Adjacent",
+      "Customs Facility",
+      "Sustainability Certified",
+      "Multi-Faith Room",
+    ],
+    rating: 4.5,
+    image: "/images/venues/excellondon.jpg",
+    available: true,
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_SESSIONS (12)
+// -----------------------------------------------------------------------------
+
+export const MOCK_SESSIONS: Session[] = [
+  {
+    id: "ses_001",
+    eventId: "evt_001",
+    title: "Opening Keynote: The AI-First Future",
+    description: "A visionary look at how artificial intelligence is reshaping every industry and what it means for developers in 2026 and beyond.",
+    track: "Keynote",
+    speakerId: "spk_001",
+    startTime: "2026-03-15T09:00:00Z",
+    endTime: "2026-03-15T10:00:00Z",
+    room: "Main Hall A",
+    capacity: 3000,
+    attendees: 2847,
+    level: "intermediate",
+    tags: ["AI", "Future", "Keynote"],
+    status: "scheduled",
+  },
+  {
+    id: "ses_002",
+    eventId: "evt_001",
+    title: "Building Scalable ML Pipelines with Kubernetes",
+    description: "Deep dive into deploying and managing machine learning pipelines at scale using Kubernetes and MLOps best practices.",
+    track: "Technical",
+    speakerId: "spk_002",
+    startTime: "2026-03-15T10:30:00Z",
+    endTime: "2026-03-15T11:30:00Z",
+    room: "Room 201",
+    capacity: 300,
+    attendees: 278,
+    level: "advanced",
+    tags: ["ML", "Kubernetes", "MLOps", "Pipelines"],
+    status: "scheduled",
+  },
+  {
+    id: "ses_003",
+    eventId: "evt_001",
+    title: "Workshop: Hands-On React Server Components",
+    description: "Interactive workshop where you'll build a full-stack app using React Server Components, streaming, and the new Next.js patterns.",
+    track: "Workshop",
+    speakerId: "spk_003",
+    startTime: "2026-03-15T13:00:00Z",
+    endTime: "2026-03-15T15:00:00Z",
+    room: "Workshop Lab 1",
+    capacity: 60,
+    attendees: 58,
+    level: "intermediate",
+    tags: ["React", "Next.js", "RSC", "Workshop"],
+    status: "scheduled",
+  },
+  {
+    id: "ses_004",
+    eventId: "evt_001",
+    title: "Panel: Ethics in AI — Who's Responsible?",
+    description: "Industry leaders debate the ethical implications of AI deployment, algorithmic bias, and corporate responsibility in the age of automation.",
+    track: "Panel",
+    speakerId: "spk_004",
+    startTime: "2026-03-15T14:00:00Z",
+    endTime: "2026-03-15T15:00:00Z",
+    room: "Room 302",
+    capacity: 250,
+    attendees: 241,
+    level: "beginner",
+    tags: ["AI Ethics", "Panel", "Responsible AI"],
+    status: "scheduled",
+  },
+  {
+    id: "ses_005",
+    eventId: "evt_001",
+    title: "Zero Trust Architecture in Practice",
+    description: "Real-world implementation strategies for zero trust security, covering identity, device, network, and application layers.",
+    track: "Technical",
+    speakerId: "spk_005",
+    startTime: "2026-03-15T15:30:00Z",
+    endTime: "2026-03-15T16:30:00Z",
+    room: "Room 201",
+    capacity: 300,
+    attendees: 189,
+    level: "advanced",
+    tags: ["Security", "Zero Trust", "Infrastructure"],
+    status: "scheduled",
+  },
+  {
+    id: "ses_006",
+    eventId: "evt_002",
+    title: "Design Systems That Scale",
+    description: "How to build and maintain design systems that grow with your organization, from tokens to component libraries.",
+    track: "Keynote",
+    speakerId: "spk_006",
+    startTime: "2026-04-10T10:00:00Z",
+    endTime: "2026-04-10T11:00:00Z",
+    room: "Auditorium",
+    capacity: 150,
+    attendees: 142,
+    level: "intermediate",
+    tags: ["Design Systems", "UI", "Components"],
+    status: "scheduled",
+  },
+  {
+    id: "ses_007",
+    eventId: "evt_001",
+    title: "Networkng Mixer: AI Builders Connect",
+    description: "Informal networking session for AI practitioners to share experiences, challenges, and opportunities over drinks and appetizers.",
+    track: "Networking",
+    speakerId: "spk_001",
+    startTime: "2026-03-15T17:00:00Z",
+    endTime: "2026-03-15T18:30:00Z",
+    room: "Terrace Lounge",
+    capacity: 500,
+    attendees: 342,
+    level: "beginner",
+    tags: ["Networking", "Social", "AI"],
+    status: "scheduled",
+  },
+  {
+    id: "ses_008",
+    eventId: "evt_003",
+    title: "Pitch Workshop: Storytelling for Startups",
+    description: "Learn to craft compelling pitch narratives that resonate with investors. Includes live practice rounds with feedback.",
+    track: "Workshop",
+    speakerId: "spk_007",
+    startTime: "2026-05-22T13:00:00Z",
+    endTime: "2026-05-22T15:00:00Z",
+    room: "Workshop Room A",
+    capacity: 80,
+    attendees: 76,
+    level: "intermediate",
+    tags: ["Pitch", "Startups", "Storytelling"],
+    status: "scheduled",
+  },
+  {
+    id: "ses_009",
+    eventId: "evt_001",
+    title: "WebAssembly: Beyond the Browser",
+    description: "Exploring WASM on the server, edge computing with WASM, and the future of portable, sandboxed computing.",
+    track: "Technical",
+    speakerId: "spk_008",
+    startTime: "2026-03-16T09:30:00Z",
+    endTime: "2026-03-16T10:30:00Z",
+    room: "Room 201",
+    capacity: 300,
+    attendees: 215,
+    level: "advanced",
+    tags: ["WebAssembly", "WASM", "Edge", "Server"],
+    status: "scheduled",
+  },
+  {
+    id: "ses_010",
+    eventId: "evt_001",
+    title: "Fireside Chat: From Side Project to  ARR",
+    description: "Founders share their journey from weekend hack to venture-backed company with honest lessons learned along the way.",
+    track: "Panel",
+    speakerId: "spk_003",
+    startTime: "2026-03-16T11:00:00Z",
+    endTime: "2026-03-16T12:00:00Z",
+    room: "Room 302",
+    capacity: 250,
+    attendees: 248,
+    level: "beginner",
+    tags: ["Startup", "Growth", "Fireside Chat"],
+    status: "scheduled",
+  },
+  {
+    id: "ses_011",
+    eventId: "evt_001",
+    title: "Workshop: Advanced TypeScript Patterns",
+    description: "Master advanced TypeScript techniques including conditional types, template literals, and building type-safe APIs.",
+    track: "Workshop",
+    speakerId: "spk_002",
+    startTime: "2026-03-16T13:00:00Z",
+    endTime: "2026-03-16T15:00:00Z",
+    room: "Workshop Lab 2",
+    capacity: 50,
+    attendees: 49,
+    level: "advanced",
+    tags: ["TypeScript", "Advanced", "Type System"],
+    status: "scheduled",
+  },
+  {
+    id: "ses_012",
+    eventId: "evt_004",
+    title: "Open Source Sustainability Panel",
+    description: "Maintainers and sponsors discuss the challenges of sustaining open source projects and building healthy communities.",
+    track: "Panel",
+    speakerId: "spk_005",
+    startTime: "2026-06-07T14:00:00Z",
+    endTime: "2026-06-07T15:00:00Z",
+    room: "Main Stage",
+    capacity: 600,
+    attendees: 478,
+    level: "beginner",
+    tags: ["Open Source", "Sustainability", "Community"],
+    status: "scheduled",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_SPEAKERS (8)
+// -----------------------------------------------------------------------------
+
+export const MOCK_SPEAKERS: Speaker[] = [
+  {
+    id: "spk_001",
+    name: "Dr. Amara Okafor",
+    email: "amara.okafor@deepmind.dev",
+    phone: "+1 (650) 555-0101",
+    bio: "Chief AI Scientist at DeepMind. PhD from MIT in Machine Learning. Published 40+ papers on reinforcement learning and neural architecture search. Keynote speaker at NeurIPS, ICML, and CVPR.",
+    avatar: "/images/speakers/amara.jpg",
+    title: "Chief AI Scientist",
+    company: "DeepMind",
+    website: "https://amaraokafor.com",
+    linkedin: "linkedin.com/in/amaraokafor",
+    twitter: "@amara_ml",
+    sessions: ["ses_001", "ses_007"],
+    rating: 4.9,
+    fee: 25000,
+    expertise: ["Machine Learning", "Reinforcement Learning", "Neural Architecture", "AI Ethics"],
+    featured: true,
+  },
+  {
+    id: "spk_002",
+    name: "Marcus Chen",
+    email: "marcus.chen@cloudscale.io",
+    phone: "+1 (408) 555-0102",
+    bio: "Principal Engineer at CloudScale, specializing in distributed systems and Kubernetes. Core contributor to several CNCF projects. Author of 'Scaling Kubernetes in Production'.",
+    avatar: "/images/speakers/marcus.jpg",
+    title: "Principal Engineer",
+    company: "CloudScale",
+    website: "https://marcuschen.dev",
+    linkedin: "linkedin.com/in/marcuschen",
+    twitter: "@mchen_dev",
+    sessions: ["ses_002", "ses_011"],
+    rating: 4.8,
+    fee: 15000,
+    expertise: ["Kubernetes", "Distributed Systems", "Cloud Infrastructure", "MLOps"],
+    featured: true,
+  },
+  {
+    id: "spk_003",
+    name: "Sarah Kim",
+    email: "sarah.kim@vercel.com",
+    phone: "+1 (512) 555-0103",
+    bio: "Staff Engineer at Vercel, working on Next.js and the React ecosystem. Previously at Meta on the React team. Passionate about developer experience and web performance.",
+    avatar: "/images/speakers/sarah.jpg",
+    title: "Staff Engineer",
+    company: "Vercel",
+    website: "https://sarahkim.io",
+    linkedin: "linkedin.com/in/sarahkim",
+    twitter: "@sarahkim_dev",
+    sessions: ["ses_003", "ses_010"],
+    rating: 4.7,
+    fee: 18000,
+    expertise: ["React", "Next.js", "TypeScript", "Web Performance"],
+    featured: true,
+  },
+  {
+    id: "spk_004",
+    name: "Prof. Elena Volkov",
+    email: "elena.volkov@stanford.edu",
+    phone: "+1 (650) 555-0104",
+    bio: "Professor of Computer Science at Stanford University. Director of the AI Ethics Lab. Advisor to multiple AI policy organizations and author of 'The Ethical Algorithm'.",
+    avatar: "/images/speakers/elena.jpg",
+    title: "Professor of Computer Science",
+    company: "Stanford University",
+    website: "https://elenavolkov.stanford.edu",
+    linkedin: "linkedin.com/in/elenavolkov",
+    twitter: "@elena_ethics",
+    sessions: ["ses_004"],
+    rating: 4.9,
+    fee: 12000,
+    expertise: ["AI Ethics", "Algorithmic Fairness", "AI Policy", "Responsible AI"],
+    featured: false,
+  },
+  {
+    id: "spk_005",
+    name: "James Rodriguez",
+    email: "james.rodriguez@norton.cyber",
+    phone: "+1 (703) 555-0105",
+    bio: "VP of Security Engineering at Norton Cyber. Former NSA red team lead. CISSP, OSCP certified. Known for pioneering zero trust implementations at Fortune 500 companies.",
+    avatar: "/images/speakers/james.jpg",
+    title: "VP of Security Engineering",
+    company: "Norton Cyber",
+    website: "https://jamesrodriguez.security",
+    linkedin: "linkedin.com/in/jamesrodriguez-sec",
+    twitter: "@jrod_security",
+    sessions: ["ses_005", "ses_012"],
+    rating: 4.6,
+    fee: 20000,
+    expertise: ["Cybersecurity", "Zero Trust", "Penetration Testing", "Security Architecture"],
+    featured: false,
+  },
+  {
+    id: "spk_006",
+    name: "Priya Sharma",
+    email: "priya.sharma@figma.com",
+    phone: "+1 (415) 555-0106",
+    bio: "Head of Design Systems at Figma. Previously led design systems at Airbnb and Google. Speaker at Config, WWDC, and Google I/O. Advocate for inclusive design practices.",
+    avatar: "/images/speakers/priya.jpg",
+    title: "Head of Design Systems",
+    company: "Figma",
+    website: "https://priyasharma.design",
+    linkedin: "linkedin.com/in/priyasharma-ds",
+    twitter: "@priya_designs",
+    sessions: ["ses_006"],
+    rating: 4.8,
+    fee: 14000,
+    expertise: ["Design Systems", "UI/UX", "Figma", "Inclusive Design"],
+    featured: true,
+  },
+  {
+    id: "spk_007",
+    name: "Alex Petrov",
+    email: "alex.petrov@sequoiacap.com",
+    phone: "+1 (650) 555-0107",
+    bio: "Partner at Sequoia Capital focused on early-stage SaaS investments. Former founder of two acquired startups. Mentor at Y Combinator and Techstars.",
+    avatar: "/images/speakers/alex.jpg",
+    title: "Partner",
+    company: "Sequoia Capital",
+    website: "https://alexpetrov.vc",
+    linkedin: "linkedin.com/in/alexpetrov",
+    twitter: "@alexpetrov_vc",
+    sessions: ["ses_008"],
+    rating: 4.5,
+    fee: 10000,
+    expertise: ["Venture Capital", "SaaS", "Startup Strategy", "Fundraising"],
+    featured: false,
+  },
+  {
+    id: "spk_008",
+    name: "Yuki Tanaka",
+    email: "yuki.tanaka@bytecode.org",
+    phone: "+1 (206) 555-0108",
+    bio: "WebAssembly lead at Bytecode Alliance. Core contributor to Rust and WASM toolchains. Creator of the popular WasmEdge runtime. Speaker and educator on systems programming.",
+    avatar: "/images/speakers/yuki.jpg",
+    title: "WebAssembly Lead",
+    company: "Bytecode Alliance",
+    website: "https://yukitanaka.dev",
+    linkedin: "linkedin.com/in/yukitanaka",
+    twitter: "@yuki_wasm",
+    sessions: ["ses_009"],
+    rating: 4.7,
+    fee: 12000,
+    expertise: ["WebAssembly", "Rust", "Systems Programming", "Edge Computing"],
+    featured: false,
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_ATTENDEES (15)
+// -----------------------------------------------------------------------------
+
+export const MOCK_ATTENDEES: Attendee[] = [
+  {
+    id: "att_001",
+    firstName: "Emily",
+    lastName: "Watson",
+    email: "emily.watson@google.com",
+    phone: "+1 (650) 555-1001",
+    company: "Google",
+    jobTitle: "Senior Software Engineer",
+    ticketType: "vip",
+    ticketPrice: 1200,
+    checkInStatus: "checked-in",
+    checkedInAt: "2026-03-15T08:42:00Z",
+    dietary: "vegetarian",
+    sessionsRegistered: ["ses_001", "ses_002", "ses_003", "ses_007"],
+    registeredAt: "2026-01-15T10:30:00Z",
+    avatar: "/images/avatars/emily.jpg",
+    notes: "VIP guest, interested in ML talks",
+    amountPaid: 1200,
+  },
+  {
+    id: "att_002",
+    firstName: "David",
+    lastName: "Nguyen",
+    email: "d.nguyen@microsoft.com",
+    phone: "+1 (425) 555-1002",
+    company: "Microsoft",
+    jobTitle: "Cloud Solutions Architect",
+    ticketType: "general",
+    ticketPrice: 599,
+    checkInStatus: "checked-in",
+    checkedInAt: "2026-03-15T08:55:00Z",
+    dietary: "none",
+    sessionsRegistered: ["ses_001", "ses_005", "ses_009"],
+    registeredAt: "2026-01-20T14:00:00Z",
+    avatar: "/images/avatars/david.jpg",
+    notes: "",
+    amountPaid: 599,
+  },
+  {
+    id: "att_003",
+    firstName: "Sophia",
+    lastName: "Martinez",
+    email: "sophia.m@spotify.com",
+    phone: "+46 70 555 1003",
+    company: "Spotify",
+    jobTitle: "Staff Frontend Engineer",
+    ticketType: "early-bird",
+    ticketPrice: 399,
+    checkInStatus: "checked-in",
+    checkedInAt: "2026-03-15T09:02:00Z",
+    dietary: "vegan",
+    sessionsRegistered: ["ses_001", "ses_003", "ses_010"],
+    registeredAt: "2025-12-01T09:00:00Z",
+    avatar: "/images/avatars/sophia.jpg",
+    notes: "Early bird, vegetarian meals requested",
+    amountPaid: 399,
+  },
+  {
+    id: "att_004",
+    firstName: "Michael",
+    lastName: "Brown",
+    email: "michael.b@amazon.com",
+    phone: "+1 (206) 555-1004",
+    company: "Amazon Web Services",
+    jobTitle: "Principal Solutions Architect",
+    ticketType: "vip",
+    ticketPrice: 1200,
+    checkInStatus: "checked-in",
+    checkedInAt: "2026-03-15T08:30:00Z",
+    dietary: "none",
+    sessionsRegistered: ["ses_001", "ses_002", "ses_005", "ses_009"],
+    registeredAt: "2026-01-10T11:00:00Z",
+    avatar: "/images/avatars/michael.jpg",
+    notes: "Speaking on AWS Lambda panel",
+    amountPaid: 1200,
+  },
+  {
+    id: "att_005",
+    firstName: "Lisa",
+    lastName: "Anderson",
+    email: "l.anderson@stripe.com",
+    phone: "+1 (415) 555-1005",
+    company: "Stripe",
+    jobTitle: "Product Manager",
+    ticketType: "general",
+    ticketPrice: 599,
+    checkInStatus: "pending",
+    checkedInAt: null,
+    dietary: "gluten-free",
+    sessionsRegistered: ["ses_001", "ses_004", "ses_006"],
+    registeredAt: "2026-02-05T16:30:00Z",
+    avatar: "/images/avatars/lisa.jpg",
+    notes: "Interested in FinTech sessions",
+    amountPaid: 599,
+  },
+  {
+    id: "att_006",
+    firstName: "Ryan",
+    lastName: "Garcia",
+    email: "ryan.g@netflix.com",
+    phone: "+1 (408) 555-1006",
+    company: "Netflix",
+    jobTitle: "Senior Backend Engineer",
+    ticketType: "general",
+    ticketPrice: 599,
+    checkInStatus: "checked-in",
+    checkedInAt: "2026-03-15T09:10:00Z",
+    dietary: "none",
+    sessionsRegistered: ["ses_002", "ses_009", "ses_011"],
+    registeredAt: "2026-02-12T13:15:00Z",
+    avatar: "/images/avatars/ryan.jpg",
+    notes: "Attending ML and WASM sessions",
+    amountPaid: 599,
+  },
+  {
+    id: "att_007",
+    firstName: "Aisha",
+    lastName: "Patel",
+    email: "aisha.p@figma.com",
+    phone: "+1 (415) 555-1007",
+    company: "Figma",
+    jobTitle: "Design Engineer",
+    ticketType: "early-bird",
+    ticketPrice: 399,
+    checkInStatus: "checked-in",
+    checkedInAt: "2026-03-15T09:15:00Z",
+    dietary: "vegetarian",
+    sessionsRegistered: ["ses_001", "ses_003", "ses_006"],
+    registeredAt: "2025-12-10T08:00:00Z",
+    avatar: "/images/avatars/aisha.jpg",
+    notes: "Co-attending with Priya Sharma",
+    amountPaid: 399,
+  },
+  {
+    id: "att_008",
+    firstName: "Chris",
+    lastName: "Johnson",
+    email: "chris.j@datadog.com",
+    phone: "+1 (646) 555-1008",
+    company: "Datadog",
+    jobTitle: "Site Reliability Engineer",
+    ticketType: "student",
+    ticketPrice: 199,
+    checkInStatus: "no-show",
+    checkedInAt: null,
+    dietary: "none",
+    sessionsRegistered: ["ses_005", "ses_009"],
+    registeredAt: "2026-02-28T17:45:00Z",
+    avatar: "/images/avatars/chris.jpg",
+    notes: "Student discount applied",
+    amountPaid: 199,
+  },
+  {
+    id: "att_009",
+    firstName: "Olivia",
+    lastName: "Lee",
+    email: "olivia.lee@shopify.com",
+    phone: "+1 (647) 555-1009",
+    company: "Shopify",
+    jobTitle: "Engineering Manager",
+    ticketType: "premium",
+    ticketPrice: 999,
+    checkInStatus: "checked-in",
+    checkedInAt: "2026-03-15T08:50:00Z",
+    dietary: "halal",
+    sessionsRegistered: ["ses_001", "ses_002", "ses_004", "ses_010"],
+    registeredAt: "2026-01-22T10:00:00Z",
+    avatar: "/images/avatars/olivia.jpg",
+    notes: "Managing team of 8 attending",
+    amountPaid: 999,
+  },
+  {
+    id: "att_010",
+    firstName: "Jake",
+    lastName: "Thompson",
+    email: "jake.t@twilio.com",
+    phone: "+1 (415) 555-1010",
+    company: "Twilio",
+    jobTitle: "Developer Advocate",
+    ticketType: "general",
+    ticketPrice: 599,
+    checkInStatus: "checked-in",
+    checkedInAt: "2026-03-15T09:20:00Z",
+    dietary: "none",
+    sessionsRegistered: ["ses_001", "ses_003", "ses_008"],
+    registeredAt: "2026-02-18T09:30:00Z",
+    avatar: "/images/avatars/jake.jpg",
+    notes: "Live-tweeting sessions",
+    amountPaid: 599,
+  },
+  {
+    id: "att_011",
+    firstName: "Nina",
+    lastName: "Kowalski",
+    email: "nina.k@uber.com",
+    phone: "+1 (415) 555-1011",
+    company: "Uber",
+    jobTitle: "Data Scientist",
+    ticketType: "early-bird",
+    ticketPrice: 399,
+    checkInStatus: "pending",
+    checkedInAt: null,
+    dietary: "none",
+    sessionsRegistered: ["ses_001", "ses_002", "ses_011"],
+    registeredAt: "2025-12-15T12:00:00Z",
+    avatar: "/images/avatars/nina.jpg",
+    notes: "",
+    amountPaid: 399,
+  },
+  {
+    id: "att_012",
+    firstName: "Tom",
+    lastName: "Bradshaw",
+    email: "tom.b@slack.com",
+    phone: "+1 (415) 555-1012",
+    company: "Slack",
+    jobTitle: "iOS Engineer",
+    ticketType: "general",
+    ticketPrice: 599,
+    checkInStatus: "checked-in",
+    checkedInAt: "2026-03-15T09:25:00Z",
+    dietary: "nut-free",
+    sessionsRegistered: ["ses_003", "ses_006", "ses_010"],
+    registeredAt: "2026-02-20T14:30:00Z",
+    avatar: "/images/avatars/tom.jpg",
+    notes: "Allergic to peanuts",
+    amountPaid: 599,
+  },
+  {
+    id: "att_013",
+    firstName: "Rachel",
+    lastName: "Kim",
+    email: "rachel.k@airbnb.com",
+    phone: "+1 (415) 555-1013",
+    company: "Airbnb",
+    jobTitle: "Staff Engineer",
+    ticketType: "vip",
+    ticketPrice: 1200,
+    checkInStatus: "checked-in",
+    checkedInAt: "2026-03-15T08:35:00Z",
+    dietary: "none",
+    sessionsRegistered: ["ses_001", "ses_004", "ses_007", "ses_010"],
+    registeredAt: "2026-01-05T15:00:00Z",
+    avatar: "/images/avatars/rachel.jpg",
+    notes: "VIP speaker lounge access",
+    amountPaid: 1200,
+  },
+  {
+    id: "att_014",
+    firstName: "Kevin",
+    lastName: "O'Brien",
+    email: "kevin.ob@coinbase.com",
+    phone: "+1 (415) 555-1014",
+    company: "Coinbase",
+    jobTitle: "Blockchain Engineer",
+    ticketType: "general",
+    ticketPrice: 599,
+    checkInStatus: "cancelled",
+    checkedInAt: null,
+    dietary: "none",
+    sessionsRegistered: ["ses_001"],
+    registeredAt: "2026-02-25T11:00:00Z",
+    avatar: "/images/avatars/kevin.jpg",
+    notes: "Cancelled due to schedule conflict",
+    amountPaid: 0,
+  },
+  {
+    id: "att_015",
+    firstName: "Priya",
+    lastName: "Ramanathan",
+    email: "priya.r@atlassian.com",
+    phone: "+61 2 5551 0015",
+    company: "Atlassian",
+    jobTitle: "Principal Product Designer",
+    ticketType: "premium",
+    ticketPrice: 999,
+    checkInStatus: "checked-in",
+    checkedInAt: "2026-03-15T08:58:00Z",
+    dietary: "vegan",
+    sessionsRegistered: ["ses_001", "ses_003", "ses_006", "ses_007"],
+    registeredAt: "2026-01-18T08:00:00Z",
+    avatar: "/images/avatars/priya_r.jpg",
+    notes: "Speaker at DesignCraft workshop",
+    amountPaid: 999,
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_TICKETS (8 types)
+// -----------------------------------------------------------------------------
+
+export const MOCK_TICKETS: TicketType[] = [
+  {
+    id: "tkt_001",
+    eventId: "evt_001",
+    name: "Early Bird",
+    description: "Limited early access pricing for the first 500 registrants. Full conference access at a discounted rate.",
+    price: 399,
+    capacity: 500,
+    sold: 500,
+    revenue: 199500,
+    saleStart: "2025-10-01T00:00:00Z",
+    saleEnd: "2025-12-31T23:59:59Z",
+    status: "sold-out",
+    perks: ["Full Conference Access", "Lunch Included", "Conference Swag Bag", "WiFi Access"],
+  },
+  {
+    id: "tkt_002",
+    eventId: "evt_001",
+    name: "General Admission",
+    description: "Standard conference pass with access to all keynotes, sessions, and networking events.",
+    price: 599,
+    capacity: 1500,
+    sold: 1200,
+    revenue: 718800,
+    saleStart: "2026-01-01T00:00:00Z",
+    saleEnd: "2026-03-10T23:59:59Z",
+    status: "active",
+    perks: ["Full Conference Access", "Lunch Included", "WiFi Access", "Session Recordings"],
+  },
+  {
+    id: "tkt_003",
+    eventId: "evt_001",
+    name: "VIP Pass",
+    description: "Premium experience with VIP lounge, speaker meet & greet, and priority seating.",
+    price: 1200,
+    capacity: 200,
+    sold: 185,
+    revenue: 222000,
+    saleStart: "2025-11-01T00:00:00Z",
+    saleEnd: "2026-03-01T23:59:59Z",
+    status: "active",
+    perks: [
+      "Full Conference Access",
+      "VIP Lounge",
+      "Speaker Meet & Greet",
+      "Priority Seating",
+      "Premium Catering",
+      "Exclusive Networking Dinner",
+      "Conference Swag Bag Plus",
+    ],
+  },
+  {
+    id: "tkt_004",
+    eventId: "evt_001",
+    name: "Workshop Add-On",
+    description: "Additional pass for hands-on workshop sessions. Must hold a conference ticket.",
+    price: 199,
+    capacity: 300,
+    sold: 245,
+    revenue: 48755,
+    saleStart: "2026-01-15T00:00:00Z",
+    saleEnd: "2026-03-12T23:59:59Z",
+    status: "active",
+    perks: ["Workshop Access", "Laptop Rental Available", "Workshop Materials", "Certificate of Completion"],
+  },
+  {
+    id: "tkt_005",
+    eventId: "evt_001",
+    name: "Student Pass",
+    description: "Discounted rate for verified students. Valid student ID required at check-in.",
+    price: 199,
+    capacity: 300,
+    sold: 170,
+    revenue: 33830,
+    saleStart: "2026-01-01T00:00:00Z",
+    saleEnd: "2026-03-14T23:59:59Z",
+    status: "active",
+    perks: ["Full Conference Access", "Lunch Included", "WiFi Access", "Mentorship Program"],
+  },
+  {
+    id: "tkt_006",
+    eventId: "evt_001",
+    name: "Group Pass (5+)",
+    description: "Discounted group rate for teams of 5 or more. Must register together.",
+    price: 499,
+    capacity: 500,
+    sold: 320,
+    revenue: 159680,
+    saleStart: "2026-01-01T00:00:00Z",
+    saleEnd: "2026-03-10T23:59:59Z",
+    status: "active",
+    perks: ["Full Conference Access", "Dedicated Group Seating", "Lunch Included", "Team Photo Session"],
+  },
+  {
+    id: "tkt_007",
+    eventId: "evt_001",
+    name: "Virtual Pass",
+    description: "Access to live-streamed sessions and on-demand recordings. No in-person access.",
+    price: 149,
+    capacity: 5000,
+    sold: 890,
+    revenue: 132610,
+    saleStart: "2026-01-01T00:00:00Z",
+    saleEnd: "2026-03-17T18:00:00Z",
+    status: "active",
+    perks: ["Live Streaming", "On-Demand Recordings", "Virtual Networking Lounge", "Digital Swag Bag"],
+  },
+  {
+    id: "tkt_008",
+    eventId: "evt_001",
+    name: "Speaker Pass",
+    description: "Complimentary pass for confirmed speakers and moderators.",
+    price: 0,
+    capacity: 50,
+    sold: 32,
+    revenue: 0,
+    saleStart: "2025-09-01T00:00:00Z",
+    saleEnd: "2026-03-17T18:00:00Z",
+    status: "active",
+    perks: ["Full Conference Access", "VIP Lounge", "Speaker Green Room", "Premium Catering", "Travel Reimbursement"],
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_SPONSORS (6)
+// -----------------------------------------------------------------------------
+
+export const MOCK_SPONSORS: Sponsor[] = [
+  {
+    id: "spon_001",
+    name: "Google Cloud",
+    logo: "/images/sponsors/google-cloud.png",
+    tier: "platinum",
+    amount: 150000,
+    contactName: "Rachel Adams",
+    contactEmail: "sponsors@google.com",
+    contactPhone: "+1 (650) 555-2001",
+    website: "https://cloud.google.com",
+    benefits: [
+      "Main Stage Branding",
+      "Keynote Slot (10 min)",
+      "Large Booth (20x20)",
+      "VIP Dinner Host",
+      "Logo on All Marketing",
+      "10 VIP Passes",
+      "Workshop Room Sponsor",
+      "Podcast Interview",
+    ],
+    status: "confirmed",
+    since: "2025-08-15",
+  },
+  {
+    id: "spon_002",
+    name: "Microsoft Azure",
+    logo: "/images/sponsors/azure.png",
+    tier: "platinum",
+    amount: 120000,
+    contactName: "Brian Foster",
+    contactEmail: "events@microsoft.com",
+    contactPhone: "+1 (425) 555-2002",
+    website: "https://azure.microsoft.com",
+    benefits: [
+      "Main Stage Branding",
+      "Session Slot (30 min)",
+      "Large Booth (20x20)",
+      "Logo on All Marketing",
+      "8 VIP Passes",
+      "Networking Event Sponsor",
+    ],
+    status: "confirmed",
+    since: "2025-09-01",
+  },
+  {
+    id: "spon_003",
+    name: "Vercel",
+    logo: "/images/sponsors/vercel.png",
+    tier: "gold",
+    amount: 75000,
+    contactName: "Katie Liu",
+    contactEmail: "sponsors@vercel.com",
+    contactPhone: "+1 (415) 555-2003",
+    website: "https://vercel.com",
+    benefits: [
+      "Workshop Room Sponsor",
+      "Medium Booth (15x15)",
+      "Logo on Website",
+      "4 VIP Passes",
+      "Swag Bag Insert",
+      "Lightning Talk Slot",
+    ],
+    status: "confirmed",
+    since: "2025-10-01",
+  },
+  {
+    id: "spon_004",
+    name: "Stripe",
+    logo: "/images/sponsors/stripe.png",
+    tier: "gold",
+    amount: 60000,
+    contactName: "Michael O'Neill",
+    contactEmail: "events@stripe.com",
+    contactPhone: "+1 (415) 555-2004",
+    website: "https://stripe.com",
+    benefits: [
+      "Medium Booth (15x15)",
+      "Logo on Website",
+      "3 VIP Passes",
+      "Session Slot (30 min)",
+      "Lunch Sponsor",
+    ],
+    status: "confirmed",
+    since: "2025-10-15",
+  },
+  {
+    id: "spon_005",
+    name: "MongoDB",
+    logo: "/images/sponsors/mongodb.png",
+    tier: "silver",
+    amount: 35000,
+    contactName: "Anna Schmidt",
+    contactEmail: "partnerships@mongodb.com",
+    contactPhone: "+1 (650) 555-2005",
+    website: "https://mongodb.com",
+    benefits: [
+      "Small Booth (10x10)",
+      "Logo on Website",
+      "2 VIP Passes",
+      "Swag Bag Insert",
+      "Blog Feature",
+    ],
+    status: "pending",
+    since: "2025-11-01",
+  },
+  {
+    id: "spon_006",
+    name: "DigitalOcean",
+    logo: "/images/sponsors/digitalocean.png",
+    tier: "silver",
+    amount: 25000,
+    contactName: "Kevin Park",
+    contactEmail: "sponsors@digitalocean.com",
+    contactPhone: "+1 (212) 555-2006",
+    website: "https://digitalocean.com",
+    benefits: [
+      "Small Booth (10x10)",
+      "Logo on Website",
+      "1 VIP Pass",
+      "Swag Bag Insert",
+      "Social Media Mention",
+    ],
+    status: "confirmed",
+    since: "2025-11-15",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_VENDORS (6)
+// -----------------------------------------------------------------------------
+
+export const MOCK_VENDORS: Vendor[] = [
+  {
+    id: "vnd_001",
+    name: "Apex AV Solutions",
+    service: "Audio/Visual Equipment & Production",
+    category: "AV & Production",
+    contactName: "Daniel Park",
+    contactEmail: "dan@apexav.com",
+    contactPhone: "+1 (415) 555-3001",
+    cost: 85000,
+    status: "confirmed",
+    startDate: "2026-03-13",
+    endDate: "2026-03-18",
+    notes: "Full AV setup for Main Hall and 4 breakout rooms. Includes live streaming capability.",
+    rating: 4.8,
+    contractUrl: "/contracts/vnd_001_apex_av.pdf",
+  },
+  {
+    id: "vnd_002",
+    name: "Bloom Florals & Decor",
+    service: "Event Decoration & Floral Arrangements",
+    category: "Décor",
+    contactName: "Isabella Rossi",
+    contactEmail: "events@bloomflorals.com",
+    contactPhone: "+1 (415) 555-3002",
+    cost: 18000,
+    status: "confirmed",
+    startDate: "2026-03-15",
+    endDate: "2026-03-17",
+    notes: "Stage backdrop, table centerpieces, and entrance arrangements. Modern minimalist theme.",
+    rating: 4.6,
+    contractUrl: "/contracts/vnd_002_bloom.pdf",
+  },
+  {
+    id: "vnd_003",
+    name: "SecureAll Events",
+    service: "Event Security & Crowd Management",
+    category: "Security",
+    contactName: "Robert Chen",
+    contactEmail: "robert@secureall.com",
+    contactPhone: "+1 (415) 555-3003",
+    cost: 42000,
+    status: "confirmed",
+    startDate: "2026-03-14",
+    endDate: "2026-03-18",
+    notes: "24/7 security coverage. 12 security personnel on-site. Bag check and credentialing.",
+    rating: 4.7,
+    contractUrl: "/contracts/vnd_003_secure.pdf",
+  },
+  {
+    id: "vnd_004",
+    name: "TechRent Pro",
+    service: "Technology Equipment Rental",
+    category: "Technology",
+    contactName: "Amy Lawson",
+    contactEmail: "rentals@techrentpro.com",
+    contactPhone: "+1 (408) 555-3004",
+    cost: 35000,
+    status: "in-progress",
+    startDate: "2026-03-12",
+    endDate: "2026-03-19",
+    notes: "100 laptops for workshop labs, 20 tablets for check-in, charging stations throughout venue.",
+    rating: 4.5,
+    contractUrl: "/contracts/vnd_004_techrent.pdf",
+  },
+  {
+    id: "vnd_005",
+    name: "Peak Transport Group",
+    service: "Shuttle & Transportation Services",
+    category: "Transportation",
+    contactName: "James Wheeler",
+    contactEmail: "events@peaktransport.com",
+    contactPhone: "+1 (415) 555-3005",
+    cost: 28000,
+    status: "confirmed",
+    startDate: "2026-03-15",
+    endDate: "2026-03-17",
+    notes: "Airport shuttles every 30 minutes. Hotel-to-venue shuttle service. VIP car service.",
+    rating: 4.4,
+    contractUrl: "/contracts/vnd_005_transport.pdf",
+  },
+  {
+    id: "vnd_006",
+    name: "SnapShot Photo Booth",
+    service: "Photo Booth & Event Photography",
+    category: "Photography",
+    contactName: "Megan Torres",
+    contactEmail: "book@snapshotbooth.com",
+    contactPhone: "+1 (415) 555-3006",
+    cost: 12000,
+    status: "pending",
+    startDate: "2026-03-15",
+    endDate: "2026-03-17",
+    notes: "2 photo booths with custom branding backdrop. 1 event photographer for keynotes.",
+    rating: 4.3,
+    contractUrl: "/contracts/vnd_006_snapshot.pdf",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_CATERING (6)
+// -----------------------------------------------------------------------------
+
+export const MOCK_CATERING: CateringMenu[] = [
+  {
+    id: "cat_001",
+    vendorId: "vnd_001",
+    name: "Day 1 — Opening Reception Buffet",
+    description: "International buffet featuring Mediterranean, Asian, and American cuisine for the opening reception.",
+    type: "Buffet",
+    pricePerPerson: 45,
+    minGuests: 200,
+    maxGuests: 500,
+    items: [
+      "Grilled Chicken with Herbs",
+      "Vegetable Pad Thai",
+      "Caesar Salad",
+      "Hummus & Pita Platter",
+      "Fresh Fruit Display",
+      "Artisan Bread Basket",
+      "Tiramisu",
+      "Sparkling Water & Lemonade",
+    ],
+    dietary: ["vegetarian", "vegan", "gluten-free"],
+    eventId: "evt_001",
+    scheduledDate: "2026-03-15T18:00:00Z",
+    servings: 450,
+    status: "confirmed",
+  },
+  {
+    id: "cat_002",
+    vendorId: "vnd_001",
+    name: "Day 1 — Networking Lunch",
+    description: "Gourmet box lunches with premium sandwich options, salads, and sides served during the networking break.",
+    type: "Boxed Lunch",
+    pricePerPerson: 32,
+    minGuests: 100,
+    maxGuests: 600,
+    items: [
+      "Turkey Club Sandwich",
+      "Caprese Panini (V)",
+      "Mediterranean Grain Bowl (VG)",
+      "Mixed Green Side Salad",
+      "Kettle Chips",
+      "Cookie assortment",
+      "Iced Tea & Coffee",
+    ],
+    dietary: ["vegetarian", "vegan", "gluten-free", "nut-free"],
+    eventId: "evt_001",
+    scheduledDate: "2026-03-15T12:30:00Z",
+    servings: 420,
+    status: "confirmed",
+  },
+  {
+    id: "cat_003",
+    vendorId: "vnd_001",
+    name: "Day 2 — Executive Breakfast",
+    description: "Premium breakfast spread with hot items, pastries, fresh juice, and specialty coffee for VIP and speaker attendees.",
+    type: "Breakfast Buffet",
+    pricePerPerson: 28,
+    minGuests: 50,
+    maxGuests: 200,
+    items: [
+      "Eggs Benedict",
+      "Avocado Toast",
+      "Fresh Croissants & Danish",
+      "Yogurt Parfaits",
+      "Smoked Salmon Platter",
+      "Fresh Squeezed Juices",
+      "Specialty Coffee Bar",
+      "Fruit Smoothies",
+    ],
+    dietary: ["vegetarian", "gluten-free"],
+    eventId: "evt_001",
+    scheduledDate: "2026-03-16T07:30:00Z",
+    servings: 150,
+    status: "planned",
+  },
+  {
+    id: "cat_004",
+    vendorId: "vnd_001",
+    name: "VIP Dinner — Day 2",
+    description: "Three-course plated dinner for VIP guests and speakers at an exclusive rooftop venue.",
+    type: "Plated Dinner",
+    pricePerPerson: 85,
+    minGuests: 40,
+    maxGuests: 80,
+    items: [
+      "Starter: Burrata with Heirloom Tomatoes",
+      "Main: Pan-Seared Salmon with Risotto",
+      "Main: Filet Mignon with Truffle Mash",
+      "Dessert: Chocolate Lava Cake",
+      "Wine & Cocktail Pairings",
+      "Artisan Bread Service",
+    ],
+    dietary: ["vegetarian", "gluten-free"],
+    eventId: "evt_001",
+    scheduledDate: "2026-03-16T19:00:00Z",
+    servings: 72,
+    status: "planned",
+  },
+  {
+    id: "cat_005",
+    vendorId: "vnd_001",
+    name: "Day 3 — Closing Celebration",
+    description: "Casual food truck-style lunch with tacos, sliders, and bowls for the closing celebration.",
+    type: "Food Stations",
+    pricePerPerson: 38,
+    minGuests: 100,
+    maxGuests: 400,
+    items: [
+      "Street Taco Station",
+      "Gourmet Slider Bar",
+      "Buddha Bowl Station",
+      "Mac & Cheese Bar",
+      "Churros & Dessert Table",
+      "Fresh Lemonade & Iced Coffee",
+    ],
+    dietary: ["vegetarian", "vegan", "gluten-free"],
+    eventId: "evt_001",
+    scheduledDate: "2026-03-17T12:00:00Z",
+    servings: 350,
+    status: "planned",
+  },
+  {
+    id: "cat_006",
+    vendorId: "vnd_001",
+    name: "Workshop Day — Light Bites",
+    description: "Snack and refreshment stations throughout the workshop area including coffee, tea, and healthy snacks.",
+    type: "Snack Stations",
+    pricePerPerson: 15,
+    minGuests: 30,
+    maxGuests: 100,
+    items: [
+      "Fresh Coffee & Tea",
+      "Energy Bars & Granola",
+      "Fresh Fruit",
+      "Trail Mix & Nuts",
+      "Sparkling Water",
+      "Cookies & Biscotti",
+    ],
+    dietary: ["vegetarian", "vegan", "gluten-free"],
+    eventId: "evt_002",
+    scheduledDate: "2026-04-10T10:00:00Z",
+    servings: 80,
+    status: "planned",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_ACCOMMODATIONS (6)
+// -----------------------------------------------------------------------------
+
+export const MOCK_ACCOMMODATIONS: Accommodation[] = [
+  {
+    id: "acc_001",
+    hotelName: "The St. Regis San Francisco",
+    address: "125 3rd Street",
+    city: "San Francisco",
+    starRating: 5,
+    roomBlocks: [
+      { roomType: "Deluxe King", count: 30, ratePerNight: 320 },
+      { roomType: "Premium Suite", count: 10, ratePerNight: 550 },
+    ],
+    contactName: "Maria Gonzalez",
+    contactEmail: "groups@stregis.com",
+    contactPhone: "+1 (415) 555-4001",
+    checkInDate: "2026-03-14",
+    checkOutDate: "2026-03-18",
+    negotiatedRate: 320,
+    totalCost: 44800,
+    status: "confirmed",
+  },
+  {
+    id: "acc_002",
+    hotelName: "Hotel Nikko San Francisco",
+    address: "222 Mason Street",
+    city: "San Francisco",
+    starRating: 4,
+    roomBlocks: [
+      { roomType: "Standard King", count: 45, ratePerNight: 210 },
+      { roomType: "Deluxe Double", count: 20, ratePerNight: 260 },
+    ],
+    contactName: "Kevin Yamamoto",
+    contactEmail: "groups@hotelnikko.com",
+    contactPhone: "+1 (415) 555-4002",
+    checkInDate: "2026-03-14",
+    checkOutDate: "2026-03-18",
+    negotiatedRate: 210,
+    totalCost: 46200,
+    status: "confirmed",
+  },
+  {
+    id: "acc_003",
+    hotelName: "W San Francisco",
+    address: "181 3rd Street",
+    city: "San Francisco",
+    starRating: 4,
+    roomBlocks: [
+      { roomType: "Wonderful Room", count: 25, ratePerNight: 280 },
+      { roomType: "Marvelous Suite", count: 8, ratePerNight: 480 },
+    ],
+    contactName: "Sarah Chen",
+    contactEmail: "events@whotels.com",
+    contactPhone: "+1 (415) 555-4003",
+    checkInDate: "2026-03-14",
+    checkOutDate: "2026-03-18",
+    negotiatedRate: 280,
+    totalCost: 36400,
+    status: "reserved",
+  },
+  {
+    id: "acc_004",
+    hotelName: "Hilton San Francisco Union Square",
+    address: "333 O'Farrell Street",
+    city: "San Francisco",
+    starRating: 4,
+    roomBlocks: [
+      { roomType: "King Room", count: 60, ratePerNight: 195 },
+      { roomType: "Double Queen", count: 30, ratePerNight: 225 },
+    ],
+    contactName: "Tom Richards",
+    contactEmail: "groups@hiltonsf.com",
+    contactPhone: "+1 (415) 555-4004",
+    checkInDate: "2026-03-14",
+    checkOutDate: "2026-03-18",
+    negotiatedRate: 195,
+    totalCost: 55800,
+    status: "confirmed",
+  },
+  {
+    id: "acc_005",
+    hotelName: "InterContinental San Francisco",
+    address: "888 Howard Street",
+    city: "San Francisco",
+    starRating: 5,
+    roomBlocks: [
+      { roomType: "Classic Room", count: 20, ratePerNight: 350 },
+      { roomType: "Executive Suite", count: 6, ratePerNight: 600 },
+    ],
+    contactName: "Laura Martinez",
+    contactEmail: "events@icsanfrancisco.com",
+    contactPhone: "+1 (415) 555-4005",
+    checkInDate: "2026-03-14",
+    checkOutDate: "2026-03-18",
+    negotiatedRate: 350,
+    totalCost: 32400,
+    status: "confirmed",
+  },
+  {
+    id: "acc_006",
+    hotelName: "Hotel Zephyr Fisherman's Wharf",
+    address: "2500 Mason Street",
+    city: "San Francisco",
+    starRating: 3,
+    roomBlocks: [
+      { roomType: "Zephyr King", count: 40, ratePerNight: 165 },
+      { roomType: "Standard Double", count: 20, ratePerNight: 185 },
+    ],
+    contactName: "Jake Morrison",
+    contactEmail: "groups@hotelzephyr.com",
+    contactPhone: "+1 (415) 555-4006",
+    checkInDate: "2026-03-14",
+    checkOutDate: "2026-03-18",
+    negotiatedRate: 165,
+    totalCost: 37400,
+    status: "reserved",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_CAMPAIGNS (6)
+// -----------------------------------------------------------------------------
+
+export const MOCK_CAMPAIGNS: Campaign[] = [
+  {
+    id: "cmp_001",
+    name: "Early Bird Launch Blast",
+    description: "Massive email campaign to announce early bird ticket sales with 40% discount for the first 500 registrations.",
+    channel: "email",
+    status: "completed",
+    sent: 45000,
+    delivered: 43200,
+    opened: 18500,
+    clicked: 6200,
+    conversions: 1850,
+    revenue: 738150,
+    cost: 2500,
+    startDate: "2025-10-01T00:00:00Z",
+    endDate: "2025-10-15T23:59:59Z",
+    targetAudience: "Past attendees + Tech newsletter subscribers",
+    content: "Early bird pricing now available! Save 40% on TechVision Summit 2026 tickets. Limited to the first 500 registrations.",
+  },
+  {
+    id: "cmp_002",
+    name: "Social Media Countdown",
+    description: "30-day social media campaign across LinkedIn, Twitter, and Instagram with daily speaker reveals and countdown posts.",
+    channel: "social",
+    status: "completed",
+    sent: 90,
+    delivered: 88,
+    opened: 45000,
+    clicked: 8900,
+    conversions: 320,
+    revenue: 191680,
+    cost: 15000,
+    startDate: "2026-02-13T00:00:00Z",
+    endDate: "2026-03-15T08:00:00Z",
+    targetAudience: "Tech professionals, developers, and AI enthusiasts",
+    content: "Speaker reveals, behind-the-scenes content, and daily countdown to TechVision Summit 2026.",
+  },
+  {
+    id: "cmp_003",
+    name: "Google Ads — Tech Professionals",
+    description: "Targeted Google Ads campaign focused on developers, engineers, and tech managers searching for conferences.",
+    channel: "paid",
+    status: "completed",
+    sent: 0,
+    delivered: 0,
+    opened: 285000,
+    clicked: 12800,
+    conversions: 640,
+    revenue: 383360,
+    cost: 28000,
+    startDate: "2026-01-15T00:00:00Z",
+    endDate: "2026-03-10T23:59:59Z",
+    targetAudience: "Software engineers, tech leads, CTOs",
+    content: "Search and display ads for 'tech conferences 2026', 'AI conference', 'developer summit'",
+  },
+  {
+    id: "cmp_004",
+    name: "VIP Early Access Invitations",
+    description: "Exclusive email campaign to previous VIP ticket holders with early access to premium tickets and special perks.",
+    channel: "email",
+    status: "completed",
+    sent: 1200,
+    delivered: 1180,
+    opened: 980,
+    clicked: 720,
+    conversions: 285,
+    revenue: 342000,
+    cost: 500,
+    startDate: "2025-10-15T00:00:00Z",
+    endDate: "2025-10-30T23:59:59Z",
+    targetAudience: "Previous VIP attendees (2024 and 2025)",
+    content: "You're invited! Exclusive early access to VIP tickets for TechVision Summit 2026. Be the first to secure your spot.",
+  },
+  {
+    id: "cmp_005",
+    name: "Partner Cross-Promotion",
+    description: "Co-marketing campaign with sponsor companies promoting the event through their employee networks and channels.",
+    channel: "direct",
+    status: "in-progress",
+    sent: 0,
+    delivered: 0,
+    opened: 0,
+    clicked: 0,
+    conversions: 0,
+    revenue: 0,
+    cost: 5000,
+    startDate: "2026-02-01T00:00:00Z",
+    endDate: "2026-03-15T08:00:00Z",
+    targetAudience: "Employees of sponsor companies",
+    content: "Your company is a sponsor! Use your exclusive partner discount code for TechVision Summit tickets.",
+  },
+  {
+    id: "cmp_006",
+    name: "SMS Last-Minute Reminder",
+    description: "SMS campaign to registered attendees with event logistics, schedule highlights, and last-minute information.",
+    channel: "sms",
+    status: "scheduled",
+    sent: 0,
+    delivered: 0,
+    opened: 0,
+    clicked: 0,
+    conversions: 0,
+    revenue: 0,
+    cost: 800,
+    startDate: "2026-03-14T08:00:00Z",
+    endDate: "2026-03-15T07:00:00Z",
+    targetAudience: "All registered attendees",
+    content: "TechVision Summit starts tomorrow! Check-in opens at 8 AM. Your schedule is ready at eventcraft.io/schedule",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_PROMOTIONS (6)
+// -----------------------------------------------------------------------------
+
+export const MOCK_PROMOTIONS: Promotion[] = [
+  {
+    id: "promo_001",
+    code: "EARLYBIRD40",
+    name: "Early Bird 40% Off",
+    description: "40% discount on General Admission tickets during early bird period.",
+    discountType: "percentage",
+    discountValue: 40,
+    minPurchase: 0,
+    maxUses: 500,
+    usedCount: 500,
+    startDate: "2025-10-01T00:00:00Z",
+    endDate: "2025-12-31T23:59:59Z",
+    status: "expired",
+    applicableTickets: ["tkt_002"],
+  },
+  {
+    id: "promo_002",
+    code: "STUDENT50",
+    name: "Student Discount",
+    description: "50% off for verified students with valid student ID.",
+    discountType: "percentage",
+    discountValue: 50,
+    minPurchase: 0,
+    maxUses: 300,
+    usedCount: 170,
+    startDate: "2026-01-01T00:00:00Z",
+    endDate: "2026-03-14T23:59:59Z",
+    status: "active",
+    applicableTickets: ["tkt_005"],
+  },
+  {
+    id: "promo_003",
+    code: "GROUP2026",
+    name: "Group Discount",
+    description: "20% off for groups of 5 or more tickets.",
+    discountType: "percentage",
+    discountValue: 20,
+    minPurchase: 5,
+    maxUses: 100,
+    usedCount: 42,
+    startDate: "2026-01-01T00:00:00Z",
+    endDate: "2026-03-10T23:59:59Z",
+    status: "active",
+    applicableTickets: ["tkt_002", "tkt_006"],
+  },
+  {
+    id: "promo_004",
+    code: "SPONSOR100",
+    name: "Sponsor Partner Discount",
+    description: " off any ticket for employees of sponsor companies.",
+    discountType: "fixed",
+    discountValue: 100,
+    minPurchase: 200,
+    maxUses: 500,
+    usedCount: 89,
+    startDate: "2026-01-15T00:00:00Z",
+    endDate: "2026-03-14T23:59:59Z",
+    status: "active",
+    applicableTickets: ["tkt_001", "tkt_002", "tkt_003"],
+  },
+  {
+    id: "promo_005",
+    code: "REFERAFRIEND",
+    name: "Refer a Friend",
+    description: "Buy one get one 50% off when you refer a colleague.",
+    discountType: "bogo",
+    discountValue: 50,
+    minPurchase: 0,
+    maxUses: 200,
+    usedCount: 67,
+    startDate: "2026-02-01T00:00:00Z",
+    endDate: "2026-03-12T23:59:59Z",
+    status: "active",
+    applicableTickets: ["tkt_002", "tkt_003"],
+  },
+  {
+    id: "promo_006",
+    code: "LASTCHANCE",
+    name: "Last Chance Offer",
+    description: "15% off remaining tickets in the final week before the event.",
+    discountType: "percentage",
+    discountValue: 15,
+    minPurchase: 0,
+    maxUses: 200,
+    usedCount: 0,
+    startDate: "2026-03-08T00:00:00Z",
+    endDate: "2026-03-14T23:59:59Z",
+    status: "active",
+    applicableTickets: ["tkt_002", "tkt_004", "tkt_007"],
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_MERCHANDISE (8)
+// -----------------------------------------------------------------------------
+
+export const MOCK_MERCHANDISE: Merchandise[] = [
+  {
+    id: "mer_001",
+    name: "TechVision Summit Hoodie",
+    description: "Premium zip-up hoodie with embroidered TechVision logo and event branding. Available in multiple colors.",
+    category: "Apparel",
+    price: 65,
+    stock: 500,
+    sold: 342,
+    revenue: 22230,
+    image: "/images/merch/hoodie.jpg",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: ["Black", "Charcoal", "Navy"],
+    sku: "TV-HOODIE-2026",
+    eventId: "evt_001",
+  },
+  {
+    id: "mer_002",
+    name: "EventCraft T-Shirt",
+    description: "100% organic cotton t-shirt with minimalist TechVision design. Sustainable and comfortable.",
+    category: "Apparel",
+    price: 35,
+    stock: 1000,
+    sold: 567,
+    revenue: 19845,
+    image: "/images/merch/tshirt.jpg",
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    colors: ["White", "Black", "Rose", "Slate"],
+    sku: "TV-TSHIRT-2026",
+    eventId: "evt_001",
+  },
+  {
+    id: "mer_003",
+    name: "Conference Backpack",
+    description: "Durable tech backpack with padded laptop compartment, USB charging port, and event branding.",
+    category: "Accessories",
+    price: 89,
+    stock: 300,
+    sold: 198,
+    revenue: 17622,
+    image: "/images/merch/backpack.jpg",
+    sizes: ["One Size"],
+    colors: ["Black", "Gray"],
+    sku: "TV-BACKPACK-2026",
+    eventId: "evt_001",
+  },
+  {
+    id: "mer_004",
+    name: "Enamel Pin Set",
+    description: "Collectible set of 5 enamel pins featuring AI, cloud, code, circuit, and rocket motifs.",
+    category: "Collectibles",
+    price: 22,
+    stock: 800,
+    sold: 456,
+    revenue: 10032,
+    image: "/images/merch/pinset.jpg",
+    sizes: ["One Size"],
+    colors: ["Multi"],
+    sku: "TV-PINS-2026",
+    eventId: "evt_001",
+  },
+  {
+    id: "mer_005",
+    name: "Insulated Water Bottle",
+    description: "Double-wall vacuum insulated water bottle. Keeps drinks cold 24h or hot 12h. Laser-etched logo.",
+    category: "Drinkware",
+    price: 28,
+    stock: 600,
+    sold: 312,
+    revenue: 8736,
+    image: "/images/merch/bottle.jpg",
+    sizes: ["24oz", "32oz"],
+    colors: ["Matte Black", "Stainless Steel", "Rose Gold"],
+    sku: "TV-BOTTLE-2026",
+    eventId: "evt_001",
+  },
+  {
+    id: "mer_006",
+    name: "Premium Notebook",
+    description: "A5 hardcover notebook with dot grid pages, ribbon bookmark, and pen loop. Faux leather cover.",
+    category: "Stationery",
+    price: 18,
+    stock: 500,
+    sold: 289,
+    revenue: 5202,
+    image: "/images/merch/notebook.jpg",
+    sizes: ["A5"],
+    colors: ["Black", "Burgundy", "Forest Green"],
+    sku: "TV-NOTEBOOK-2026",
+    eventId: "evt_001",
+  },
+  {
+    id: "mer_007",
+    name: "Wireless Charging Pad",
+    description: "Sleek Qi-certified wireless charging pad with event branding. Compatible with all Qi-enabled devices.",
+    category: "Tech",
+    price: 32,
+    stock: 400,
+    sold: 178,
+    revenue: 5696,
+    image: "/images/merch/charger.jpg",
+    sizes: ["One Size"],
+    colors: ["White", "Black"],
+    sku: "TV-CHARGER-2026",
+    eventId: "evt_001",
+  },
+  {
+    id: "mer_008",
+    name: "Sticker Pack",
+    description: "Die-cut vinyl sticker pack with 12 unique designs. Waterproof and UV-resistant.",
+    category: "Collectibles",
+    price: 12,
+    stock: 1500,
+    sold: 834,
+    revenue: 10008,
+    image: "/images/merch/stickers.jpg",
+    sizes: ["One Size"],
+    colors: ["Multi"],
+    sku: "TV-STICKERS-2026",
+    eventId: "evt_001",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_FLOOR_PLANS (4)
+// -----------------------------------------------------------------------------
+
+export const MOCK_FLOOR_PLANS: FloorPlan[] = [
+  {
+    id: "fp_001",
+    name: "Main Hall — Level 1",
+    venueId: "ven_001",
+    level: "Ground Floor",
+    image: "/images/floorplans/main-hall-l1.svg",
+    width: 1200,
+    height: 800,
+    zones: [
+      { id: "zone_001", name: "Main Stage", type: "stage", x: 50, y: 50, width: 400, height: 200, capacity: 3000, currentOccupancy: 0 },
+      { id: "zone_002", name: "Audience Area", type: "seating", x: 50, y: 270, width: 400, height: 480, capacity: 2800, currentOccupancy: 0 },
+      { id: "zone_003", name: "Sponsor Village", type: "exhibition", x: 500, y: 50, width: 350, height: 350, capacity: 200, currentOccupancy: 0 },
+      { id: "zone_004", name: "Food Court", type: "food", x: 500, y: 420, width: 350, height: 200, capacity: 300, currentOccupancy: 0 },
+      { id: "zone_005", name: "Registration Desk", type: "service", x: 900, y: 50, width: 250, height: 120, capacity: 50, currentOccupancy: 0 },
+      { id: "zone_006", name: "Lounge Area", type: "lounge", x: 900, y: 200, width: 250, height: 200, capacity: 80, currentOccupancy: 0 },
+      { id: "zone_007", name: "Restrooms", type: "utility", x: 900, y: 650, width: 250, height: 100, capacity: 30, currentOccupancy: 0 },
+      { id: "zone_008", name: "Emergency Exit", type: "exit", x: 1150, y: 400, width: 50, height: 80, capacity: 0, currentOccupancy: 0 },
+    ],
+  },
+  {
+    id: "fp_002",
+    name: "Breakout Rooms — Level 2",
+    venueId: "ven_001",
+    level: "Second Floor",
+    image: "/images/floorplans/breakout-l2.svg",
+    width: 1000,
+    height: 600,
+    zones: [
+      { id: "zone_009", name: "Room 201", type: "session", x: 50, y: 50, width: 280, height: 200, capacity: 300, currentOccupancy: 0 },
+      { id: "zone_010", name: "Room 202", type: "session", x: 50, y: 280, width: 280, height: 200, capacity: 200, currentOccupancy: 0 },
+      { id: "zone_011", name: "Room 301", type: "session", x: 370, y: 50, width: 280, height: 200, capacity: 250, currentOccupancy: 0 },
+      { id: "zone_012", name: "Room 302", type: "session", x: 370, y: 280, width: 280, height: 200, capacity: 250, currentOccupancy: 0 },
+      { id: "zone_013", name: "Workshop Lab 1", type: "workshop", x: 690, y: 50, width: 260, height: 200, capacity: 60, currentOccupancy: 0 },
+      { id: "zone_014", name: "Workshop Lab 2", type: "workshop", x: 690, y: 280, width: 260, height: 200, capacity: 50, currentOccupancy: 0 },
+      { id: "zone_015", name: "Speaker Green Room", type: "greenroom", x: 370, y: 510, width: 280, height: 80, capacity: 20, currentOccupancy: 0 },
+      { id: "zone_016", name: "Hallway", type: "corridor", x: 50, y: 510, width: 280, height: 80, capacity: 100, currentOccupancy: 0 },
+    ],
+  },
+  {
+    id: "fp_003",
+    name: "Expo Floor — Level 3",
+    venueId: "ven_001",
+    level: "Third Floor",
+    image: "/images/floorplans/expo-l3.svg",
+    width: 1100,
+    height: 700,
+    zones: [
+      { id: "zone_017", name: "Google Cloud Pavilion", type: "booth", x: 50, y: 50, width: 300, height: 200, capacity: 100, currentOccupancy: 0 },
+      { id: "zone_018", name: "Microsoft Azure Zone", type: "booth", x: 400, y: 50, width: 300, height: 200, capacity: 100, currentOccupancy: 0 },
+      { id: "zone_019", name: "Startup Alley", type: "booth", x: 750, y: 50, width: 300, height: 200, capacity: 50, currentOccupancy: 0 },
+      { id: "zone_020", name: "Demo Stage", type: "stage", x: 50, y: 280, width: 500, height: 150, capacity: 200, currentOccupancy: 0 },
+      { id: "zone_021", name: "Networking Hub", type: "lounge", x: 600, y: 280, width: 450, height: 150, capacity: 150, currentOccupancy: 0 },
+      { id: "zone_022", name: "Coffee Station", type: "food", x: 50, y: 460, width: 200, height: 100, capacity: 40, currentOccupancy: 0 },
+      { id: "zone_023", name: "Charging Lounge", type: "service", x: 300, y: 460, width: 200, height: 100, capacity: 30, currentOccupancy: 0 },
+    ],
+  },
+  {
+    id: "fp_004",
+    name: "Terrace & Outdoor — Level 4",
+    venueId: "ven_001",
+    level: "Rooftop",
+    image: "/images/floorplans/terrace-l4.svg",
+    width: 800,
+    height: 500,
+    zones: [
+      { id: "zone_024", name: "Outdoor Stage", type: "stage", x: 50, y: 50, width: 300, height: 150, capacity: 500, currentOccupancy: 0 },
+      { id: "zone_025", name: "Seating Area", type: "seating", x: 50, y: 220, width: 300, height: 200, capacity: 300, currentOccupancy: 0 },
+      { id: "zone_026", name: "Sunset Bar", type: "food", x: 400, y: 50, width: 350, height: 150, capacity: 80, currentOccupancy: 0 },
+      { id: "zone_027", name: "VIP Lounge", type: "lounge", x: 400, y: 220, width: 350, height: 200, capacity: 50, currentOccupancy: 0 },
+      { id: "zone_028", name: "Photo Opportunity Wall", type: "photo", x: 50, y: 440, width: 700, height: 50, capacity: 20, currentOccupancy: 0 },
+    ],
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_CHECKINS (10)
+// -----------------------------------------------------------------------------
+
+export const MOCK_CHECKINS: CheckIn[] = [
+  {
+    id: "chk_001",
+    attendeeId: "att_001",
+    eventId: "evt_001",
+    timestamp: "2026-03-15T08:42:15Z",
+    method: "qr",
+    stationId: "station_001",
+    status: "success",
+    checkedInBy: "Auto",
+    notes: "VIP fast-track lane",
+  },
+  {
+    id: "chk_002",
+    attendeeId: "att_002",
+    eventId: "evt_001",
+    timestamp: "2026-03-15T08:55:30Z",
+    method: "qr",
+    stationId: "station_001",
+    status: "success",
+    checkedInBy: "Auto",
+    notes: "",
+  },
+  {
+    id: "chk_003",
+    attendeeId: "att_003",
+    eventId: "evt_001",
+    timestamp: "2026-03-15T09:02:45Z",
+    method: "qr",
+    stationId: "station_002",
+    status: "success",
+    checkedInBy: "Auto",
+    notes: "",
+  },
+  {
+    id: "chk_004",
+    attendeeId: "att_004",
+    eventId: "evt_001",
+    timestamp: "2026-03-15T08:30:05Z",
+    method: "manual",
+    stationId: "station_003",
+    status: "success",
+    checkedInBy: "Staff: Maria L.",
+    notes: "VIP — early arrival",
+  },
+  {
+    id: "chk_005",
+    attendeeId: "att_006",
+    eventId: "evt_001",
+    timestamp: "2026-03-15T09:10:22Z",
+    method: "nfc",
+    stationId: "station_001",
+    status: "success",
+    checkedInBy: "Auto",
+    notes: "",
+  },
+  {
+    id: "chk_006",
+    attendeeId: "att_007",
+    eventId: "evt_001",
+    timestamp: "2026-03-15T09:15:10Z",
+    method: "qr",
+    stationId: "station_002",
+    status: "success",
+    checkedInBy: "Auto",
+    notes: "",
+  },
+  {
+    id: "chk_007",
+    attendeeId: "att_009",
+    eventId: "evt_001",
+    timestamp: "2026-03-15T08:50:40Z",
+    method: "qr",
+    stationId: "station_001",
+    status: "success",
+    checkedInBy: "Auto",
+    notes: "Manager check-in for team of 8",
+  },
+  {
+    id: "chk_008",
+    attendeeId: "att_010",
+    eventId: "evt_001",
+    timestamp: "2026-03-15T09:20:18Z",
+    method: "self",
+    stationId: "station_004",
+    status: "success",
+    checkedInBy: "Self-Service Kiosk",
+    notes: "",
+  },
+  {
+    id: "chk_009",
+    attendeeId: "att_012",
+    eventId: "evt_001",
+    timestamp: "2026-03-15T09:25:33Z",
+    method: "qr",
+    stationId: "station_002",
+    status: "success",
+    checkedInBy: "Auto",
+    notes: "",
+  },
+  {
+    id: "chk_010",
+    attendeeId: "att_013",
+    eventId: "evt_001",
+    timestamp: "2026-03-15T08:35:55Z",
+    method: "manual",
+    stationId: "station_003",
+    status: "success",
+    checkedInBy: "Staff: James K.",
+    notes: "VIP early check-in",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_FEEDBACK (8 surveys)
+// -----------------------------------------------------------------------------
+
+export const MOCK_FEEDBACK: Feedback[] = [
+  {
+    id: "fb_001",
+    eventId: "evt_001",
+    attendeeId: "att_001",
+    overallRating: 5,
+    contentRating: 5,
+    venueRating: 4,
+    speakerRating: 5,
+    cateringRating: 4,
+    organizationRating: 5,
+    wouldRecommend: true,
+    comments: "Absolutely fantastic event! The AI sessions were world-class. Dr. Okafor's keynote was inspiring.",
+    improvementSuggestions: "Could use more charging stations in the main hall area.",
+    submittedAt: "2026-03-17T14:30:00Z",
+  },
+  {
+    id: "fb_002",
+    eventId: "evt_001",
+    attendeeId: "att_002",
+    overallRating: 4,
+    contentRating: 5,
+    venueRating: 4,
+    speakerRating: 4,
+    cateringRating: 3,
+    organizationRating: 4,
+    wouldRecommend: true,
+    comments: "Great technical content. The Kubernetes ML pipeline session was exactly what I needed. Good networking opportunities.",
+    improvementSuggestions: "Lunch lines were too long. Could use more food stations or staggered lunch breaks.",
+    submittedAt: "2026-03-17T16:45:00Z",
+  },
+  {
+    id: "fb_003",
+    eventId: "evt_001",
+    attendeeId: "att_003",
+    overallRating: 5,
+    contentRating: 5,
+    venueRating: 5,
+    speakerRating: 5,
+    cateringRating: 5,
+    organizationRating: 5,
+    wouldRecommend: true,
+    comments: "Best conference I've attended in years. The workshop on React Server Components was hands-on and immediately applicable.",
+    improvementSuggestions: "Honestly nothing major. Maybe a mobile app for the schedule?",
+    submittedAt: "2026-03-17T18:20:00Z",
+  },
+  {
+    id: "fb_004",
+    eventId: "evt_001",
+    attendeeId: "att_006",
+    overallRating: 4,
+    contentRating: 4,
+    venueRating: 3,
+    speakerRating: 5,
+    cateringRating: 4,
+    organizationRating: 4,
+    wouldRecommend: true,
+    comments: "Loved the WASM session by Yuki Tanaka. Very informative and well-presented. The venue was nice but got crowded during breaks.",
+    improvementSuggestions: "Better signage for room navigation. Some sessions were hard to find.",
+    submittedAt: "2026-03-17T15:10:00Z",
+  },
+  {
+    id: "fb_005",
+    eventId: "evt_001",
+    attendeeId: "att_009",
+    overallRating: 5,
+    contentRating: 5,
+    venueRating: 5,
+    speakerRating: 5,
+    cateringRating: 4,
+    organizationRating: 5,
+    wouldRecommend: true,
+    comments: "Excellent event management. Brought my team of 8 and everyone found sessions relevant to their work. The VIP dinner was outstanding.",
+    improvementSuggestions: "Group seating area would be nice for teams attending together.",
+    submittedAt: "2026-03-17T17:00:00Z",
+  },
+  {
+    id: "fb_006",
+    eventId: "evt_001",
+    attendeeId: "att_010",
+    overallRating: 3,
+    contentRating: 4,
+    venueRating: 3,
+    speakerRating: 3,
+    cateringRating: 2,
+    organizationRating: 3,
+    wouldRecommend: true,
+    comments: "Good content overall. The startup pitch session was entertaining. Some sessions felt more like product pitches than educational content.",
+    improvementSuggestions: "Better vetting of session content to ensure educational value. More diverse speaker lineup in some tracks.",
+    submittedAt: "2026-03-17T19:30:00Z",
+  },
+  {
+    id: "fb_007",
+    eventId: "evt_001",
+    attendeeId: "att_013",
+    overallRating: 5,
+    contentRating: 5,
+    venueRating: 4,
+    speakerRating: 5,
+    cateringRating: 5,
+    organizationRating: 5,
+    wouldRecommend: true,
+    comments: "The networking opportunities were incredible. Met three potential collaborators for our next project. The fireside chat was very authentic.",
+    improvementSuggestions: "The Wi-Fi was spotty during peak hours. Need more bandwidth for 3000 attendees.",
+    submittedAt: "2026-03-17T20:15:00Z",
+  },
+  {
+    id: "fb_008",
+    eventId: "evt_001",
+    attendeeId: "att_015",
+    overallRating: 4,
+    contentRating: 4,
+    venueRating: 5,
+    speakerRating: 4,
+    cateringRating: 4,
+    organizationRating: 4,
+    wouldRecommend: true,
+    comments: "Very well organized event. The design systems workshop was practical and engaging. Great venue choice.",
+    improvementSuggestions: "Would love to see more design-focused tracks. The UX content was limited compared to engineering sessions.",
+    submittedAt: "2026-03-17T13:45:00Z",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_BUDGET (10 line items)
+// -----------------------------------------------------------------------------
+
+export const MOCK_BUDGET: BudgetItem[] = [
+  {
+    id: "bud_001",
+    eventId: "evt_001",
+    category: "Venue",
+    description: "Moscone Center West — 5-day rental (setup + event + teardown)",
+    budgetedAmount: 180000,
+    actualAmount: 185000,
+    variance: 5000,
+    status: "spent",
+    vendor: "Moscone Center",
+    dueDate: "2026-02-01",
+    paidDate: "2026-02-05",
+    notes: "Included overtime fee for extended setup on Day -2",
+  },
+  {
+    id: "bud_002",
+    eventId: "evt_001",
+    category: "AV & Production",
+    description: "Full AV production — sound, lighting, screens, live streaming",
+    budgetedAmount: 85000,
+    actualAmount: 82000,
+    variance: -3000,
+    status: "spent",
+    vendor: "Apex AV Solutions",
+    dueDate: "2026-03-20",
+    paidDate: "2026-03-22",
+    notes: "Under budget due to equipment reuse from previous event",
+  },
+  {
+    id: "bud_003",
+    eventId: "evt_001",
+    category: "Catering",
+    description: "All meals, snacks, and beverages for 3-day event (est. 2500 attendees)",
+    budgetedAmount: 195000,
+    actualAmount: 188500,
+    variance: -6500,
+    status: "spent",
+    vendor: "In-House + Apex AV",
+    dueDate: "2026-03-25",
+    paidDate: "2026-03-28",
+    notes: "Lower than expected due to 10% no-show rate",
+  },
+  {
+    id: "bud_004",
+    eventId: "evt_001",
+    category: "Marketing",
+    description: "Digital marketing, social media ads, Google Ads, email campaigns",
+    budgetedAmount: 65000,
+    actualAmount: 52000,
+    variance: -13000,
+    status: "spent",
+    vendor: "Multiple (Google, LinkedIn, Meta)",
+    dueDate: "2026-03-15",
+    paidDate: "2026-03-15",
+    notes: "Organic reach exceeded expectations reducing paid spend needed",
+  },
+  {
+    id: "bud_005",
+    eventId: "evt_001",
+    category: "Speaker Fees",
+    description: "Speaker honorariums, travel, and accommodation for 32 speakers",
+    budgetedAmount: 120000,
+    actualAmount: 115000,
+    variance: -5000,
+    status: "spent",
+    vendor: "Various Speakers",
+    dueDate: "2026-03-30",
+    paidDate: "2026-04-01",
+    notes: "Two speakers waived fees in exchange for sponsorship exposure",
+  },
+  {
+    id: "bud_006",
+    eventId: "evt_001",
+    category: "Security",
+    description: "Event security, bag checks, credentialing, and crowd management",
+    budgetedAmount: 42000,
+    actualAmount: 42000,
+    variance: 0,
+    status: "spent",
+    vendor: "SecureAll Events",
+    dueDate: "2026-03-25",
+    paidDate: "2026-03-25",
+    notes: "Fixed contract — no variance",
+  },
+  {
+    id: "bud_007",
+    eventId: "evt_001",
+    category: "Technology",
+    description: "Check-in system, event app, WiFi upgrade, equipment rental",
+    budgetedAmount: 55000,
+    actualAmount: 48000,
+    variance: -7000,
+    status: "spent",
+    vendor: "TechRent Pro + Internal",
+    dueDate: "2026-03-22",
+    paidDate: "2026-03-22",
+    notes: "Used existing check-in hardware reducing rental costs",
+  },
+  {
+    id: "bud_008",
+    eventId: "evt_001",
+    category: "Décor & Signage",
+    description: "Stage design, banners, directional signage, floral arrangements",
+    budgetedAmount: 25000,
+    actualAmount: 18000,
+    variance: -7000,
+    status: "spent",
+    vendor: "Bloom Florals & Decor",
+    dueDate: "2026-03-18",
+    paidDate: "2026-03-18",
+    notes: "Simplified design saved costs while maintaining quality",
+  },
+  {
+    id: "bud_009",
+    eventId: "evt_001",
+    category: "Swag & Merchandise",
+    description: "Conference swag bags, branded merchandise, speaker gifts",
+    budgetedAmount: 45000,
+    actualAmount: 41000,
+    variance: -4000,
+    status: "spent",
+    vendor: "Various",
+    dueDate: "2026-03-10",
+    paidDate: "2026-03-10",
+    notes: "Bulk ordering discount applied",
+  },
+  {
+    id: "bud_010",
+    eventId: "evt_001",
+    category: "Contingency",
+    description: "Emergency fund for unexpected costs and last-minute needs",
+    budgetedAmount: 38000,
+    actualAmount: 48500,
+    variance: 10500,
+    status: "over-budget",
+    vendor: "Various",
+    dueDate: "2026-03-31",
+    paidDate: null,
+    notes: "Over budget due to emergency WiFi bandwidth upgrade on Day 1 and additional security for VIP visit",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_REVENUE (9 months)
+// -----------------------------------------------------------------------------
+
+export const MOCK_REVENUE: RevenueRecord[] = [
+  {
+    month: "2025-07",
+    tickets: 15000,
+    sponsors: 0,
+    merchandise: 2500,
+    concessions: 0,
+    other: 1200,
+    total: 18700,
+    expenses: 12000,
+    profit: 6700,
+  },
+  {
+    month: "2025-08",
+    tickets: 42000,
+    sponsors: 75000,
+    merchandise: 8000,
+    concessions: 0,
+    other: 3500,
+    total: 128500,
+    expenses: 85000,
+    profit: 43500,
+  },
+  {
+    month: "2025-09",
+    tickets: 68000,
+    sponsors: 50000,
+    merchandise: 12000,
+    concessions: 0,
+    other: 5000,
+    total: 135000,
+    expenses: 92000,
+    profit: 43000,
+  },
+  {
+    month: "2025-10",
+    tickets: 199500,
+    sponsors: 35000,
+    merchandise: 18000,
+    concessions: 0,
+    other: 8000,
+    total: 260500,
+    expenses: 120000,
+    profit: 140500,
+  },
+  {
+    month: "2025-11",
+    tickets: 85000,
+    sponsors: 60000,
+    merchandise: 22000,
+    concessions: 4500,
+    other: 6000,
+    total: 177500,
+    expenses: 98000,
+    profit: 79500,
+  },
+  {
+    month: "2025-12",
+    tickets: 45000,
+    sponsors: 25000,
+    merchandise: 35000,
+    concessions: 3000,
+    other: 12000,
+    total: 120000,
+    expenses: 75000,
+    profit: 45000,
+  },
+  {
+    month: "2026-01",
+    tickets: 310000,
+    sponsors: 95000,
+    merchandise: 28000,
+    concessions: 0,
+    other: 15000,
+    total: 448000,
+    expenses: 210000,
+    profit: 238000,
+  },
+  {
+    month: "2026-02",
+    tickets: 180000,
+    sponsors: 40000,
+    merchandise: 32000,
+    concessions: 12000,
+    other: 8000,
+    total: 272000,
+    expenses: 165000,
+    profit: 107000,
+  },
+  {
+    month: "2026-03",
+    tickets: 450000,
+    sponsors: 180000,
+    merchandise: 90000,
+    concessions: 85000,
+    other: 45000,
+    total: 850000,
+    expenses: 620000,
+    profit: 230000,
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_ACTIVITY (10)
+// -----------------------------------------------------------------------------
+
+export const MOCK_ACTIVITY: Activity[] = [
+  {
+    id: "act_001",
+    type: "registration",
+    title: "New Registration",
+    description: "Emily Watson (Google) registered for VIP Pass",
+    timestamp: "2026-03-15T08:42:00Z",
+    user: "Emily Watson",
+    avatar: "/images/avatars/emily.jpg",
+    eventId: "evt_001",
+    metadata: { ticketType: "VIP Pass", amount: ",200" },
+  },
+  {
+    id: "act_002",
+    type: "payment",
+    title: "Payment Received",
+    description: "Group payment of ,495 from Microsoft team (5 tickets)",
+    timestamp: "2026-03-14T16:30:00Z",
+    user: "David Nguyen",
+    avatar: "/images/avatars/david.jpg",
+    eventId: "evt_001",
+    metadata: { amount: ",495", tickets: "5 General Admission" },
+  },
+  {
+    id: "act_003",
+    type: "checkin",
+    title: "VIP Check-In",
+    description: "Michael Brown checked in via VIP fast-track lane",
+    timestamp: "2026-03-15T08:30:05Z",
+    user: "Michael Brown",
+    avatar: "/images/avatars/michael.jpg",
+    eventId: "evt_001",
+    metadata: { method: "Manual", station: "VIP Lane" },
+  },
+  {
+    id: "act_004",
+    type: "email",
+    title: "Campaign Sent",
+    description: "SMS Last-Minute Reminder campaign scheduled for 2,347 recipients",
+    timestamp: "2026-03-14T10:00:00Z",
+    user: "System",
+    avatar: "/images/avatars/system.jpg",
+    eventId: "evt_001",
+    metadata: { campaign: "SMS Last-Minute Reminder", recipients: "2,347" },
+  },
+  {
+    id: "act_005",
+    type: "update",
+    title: "Session Updated",
+    description: "Room change: 'Zero Trust Architecture' moved to Room 302",
+    timestamp: "2026-03-14T14:15:00Z",
+    user: "Admin",
+    avatar: "/images/avatars/admin.jpg",
+    eventId: "evt_001",
+    metadata: { session: "Zero Trust Architecture", oldRoom: "Room 201", newRoom: "Room 302" },
+  },
+  {
+    id: "act_006",
+    type: "sponsor",
+    title: "Sponsor Confirmed",
+    description: "DigitalOcean confirmed Silver sponsorship (,000)",
+    timestamp: "2026-03-13T09:00:00Z",
+    user: "Kevin Park",
+    avatar: "/images/avatars/kevin_p.jpg",
+    eventId: "evt_001",
+    metadata: { sponsor: "DigitalOcean", tier: "Silver", amount: ",000" },
+  },
+  {
+    id: "act_007",
+    type: "comment",
+    title: "Feedback Received",
+    description: "5-star feedback from Emily Watson: 'Absolutely fantastic event!'",
+    timestamp: "2026-03-17T14:30:00Z",
+    user: "Emily Watson",
+    avatar: "/images/avatars/emily.jpg",
+    eventId: "evt_001",
+    metadata: { rating: "5/5", comment: "Absolutely fantastic event!" },
+  },
+  {
+    id: "act_008",
+    type: "refund",
+    title: "Refund Processed",
+    description: "Kevin O'Brien — refund of  for cancelled registration",
+    timestamp: "2026-03-12T11:00:00Z",
+    user: "Kevin O'Brien",
+    avatar: "/images/avatars/kevin.jpg",
+    eventId: "evt_001",
+    metadata: { amount: "", reason: "Schedule conflict" },
+  },
+  {
+    id: "act_009",
+    type: "registration",
+    title: "Bulk Registration",
+    description: "Atlassian team registered 8 members with Premium Passes",
+    timestamp: "2026-03-11T08:00:00Z",
+    user: "Priya Ramanathan",
+    avatar: "/images/avatars/priya_r.jpg",
+    eventId: "evt_001",
+    metadata: { ticketType: "Premium Pass", count: "8", amount: ",992" },
+  },
+  {
+    id: "act_010",
+    type: "payment",
+    title: "Sponsor Payment",
+    description: "Google Cloud wire transfer of ,000 received",
+    timestamp: "2026-03-10T15:45:00Z",
+    user: "Rachel Adams",
+    avatar: "/images/avatars/rachel_a.jpg",
+    eventId: "evt_001",
+    metadata: { sponsor: "Google Cloud", amount: ",000", method: "Wire Transfer" },
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_NOTIFICATIONS (6)
+// -----------------------------------------------------------------------------
+
+export const MOCK_NOTIFICATIONS: NotificationItem[] = [
+  {
+    id: "notif_001",
+    title: "Ticket Sales Milestone",
+    message: "TechVision Summit 2026 has reached 2,000 ticket sales! Only 1,000 spots remaining.",
+    type: "success",
+    read: false,
+    timestamp: "2026-03-15T10:00:00Z",
+    action: { label: "View Sales", href: "/revenue/tickets" },
+  },
+  {
+    id: "notif_002",
+    title: "Sponsor Payment Pending",
+    message: "MongoDB Silver sponsorship payment of ,000 is still pending. Due date: March 20.",
+    type: "warning",
+    read: false,
+    timestamp: "2026-03-14T09:00:00Z",
+    action: { label: "View Sponsors", href: "/revenue/sponsors" },
+  },
+  {
+    id: "notif_003",
+    title: "Low Stock Alert",
+    message: "TechVision Summit Hoodies — only 158 units remaining in stock. Best seller!",
+    type: "info",
+    read: true,
+    timestamp: "2026-03-13T14:00:00Z",
+    action: { label: "View Merchandise", href: "/revenue/merchandise" },
+  },
+  {
+    id: "notif_004",
+    title: "New Feedback Received",
+    message: "8 new feedback surveys submitted for TechVision Summit. Average rating: 4.6/5.",
+    type: "info",
+    read: true,
+    timestamp: "2026-03-17T20:15:00Z",
+    action: { label: "View Feedback", href: "/on-site/feedback" },
+  },
+  {
+    id: "notif_005",
+    title: "Vendor Contract Expiring",
+    message: "Contract with SnapShot Photo Booth expires in 7 days. Renew or find alternative.",
+    type: "warning",
+    read: false,
+    timestamp: "2026-03-14T11:00:00Z",
+    action: { label: "View Vendors", href: "/operations/vendors" },
+  },
+  {
+    id: "notif_006",
+    title: "Event Check-In Started",
+    message: "TechVision Summit check-in is now live. 127 attendees checked in so far.",
+    type: "success",
+    read: true,
+    timestamp: "2026-03-15T09:00:00Z",
+    action: { label: "Live Dashboard", href: "/on-site/check-in" },
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_STAFF (8)
+// -----------------------------------------------------------------------------
+
+export const MOCK_STAFF: Staff[] = [
+  {
+    id: "stf_001",
+    firstName: "Maria",
+    lastName: "Lopez",
+    email: "maria.lopez@eventcraft.io",
+    phone: "+1 (415) 555-5001",
+    role: "Event Director",
+    department: "Leadership",
+    avatar: "/images/staff/maria.jpg",
+    shiftStart: "2026-03-15T06:00:00Z",
+    shiftEnd: "2026-03-15T22:00:00Z",
+    assignedArea: "All Areas",
+    status: "on-duty",
+    permissions: ["admin", "check-in", "vendors", "finance", "reports"],
+  },
+  {
+    id: "stf_002",
+    firstName: "James",
+    lastName: "Kim",
+    email: "james.kim@eventcraft.io",
+    phone: "+1 (415) 555-5002",
+    role: "Operations Manager",
+    department: "Operations",
+    avatar: "/images/staff/james_k.jpg",
+    shiftStart: "2026-03-15T06:30:00Z",
+    shiftEnd: "2026-03-15T21:00:00Z",
+    assignedArea: "Venue & Logistics",
+    status: "on-duty",
+    permissions: ["check-in", "vendors", "reports"],
+  },
+  {
+    id: "stf_003",
+    firstName: "Sarah",
+    lastName: "Chen",
+    email: "sarah.chen@eventcraft.io",
+    phone: "+1 (415) 555-5003",
+    role: "Registration Lead",
+    department: "Front Desk",
+    avatar: "/images/staff/sarah_c.jpg",
+    shiftStart: "2026-03-15T07:00:00Z",
+    shiftEnd: "2026-03-15T18:00:00Z",
+    assignedArea: "Registration & Check-In",
+    status: "on-duty",
+    permissions: ["check-in", "attendees"],
+  },
+  {
+    id: "stf_004",
+    firstName: "Tom",
+    lastName: "Wilson",
+    email: "tom.wilson@eventcraft.io",
+    phone: "+1 (415) 555-5004",
+    role: "AV Technician",
+    department: "Technical",
+    avatar: "/images/staff/tom_w.jpg",
+    shiftStart: "2026-03-15T05:00:00Z",
+    shiftEnd: "2026-03-15T20:00:00Z",
+    assignedArea: "Stage & AV",
+    status: "on-duty",
+    permissions: ["av-control", "sessions"],
+  },
+  {
+    id: "stf_005",
+    firstName: "Lisa",
+    lastName: "Park",
+    email: "lisa.park@eventcraft.io",
+    phone: "+1 (415) 555-5005",
+    role: "Marketing Coordinator",
+    department: "Marketing",
+    avatar: "/images/staff/lisa_p.jpg",
+    shiftStart: "2026-03-15T08:00:00Z",
+    shiftEnd: "2026-03-15T19:00:00Z",
+    assignedArea: "Social Media & Content",
+    status: "on-duty",
+    permissions: ["marketing", "reports"],
+  },
+  {
+    id: "stf_006",
+    firstName: "Derek",
+    lastName: "Okafor",
+    email: "derek.okafor@eventcraft.io",
+    phone: "+1 (415) 555-5006",
+    role: "Security Lead",
+    department: "Security",
+    avatar: "/images/staff/derek.jpg",
+    shiftStart: "2026-03-15T05:30:00Z",
+    shiftEnd: "2026-03-15T23:00:00Z",
+    assignedArea: "All Entrances & VIP",
+    status: "on-duty",
+    permissions: ["security", "check-in", "reports"],
+  },
+  {
+    id: "stf_007",
+    firstName: "Amy",
+    lastName: "Garcia",
+    email: "amy.garcia@eventcraft.io",
+    phone: "+1 (415) 555-5007",
+    role: "Speaker Liaison",
+    department: "Content",
+    avatar: "/images/staff/amy.jpg",
+    shiftStart: "2026-03-15T07:30:00Z",
+    shiftEnd: "2026-03-15T19:30:00Z",
+    assignedArea: "Green Room & Speaker Areas",
+    status: "on-duty",
+    permissions: ["speakers", "sessions"],
+  },
+  {
+    id: "stf_008",
+    firstName: "Carlos",
+    lastName: "Rivera",
+    email: "carlos.rivera@eventcraft.io",
+    phone: "+1 (415) 555-5008",
+    role: "Volunteer Coordinator",
+    department: "Volunteers",
+    avatar: "/images/staff/carlos.jpg",
+    shiftStart: "2026-03-15T07:00:00Z",
+    shiftEnd: "2026-03-15T18:00:00Z",
+    assignedArea: "Volunteer Stations",
+    status: "break",
+    permissions: ["check-in", "attendees"],
+  },
+];
+
+// -----------------------------------------------------------------------------
+// MOCK_API_KEYS (3)
+// -----------------------------------------------------------------------------
 
 export const MOCK_API_KEYS: ApiKey[] = [
   {
-    id: 'k1',
-    name: 'Eventbrite Integration',
-    service: 'eventbrite',
-    prefix: 'evt_prod_...x8k2',
-    created: '2026-03-15',
-    lastUsed: '2 min ago',
-    requests: 2450000,
-    status: 'active',
-    scopes: ['events.read', 'events.write', 'attendees.read'],
-    description: 'Syncs events and attendee data with Eventbrite',
+    id: "key_001",
+    name: "Production API Key",
+    key: "evt_prod_sk_7a8b9c0d1e2f3g4h5i6j7k8l9m0n1o2p",
+    prefix: "evt_prod_sk_7a8b",
+    permissions: ["events:read", "events:write", "attendees:read", "attendees:write", "tickets:read", "tickets:write"],
+    createdAt: "2025-06-15T10:00:00Z",
+    lastUsedAt: "2026-03-15T09:30:00Z",
+    expiresAt: null,
+    status: "active",
+    requestsToday: 1247,
+    rateLimit: 10000,
   },
   {
-    id: 'k2',
-    name: 'Splash API',
-    service: 'splash',
-    prefix: 'evt_spl_...m3j9',
-    created: '2026-06-01',
-    lastUsed: '1 hr ago',
-    requests: 890000,
-    status: 'active',
-    scopes: ['events.read', 'pages.read', 'analytics.read'],
-    description: 'Powers Splash event landing pages and check-in',
+    id: "key_002",
+    name: "Staging API Key",
+    key: "evt_test_sk_x9y8z7w6v5u4t3s2r1q0p9o8n7m6l5k4",
+    prefix: "evt_test_sk_x9y8",
+    permissions: ["events:read", "attendees:read", "tickets:read"],
+    createdAt: "2026-01-10T14:00:00Z",
+    lastUsedAt: "2026-03-14T22:15:00Z",
+    expiresAt: "2026-12-31T23:59:59Z",
+    status: "active",
+    requestsToday: 89,
+    rateLimit: 1000,
   },
   {
-    id: 'k3',
-    name: 'Cvent Sync',
-    service: 'cvent',
-    prefix: 'evt_cvt_...p5w2',
-    created: '2026-07-15',
-    lastUsed: '30 min ago',
-    requests: 1200000,
-    status: 'active',
-    scopes: ['events.read', 'registrations.read', 'venues.read'],
-    description: 'Bi-directional sync with Cvent for enterprise events',
-  },
-  {
-    id: 'k4',
-    name: 'Stripe Payments',
-    service: 'stripe',
-    prefix: 'evt_str_...q1r7',
-    created: '2026-01-20',
-    lastUsed: '5 min ago',
-    requests: 3400000,
-    status: 'active',
-    scopes: ['payments', 'refunds', 'disputes.read'],
-    description: 'Processes ticket sales and refund transactions',
-  },
-  {
-    id: 'k5',
-    name: 'Mailchimp Marketing',
-    service: 'mailchimp',
-    prefix: 'evt_mc_...t8n4',
-    created: '2026-04-10',
-    lastUsed: '3 hr ago',
-    requests: 670000,
-    status: 'active',
-    scopes: ['lists.read', 'campaigns.write', 'members.write'],
-    description: 'Automated email campaigns for event promotions',
-  },
-  {
-    id: 'k6',
-    name: 'Legacy Integrations',
-    service: 'legacy',
-    prefix: 'evt_leg_...z2k5',
-    created: '2025-11-05',
-    lastUsed: '90 days ago',
-    requests: 12000,
-    status: 'inactive',
-    scopes: ['events.read'],
-    description: 'Deprecated integration — no longer in use',
+    id: "key_003",
+    name: "Deprecated Integration Key",
+    key: "evt_old_sk_m4n3o2p1q0r9s8t7u6v5w4x3y2z1a0b",
+    prefix: "evt_old_sk_m4n3",
+    permissions: ["events:read"],
+    createdAt: "2024-03-01T08:00:00Z",
+    lastUsedAt: "2025-06-30T16:45:00Z",
+    expiresAt: "2025-12-31T23:59:59Z",
+    status: "revoked",
+    requestsToday: 0,
+    rateLimit: 500,
   },
 ];
-
-// ─── Integrations ───────────────────────────────────────────────────────────
-
-export interface Integration {
-  id: string;
-  name: string;
-  icon: string;
-  status: 'connected' | 'available';
-  category: string;
-  lastSync: string;
-  eventsSynced: number;
-}
-
-export const MOCK_INTEGRATIONS: Integration[] = [
-  { id: 'int1', name: 'Eventbrite', icon: '🎟️', status: 'connected', category: 'Ticketing', lastSync: '2 min ago', eventsSynced: 1240 },
-  { id: 'int2', name: 'Splash', icon: '✨', status: 'connected', category: 'Landing Pages', lastSync: '1 hr ago', eventsSynced: 340 },
-  { id: 'int3', name: 'Cvent', icon: '🏢', status: 'connected', category: 'Enterprise Events', lastSync: '30 min ago', eventsSynced: 890 },
-  { id: 'int4', name: 'Stripe', icon: '💳', status: 'connected', category: 'Payments', lastSync: '5 min ago', eventsSynced: 0 },
-  { id: 'int5', name: 'Mailchimp', icon: '📧', status: 'connected', category: 'Email Marketing', lastSync: '3 hr ago', eventsSynced: 0 },
-  { id: 'int6', name: 'Zapier', icon: '⚡', status: 'available', category: 'Automation', lastSync: '-', eventsSynced: 0 },
-  { id: 'int7', name: 'HubSpot', icon: '🟠', status: 'available', category: 'CRM', lastSync: '-', eventsSynced: 0 },
-  { id: 'int8', name: 'Salesforce', icon: '☁️', status: 'available', category: 'CRM', lastSync: '-', eventsSynced: 0 },
-];
-
-// ─── Webhooks ───────────────────────────────────────────────────────────────
-
-export interface Webhook {
-  id: string;
-  url: string;
-  events: string[];
-  status: 'active' | 'paused';
-  lastFired: string;
-  successRate: number;
-  failures: number;
-}
-
-export const MOCK_WEBHOOKS: Webhook[] = [
-  { id: 'wh1', url: 'https://hooks.eventcraft.io/order-created', events: ['order.created', 'order.paid'], status: 'active', lastFired: '5 min ago', successRate: 99.8, failures: 3 },
-  { id: 'wh2', url: 'https://api.eventcraft.io/sync/attendees', events: ['registration.created', 'registration.cancelled'], status: 'active', lastFired: '12 min ago', successRate: 100, failures: 0 },
-  { id: 'wh3', url: 'https://slack.com/api/webhook/T04...', events: ['event.published', 'event.updated'], status: 'active', lastFired: '1 hr ago', successRate: 99.9, failures: 1 },
-  { id: 'wh4', url: 'https://legacy.eventcraft.io/hooks/v1', events: ['*'], status: 'paused', lastFired: '15 days ago', successRate: 94.2, failures: 28 },
-];
-
-// ─── Rate Limits ────────────────────────────────────────────────────────────
-
-export interface RateLimits {
-  plan: string;
-  requestsPerMinute: number;
-  requestsPerDay: number;
-  requestsUsedToday: number;
-  burstLimit: number;
-  concurrentConnections: number;
-  currentUsage: { minute: string; requests: number }[];
-  tiers: { name: string; requestsPerMinute: number; requestsPerDay: number; price: string }[];
-}
-
-export const MOCK_RATE_LIMITS: RateLimits = {
-  plan: 'Professional',
-  requestsPerMinute: 5000,
-  requestsPerDay: 500000,
-  requestsUsedToday: 342000,
-  burstLimit: 10000,
-  concurrentConnections: 50,
-  currentUsage: [
-    { minute: '14:55', requests: 4120 },
-    { minute: '14:56', requests: 3890 },
-    { minute: '14:57', requests: 4340 },
-    { minute: '14:58', requests: 4680 },
-    { minute: '14:59', requests: 4920 },
-    { minute: '15:00', requests: 3750 },
-    { minute: '15:01', requests: 4100 },
-    { minute: '15:02', requests: 4280 },
-    { minute: '15:03', requests: 3960 },
-    { minute: '15:04', requests: 4120 },
-  ],
-  tiers: [
-    { name: 'Starter', requestsPerMinute: 1000, requestsPerDay: 100000, price: 'Free' },
-    { name: 'Professional', requestsPerMinute: 5000, requestsPerDay: 500000, price: '$49/mo' },
-    { name: 'Enterprise', requestsPerMinute: 25000, requestsPerDay: 5000000, price: '$199/mo' },
-  ],
-};
-
-// ─── Code Snippets ──────────────────────────────────────────────────────────
-
-export interface CodeSnippet {
-  language: string;
-  title: string;
-  description: string;
-  code: string;
-}
-
-export const MOCK_CODE_SNIPPETS: CodeSnippet[] = [
-  {
-    language: 'bash',
-    title: 'List Events',
-    description: 'Fetch all events with pagination',
-    code: `curl -X GET https://api.eventcraft.io/v2/events \\
-  -H "Authorization: Bearer evt_prod_...x8k2" \\
-  -H "Content-Type: application/json" \\
-  -G --data-urlencode "limit=25" --data-urlencode "offset=0"`,
-  },
-  {
-    language: 'javascript',
-    title: 'Create Registration',
-    description: 'Register an attendee for an event',
-    code: `const response = await fetch('https://api.eventcraft.io/v2/events/evt_123/registrations', {
-  method: 'POST',
-  headers: {
-    'Authorization': 'Bearer evt_prod_...x8k2',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    name: 'Jane Smith',
-    email: 'jane@example.com',
-    ticketType: 'vip',
-    customFields: { company: 'Acme Corp' }
-  })
-});`,
-  },
-  {
-    language: 'python',
-    title: 'Event Analytics',
-    description: 'Pull analytics for a specific event',
-    code: `import requests
-
-response = requests.get(
-    'https://api.eventcraft.io/v2/events/evt_123/analytics',
-    headers={
-        'Authorization': 'Bearer evt_prod_...x8k2',
-        'Content-Type': 'application/json'
-    },
-    params={'period': 'last_30_days'}
-)
-analytics = response.json()`,
-  },
-];
-
-// ─── API Activity Log ───────────────────────────────────────────────────────
-
-export interface ApiActivityLog {
-  id: string;
-  action: string;
-  status: number;
-  latency: string;
-  time: string;
-  key: string;
-}
-
-export const MOCK_API_ACTIVITY: ApiActivityLog[] = [
-  { id: 'a1', action: 'GET /v2/events', status: 200, latency: '142ms', time: '2 min ago', key: 'evt_prod_...x8k2' },
-  { id: 'a2', action: 'POST /v2/events/evt_123/registrations', status: 201, latency: '89ms', time: '3 min ago', key: 'evt_prod_...x8k2' },
-  { id: 'a3', action: 'GET /v2/events/evt_456/analytics', status: 200, latency: '234ms', time: '5 min ago', key: 'evt_cvt_...p5w2' },
-  { id: 'a4', action: 'PUT /v2/events/evt_789', status: 200, latency: '67ms', time: '8 min ago', key: 'evt_spl_...m3j9' },
-  { id: 'a5', action: 'GET /v2/events?limit=25', status: 200, latency: '312ms', time: '10 min ago', key: 'evt_prod_...x8k2' },
-  { id: 'a6', action: 'POST /v2/webhooks/test', status: 422, latency: '45ms', time: '12 min ago', key: 'evt_prod_...x8k2' },
-  { id: 'a7', action: 'DELETE /v2/registrations/reg_456', status: 204, latency: '56ms', time: '15 min ago', key: 'evt_str_...q1r7' },
-  { id: 'a8', action: 'GET /v2/venues', status: 200, latency: '178ms', time: '18 min ago', key: 'evt_cvt_...p5w2' },
-];
-
-// ─── Billing ────────────────────────────────────────────────────────────────
-
-export interface BillingInfo {
-  currentPlan: { name: string; price: number; renewal: string; features: string[] };
-  usage: { events: number; registrations: number; apiCalls: number; storage: number; emails: number };
-  invoices: { id: string; amount: number; status: string; date: string }[];
-}
-
-export const MOCK_BILLING: BillingInfo = {
-  currentPlan: { name: 'Professional', price: 149, renewal: '2026-10-01', features: ['5,000 API req/min', 'Unlimited events', 'Priority support', 'Advanced analytics'] },
-  usage: { events: 48, registrations: 32400, apiCalls: 3420000, storage: 12.4, emails: 185000 },
-  invoices: [
-    { id: 'INV-2026-009', amount: 892, status: 'paid', date: '2026-09-01' },
-    { id: 'INV-2026-008', amount: 856, status: 'paid', date: '2026-08-01' },
-    { id: 'INV-2026-007', amount: 745, status: 'paid', date: '2026-07-01' },
-    { id: 'INV-2026-006', amount: 680, status: 'paid', date: '2026-06-01' },
-    { id: 'INV-2026-005', amount: 620, status: 'paid', date: '2026-05-01' },
-    { id: 'INV-2026-004', amount: 580, status: 'paid', date: '2026-04-01' },
-  ],
-};
